@@ -1,0 +1,18 @@
+# Dependencias y archivos temporales
+node_modules/
+dist/
+build/
+.DS_Store
+Thumbs.db
+
+# Archivos locales de editores
+.vscode/
+.idea/
+
+# Logs y caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.cache/
+
