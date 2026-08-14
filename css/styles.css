@@ -653,10 +653,10 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.6;
 }
 
-/* Grilla de Roles de Usuario */
+/* Grilla de Roles de Usuario (3 Columnas de Plataforma) */
 .roles-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
@@ -676,6 +676,13 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: none;
 }
 
+.role-card-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
 .role-icon-box {
   width: 44px;
   height: 44px;
@@ -686,7 +693,20 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   color: var(--color-blue-electric);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0;
+}
+
+.role-badge-tag {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #BAC7E6;
 }
 
 .role-name {
@@ -703,6 +723,34 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.25rem;
 }
 
+.role-facet-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.role-facet-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-xs);
+  padding: 0.75rem 0.85rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #E2E8F0;
+}
+
+.role-facet-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  color: #38BDF8;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+}
+
 .role-permissions-list {
   list-style: none;
   border-top: 1px solid var(--color-navy-border-subtle);
@@ -711,17 +759,19 @@ h1, h2, h3, h4, h5, h6 {
 
 .role-permissions-list li {
   display: flex;
-  align-items: center;
-  gap: 0.45rem;
+  align-items: flex-start;
+  gap: 0.5rem;
   font-size: 0.78rem;
   font-family: var(--font-mono);
   color: #D1D7E6;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
 }
 
 .role-permissions-list li svg {
   color: var(--color-blue-electric);
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 /* ==========================================================================

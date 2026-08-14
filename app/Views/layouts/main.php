@@ -166,11 +166,12 @@
         </div>
 
         <div class="form-group">
-          <label for="interestType">Tipo de Operación Principal</label>
+          <label for="interestType">Faceta / Tipo de Operación de la Empresa</label>
           <select id="interestType" name="interest_type" class="abtc-input">
-            <option value="publicar">Deseo publicar excedentes plásticos (Oferta)</option>
-            <option value="comprar">Busco materia prima / scrap recuperado (Demanda)</option>
-            <option value="ambos">Ambas (Publicar y Solicitar)</option>
+            <option value="oferente">Empresa Verificada - Oferente (Publicar Excedentes / Scrap / Moldes)</option>
+            <option value="demandante">Empresa Verificada - Demandante (Comprar / Solicitar Polímeros)</option>
+            <option value="ambas">Ambas Facetas (Publicar Excedentes y Adquirir Material)</option>
+            <option value="auditoria">Auditoría / Alianza Institucional</option>
           </select>
         </div>
 
