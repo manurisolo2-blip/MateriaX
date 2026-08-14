@@ -35,17 +35,8 @@
         <span class="brand-text">Materia<span class="accent-blue">X</span></span>
       </a>
 
-      <!-- 2. Menú de navegación y Botones -->
+      <!-- 2. Botones de Acción Corporativa -->
       <div class="nav-actions-wrapper">
-        <nav class="nav-links" id="topNav" aria-label="Navegación principal">
-          <a href="<?= base_url('#inicio') ?>" class="active">Inicio</a>
-          <a href="<?= base_url('#propuesta-roles') ?>">Propuesta & Roles</a>
-          <a href="<?= base_url('#roadmap-inventario') ?>">Roadmap & Inventario</a>
-          <a href="<?= base_url('#seguridad-infraestructura') ?>">Seguridad & Compliance</a>
-          <a href="<?= base_url('#metricas') ?>">Métricas</a>
-          <a href="<?= base_url('#contacto') ?>">Contacto</a>
-        </nav>
-
         <div class="nav-buttons">
           <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Ver solicitudes en curso">
             📋 Solicitudes <span class="badge-count" id="adminBadgeCount">0</span>
