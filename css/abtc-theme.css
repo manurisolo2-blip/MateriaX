@@ -10,8 +10,10 @@
 /* 2. Variables Oficiales en :root */
 :root {
   --color-bg-primary: #171B33;      /* Azul Marino Oscuro */
-  --color-accent-blue: #171B33;     /* Azul Eléctrico */
-  --color-accent-red: #171B33;      /* Rojo */
+  --color-accent-blue: #0284C7;     /* Azul Institucional Primario */
+  --color-accent-blue-light: #38BDF8; /* Azul Celeste de Alto Contraste */
+  --color-accent-red: #EF4444;      /* Rojo */
+  --color-accent-green: #10B981;    /* Verde */
   --color-bg-light: #F4F5F8;        /* Gris Superficie */
   --color-white: #FFFFFF;
   --color-border-dark: rgba(255, 255, 255, 0.12);
@@ -155,6 +157,13 @@ body {
   text-shadow: none;
   letter-spacing: -0.02em;
   max-width: 980px;
+}
+
+.hero-title-layered span.accent-blue,
+.hero-title span.accent-blue,
+.accent-blue {
+  color: #38BDF8 !important;
+  -webkit-text-fill-color: #38BDF8 !important;
 }
 
 .hero-subtitle {
@@ -477,12 +486,17 @@ table.data-table tr:hover td {
 
 .metric-value.accent-blue,
 .stat-box-val.accent-blue {
-  color: var(--color-accent-blue);
+  color: #38BDF8;
 }
 
 .metric-value.accent-red,
 .stat-box-val.accent-red {
-  color: var(--color-accent-red);
+  color: #F87171;
+}
+
+.metric-value.accent-green,
+.stat-box-val.accent-green {
+  color: #34D399;
 }
 
 /* ==========================================================================
