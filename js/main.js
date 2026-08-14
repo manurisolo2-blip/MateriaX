@@ -68,7 +68,7 @@ const cards = document.querySelectorAll('.resource-card');
 const searchCounter = document.querySelector('#searchCounter');
 const noResultsState = document.querySelector('#noResultsState');
 const resetSearchBtn = document.querySelector('#resetSearchBtn');
-const navLinks = document.querySelectorAll('.topnav a');
+const navLinks = document.querySelectorAll('.topnav a, .nav-links a');
 const menuToggle = document.querySelector('#menuToggle');
 const topNav = document.querySelector('#topNav');
 
@@ -76,6 +76,7 @@ const topNav = document.querySelector('#topNav');
 const accessModal = document.querySelector('#accessModal');
 const detailModal = document.querySelector('#detailModal');
 const adminModal = document.querySelector('#adminModal');
+const techDocModal = document.querySelector('#techDocModal');
 const accessForm = document.querySelector('#accessForm');
 const toastContainer = document.querySelector('#toastContainer');
 const adminBadgeCount = document.querySelector('#adminBadgeCount');
@@ -221,8 +222,10 @@ function filterResources() {
   if (noResultsState) {
     if (visibleCount === 0) {
       noResultsState.classList.remove('hidden');
+      noResultsState.style.display = 'block';
     } else {
       noResultsState.classList.add('hidden');
+      noResultsState.style.display = 'none';
     }
   }
 }
@@ -400,14 +403,44 @@ detailModal?.addEventListener('click', (e) => {
   if (e.target === detailModal) closeModal(detailModal);
 });
 
+// Technical & Academic Documentation Modal Triggers
+document.querySelector('#openTechDocBtn')?.addEventListener('click', () => openModal(techDocModal));
+document.querySelector('#openTechDocFooter')?.addEventListener('click', () => openModal(techDocModal));
+document.querySelector('#closeTechDocModal')?.addEventListener('click', () => closeModal(techDocModal));
+document.querySelector('#closeTechDocBtn')?.addEventListener('click', () => closeModal(techDocModal));
+
+techDocModal?.addEventListener('click', (e) => {
+  if (e.target === techDocModal) closeModal(techDocModal);
+});
+
 // Close modals on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeModal(accessModal);
     closeModal(detailModal);
     closeModal(adminModal);
+    closeModal(techDocModal);
   }
 });
+
+// ScrollSpy para actualizar el link activo en la barra de navegación al hacer scroll
+const trackedSections = document.querySelectorAll('section[id], footer[id]');
+const scrollSpyObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const currentId = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentId}`) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+trackedSections.forEach(sec => scrollSpyObserver.observe(sec));
 
 // Initialize Badge & Filters
 updateAdminBadge();
