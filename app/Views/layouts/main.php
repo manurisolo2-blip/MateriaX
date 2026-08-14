@@ -26,7 +26,13 @@
     <div class="navbar-container">
       <!-- 1. Izquierda: Logo / Nombre del Proyecto -->
       <a href="<?= base_url('#inicio') ?>" class="brand-wrapper" aria-label="Ir al inicio de MateriaX">
-        <img src="<?= base_url('assets/logos/isotipo-black.png') ?>" alt="MateriaX" class="brand-logo-img">
+        <div class="brand-logo-badge">
+          <svg viewBox="0 0 100 100" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="46" fill="#1E293B" stroke="#38BDF8" stroke-width="4"/>
+            <path d="M 28 58 L 52 28 L 74 28 C 80 28 84 32 80 38 L 74 44 L 54 44 C 48 44 45 47 45 52 L 66 52 L 78 74 C 82 82 78 88 70 88 C 64 88 60 84 57 78 L 48 60 L 28 60 Z" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <span class="brand-text">Materia<span class="accent-blue">X</span></span>
       </a>
 
       <!-- 2. Menú de navegación y Botones -->
@@ -81,7 +87,13 @@
       <div class="footer-grid-modular">
         <div class="footer-brand-info">
           <div class="brand-wrapper">
-            <img src="<?= base_url('assets/logos/isotipo-black.png') ?>" alt="MateriaX" class="brand-logo-img brand-logo-img-footer">
+            <div class="brand-logo-badge">
+              <svg viewBox="0 0 100 100" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="46" fill="#1E293B" stroke="#38BDF8" stroke-width="4"/>
+                <path d="M 28 58 L 52 28 L 74 28 C 80 28 84 32 80 38 L 74 44 L 54 44 C 48 44 45 47 45 52 L 66 52 L 78 74 C 82 82 78 88 70 88 C 64 88 60 84 57 78 L 48 60 L 28 60 Z" fill="#FFFFFF"/>
+              </svg>
+            </div>
+            <span class="brand-text brand-text-lg">Materia<span class="accent-blue">X</span></span>
           </div>
           <p>
             Plataforma B2B para la valorización y reutilización de polímeros industriales. Trazabilidad garantizada bajo arquitectura segura.
