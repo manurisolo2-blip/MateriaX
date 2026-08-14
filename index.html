@@ -48,20 +48,17 @@
           <a href="#inicio" class="active">Inicio</a>
           <a href="#propuesta-roles">Propuesta & Roles</a>
           <a href="#roadmap-inventario">Roadmap & Inventario</a>
-          <a href="#seguridad-infraestructura">Seguridad</a>
+          <a href="#seguridad-infraestructura">Seguridad & Compliance</a>
           <a href="#metricas">Métricas</a>
           <a href="#contacto">Contacto</a>
         </nav>
 
         <div class="nav-buttons">
-          <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Ver solicitudes en LocalStorage">
+          <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Ver solicitudes en curso">
             📋 Solicitudes <span class="badge-count" id="adminBadgeCount">0</span>
           </button>
-          <button type="button" class="btn btn-sm btn-ghost" id="openTechDocBtn" title="Ver Memoria Técnica y Ficha Académica">
-            📄 Memoria Técnica
-          </button>
           <button type="button" class="btn btn-sm btn-primary btn-abtc-primary" id="openAccessModalNav">
-            Acceso / Login
+            Portal Empresas / Acceso
           </button>
         </div>
       </div>
@@ -480,160 +477,128 @@
     </section>
 
     <!-- ==========================================================================
-         SECCIÓN 4: SEGURIDAD & INFRAESTRUCTURA (<section class="tech-section">)
+         SECCIÓN 4: SEGURIDAD, COMPLIANCE & TRAZABILIDAD (<section class="tech-section">)
          ========================================================================== -->
     <section class="tech-section section-dark" id="seguridad-infraestructura">
       <div class="hero-bg-grid"></div>
       <div class="section-wrapper" style="position: relative; z-index: 2;">
         <div class="section-header-block">
-          <span class="section-eyebrow">SEGURIDAD DE GRADO INDUSTRIAL & ARQUITECTURA</span>
-          <h2 class="section-title-dark">Blindaje de Operaciones & Trazabilidad Relacional</h2>
+          <span class="section-eyebrow">ESTÁNDARES DE SEGURIDAD EMPRESARIAL & COMPLIANCE</span>
+          <h2 class="section-title-dark">Confidencialidad, Trazabilidad & Certificación ESG</h2>
           <p class="section-desc-dark">
-            Garantía de confidencialidad en transacciones B2B, defensas avanzadas contra vulnerabilidades OWASP y arquitectura de persistencia relacional.
+            MateriaX implementa protocolos de seguridad de grado industrial para garantizar la confidencialidad en transacciones B2B, homologación fiscal de contrapartes y trazabilidad física y documental de cada lote.
           </p>
         </div>
 
         <div class="tech-panel-asymmetric">
-          <!-- Columna Izquierda: MVC & Seguridad Backend -->
+          <!-- Columna Izquierda: Blindaje Transaccional & Seguridad Corporativa -->
           <div class="tech-layer-card abtc-card">
             <div class="tech-card-header">
-              <div class="brand-icon" style="width:34px; height:34px; font-size: 0.8rem;">CI4</div>
-              <h3 class="tech-card-title">Arquitectura MVC & Blindaje Criptográfico</h3>
+              <div class="brand-icon" style="width:34px; height:34px; font-size: 0.8rem; background: var(--color-blue-electric);">SEC</div>
+              <h3 class="tech-card-title">Blindaje Transaccional & Control RBAC</h3>
             </div>
             <p class="tech-card-desc">
-              Separación estricta entre capa de presentación, lógica de negocio y persistencia (`App\Controllers`, `App\Models`, `App\Views`) para máxima escalabilidad y auditoría de operaciones.
+              Protección de datos industriales mediante cifrado de extremo a extremo, control de acceso basado en roles (RBAC) y resguardo de acuerdos de confidencialidad comercial.
             </p>
-
-            <div class="code-block-preview">
-              <span class="comment">// Controlador CodeIgniter 4: Validación, Modelos, Bcrypt y Sesiones</span><br>
-              <span class="kw">namespace</span> App\Controllers;<br>
-              <span class="kw">use</span> App\Models\UserModel;<br><br>
-              <span class="kw">class</span> <span class="func">AuthController</span> <span class="kw">extends</span> BaseController {<br>
-              &nbsp;&nbsp;<span class="kw">public function</span> <span class="func">login</span>() {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 1. Reglas de validación (CSRF e inputs)</span><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (!$this-><span class="func">validate</span>([<span class="str">'email'</span> => <span class="str">'required|valid_email'</span>, <span class="str">'password'</span> => <span class="str">'required'</span>])) {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="func">redirect</span>()-><span class="func">back</span>()-><span class="func">withInput</span>();<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 2. Extracción de request e instanciación de modelo</span><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;$email = $this->request-><span class="func">getPost</span>(<span class="str">'email'</span>);<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;$pass  = $this->request-><span class="func">getPost</span>(<span class="str">'password'</span>);<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;$model = <span class="kw">new</span> <span class="func">UserModel</span>();<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;$user  = $model-><span class="func">where</span>(<span class="str">'email'</span>, $email)-><span class="func">first</span>();<br><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 3. Verificación de existencia y hash Bcrypt</span><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (!$user || !<span class="func">password_verify</span>($pass, $user[<span class="str">'password_hash'</span>])) {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="func">redirect</span>()-><span class="func">back</span>()-><span class="func">with</span>(<span class="str">'error'</span>, <span class="str">'Credenciales inválidas'</span>);<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 4. Persistencia de sesión y redirección exitosa</span><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="func">session</span>()-><span class="func">set</span>([<span class="str">'user_id'</span> => $user[<span class="str">'id'</span>], <span class="str">'role'</span> => $user[<span class="str">'role'</span>], <span class="str">'isLoggedIn'</span> => <span class="kw">true</span>]);<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="func">redirect</span>()-><span class="func">to</span>(<span class="str">'/dashboard'</span>);<br>
-              &nbsp;&nbsp;}<br>
-              }
-            </div>
 
             <ul class="tech-checklist">
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span><strong>Protección CSRF:</strong> Filtros automáticos y validación nativa de tokens sincronizados por solicitud POST.</span>
+                <div>
+                  <strong>Cifrado Transaccional & TLS 1.3:</strong>
+                  <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Toda cotización, negociación de lotes y credenciales operan bajo túneles criptográficos blindados.</span>
+                </div>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span><strong>Prevención SQL Injection:</strong> Consultas preparadas parametrizadas en Modelos y Query Builder de CI4.</span>
+                <div>
+                  <strong>Homologación Fiscal y CUIT Verificado:</strong>
+                  <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Validación estricta de personería jurídica y habilitación ambiental de plantas antes de operar.</span>
+                </div>
               </li>
               <li>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                <span><strong>Hash de Contraseñas:</strong> Encriptación irreversible con algoritmo seguro `PASSWORD_BCRYPT`.</span>
+                <div>
+                  <strong>Protección de Propiedad Intelectual & NDA:</strong>
+                  <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Resguardo de geometrías propietarias en matricería, moldes y formulaciones plásticas.</span>
+                </div>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <div>
+                  <strong>Registro de Auditoría Inmutable:</strong>
+                  <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Trazabilidad completa con marca de tiempo por cada solicitud, pesaje y retiro de planta.</span>
+                </div>
               </li>
             </ul>
           </div>
 
-          <!-- Columna Derecha: Modelo de Base de Datos Relacional -->
+          <!-- Columna Derecha: Trazabilidad de Materiales & Pasaporte Digital -->
           <div class="tech-layer-card highlight-red abtc-card">
             <div class="tech-card-header">
-              <div class="brand-icon" style="background: var(--color-navy-dark); width:34px; height:34px;">SQL</div>
-              <h3 class="tech-card-title">Modelo Relacional & Cardinalidades</h3>
+              <div class="brand-icon" style="background: var(--color-red-performance); width:34px; height:34px; font-size: 0.8rem;">ESG</div>
+              <h3 class="tech-card-title">Cadena de Custodia & Pasaporte Digital</h3>
             </div>
             <p class="tech-card-desc">
-              Esquema de persistencia normalizado en 3FN con integridad referencial (Foreign Keys), restricciones y relaciones explícitas:
+              Trazabilidad física y documental del lote desde el pesaje en origen hasta su reincorporación en líneas de inyección, extrusión o rotomoldeo:
             </p>
 
-            <!-- Diagrama de Cardinalidades y Mapeo de Relaciones -->
+            <!-- Diagrama de Pasos de Trazabilidad B2B -->
             <div class="db-relations-flow">
               <div class="db-relation-row">
-                <span class="db-entity">roles <span class="badge-pk">PK id</span></span>
-                <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-                <span class="db-entity">usuarios <span class="badge-fk">FK role_id</span></span>
+                <span class="db-entity">1. Pesaje en Báscula <span class="badge-pk">Origen</span></span>
+                <span class="db-cardinality-indicator">Precinto Digital</span>
+                <span class="db-entity">Control Físico-Químico</span>
               </div>
               <div class="db-relation-row">
-                <span class="db-entity">usuarios <span class="badge-pk">PK id</span></span>
-                <span class="db-cardinality-indicator" title="Uno a Uno">1 : 1 &rarr;</span>
-                <span class="db-entity">empresas <span class="badge-fk">FK user_id</span></span>
+                <span class="db-entity">2. Homologación <span class="badge-fk">Matching</span></span>
+                <span class="db-cardinality-indicator">MFI / Densidad</span>
+                <span class="db-entity">Planta Receptora</span>
               </div>
               <div class="db-relation-row">
-                <span class="db-entity">empresas <span class="badge-pk">PK id</span></span>
-                <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-                <span class="db-entity">recursos <span class="badge-fk">FK empresa_id</span></span>
+                <span class="db-entity">3. Despacho Seguro <span class="badge-pk">Logística</span></span>
+                <span class="db-cardinality-indicator">Manifiesto B2B</span>
+                <span class="db-entity">Transporte Habilitado</span>
               </div>
               <div class="db-relation-row">
-                <span class="db-entity">categorias <span class="badge-pk">PK id</span></span>
-                <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-                <span class="db-entity">recursos <span class="badge-fk">FK categoria_id</span></span>
-              </div>
-              <div class="db-relation-row">
-                <span class="db-entity">recursos <span class="badge-pk">PK id</span></span>
-                <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-                <span class="db-entity">solicitudes <span class="badge-fk">FK recurso_id</span></span>
-              </div>
-              <div class="db-relation-row">
-                <span class="db-entity">solicitudes <span class="badge-pk">PK id</span></span>
-                <span class="db-cardinality-indicator" title="Uno a Uno">1 : 1 &rarr;</span>
-                <span class="db-entity">operaciones <span class="badge-fk">FK solicitud_id</span></span>
+                <span class="db-entity">4. Reingreso Productivo <span class="badge-fk">Destino</span></span>
+                <span class="db-cardinality-indicator">Certificado ESG</span>
+                <span class="db-entity">CO₂ Evitado Auditado</span>
               </div>
             </div>
 
-            <!-- Matriz de Tablas Normalizadas con PK/FK alineados -->
+            <!-- Matriz de Indicadores de Cumplimiento -->
             <div class="db-schema-matrix">
               <div class="db-table-pill">
-                <span class="table-name">usuarios</span>
-                <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+                <span class="table-name">ISO 9001 / 14001</span>
+                <span class="table-keys"><span class="badge-pk">CALIDAD</span></span>
               </div>
               <div class="db-table-pill">
-                <span class="table-name">roles</span>
-                <span class="table-keys"><span class="badge-pk">PK</span></span>
+                <span class="table-name">Manifiesto Carga</span>
+                <span class="table-keys"><span class="badge-fk">DIGITAL</span></span>
               </div>
               <div class="db-table-pill">
-                <span class="table-name">empresas</span>
-                <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+                <span class="table-name">Reporte CO₂</span>
+                <span class="table-keys"><span class="badge-pk">ESG</span></span>
               </div>
               <div class="db-table-pill">
-                <span class="table-name">recursos</span>
-                <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+                <span class="table-name">Trazabilidad Batch</span>
+                <span class="table-keys"><span class="badge-fk">LOTE</span></span>
               </div>
               <div class="db-table-pill">
-                <span class="table-name">categorias</span>
-                <span class="table-keys"><span class="badge-pk">PK</span></span>
+                <span class="table-name">Homologación CUIT</span>
+                <span class="table-keys"><span class="badge-pk">AFIP</span></span>
               </div>
               <div class="db-table-pill">
-                <span class="table-name">solicitudes</span>
-                <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
-              </div>
-              <div class="db-table-pill">
-                <span class="table-name">operaciones</span>
-                <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
-              </div>
-              <div class="db-table-pill">
-                <span class="table-name">sesiones</span>
-                <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
-              </div>
-              <div class="db-table-pill">
-                <span class="table-name">ubicaciones</span>
-                <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+                <span class="table-name">Custodia NDA</span>
+                <span class="table-keys"><span class="badge-fk">LEGAL</span></span>
               </div>
             </div>
 
             <div class="db-integrity-note">
-              <span class="note-title">INTEGRIDAD REFERENCIAL & AUDITORÍA EN BD:</span>
+              <span class="note-title">CERTIFICACIÓN AMBIENTAL & HUELLA DE CARBONO:</span>
               <p>
-                Restricciones `ON DELETE RESTRICT / CASCADE`, índices `BTREE` en claves foráneas y filtros de rol (`App\Filters\AuthFilter`) para control estricto de accesos.
+                Cada operación completada emite automáticamente un informe de sustentabilidad empresarial con el balance exacto de material revalorizado y emisiones netas mitigadas.
               </p>
             </div>
           </div>
@@ -832,24 +797,20 @@
               </div>
               <span class="brand-text brand-text-lg">Materia<span class="accent-blue">X</span></span>
             </div>
-            <p>
-              Plataforma B2B para la valorización y reutilización de polímeros industriales. Trazabilidad garantizada bajo arquitectura segura.
-            </p>
           </div>
-
           <div class="footer-col">
             <h4 class="footer-col-title">Estructura Web</h4>
             <ul class="footer-col-links">
               <li><a href="#inicio">Inicio / Hero</a></li>
               <li><a href="#propuesta-roles">Propuesta & Roles</a></li>
-              <li><a href="#modulos-hitos">Grilla de Hitos</a></li>
-              <li><a href="#infraestructura-seguridad">Infraestructura & MVC</a></li>
+              <li><a href="#roadmap-inventario">Roadmap & Inventario</a></li>
+              <li><a href="#seguridad-infraestructura">Seguridad & Compliance</a></li>
               <li><a href="#metricas">Dashboard de Métricas</a></li>
             </ul>
           </div>
 
           <div class="footer-col">
-            <h4 class="footer-col-title">Polímeros</h4>
+            <h4 class="footer-col-title">Polímeros & Lotes</h4>
             <ul class="footer-col-links">
               <li><a href="#roadmap-inventario" data-filter-link="polietileno">Polietileno (PEAD/PEBD)</a></li>
               <li><a href="#roadmap-inventario" data-filter-link="polipropileno">Polipropileno (PP)</a></li>
@@ -859,25 +820,27 @@
           </div>
 
           <div class="footer-col">
-            <h4 class="footer-col-title">Seguridad & Backend</h4>
+            <h4 class="footer-col-title">Seguridad & Compliance</h4>
             <ul class="footer-col-links">
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● CodeIgniter 4 MVC</span></li>
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● MySQL InnoDB DB</span></li>
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● CSRF + Bcrypt Hash</span></li>
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Arquitectura 3FN</span></li>
+              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Cifrado de Datos & RBAC</span></li>
+              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Homologación CUIT / AFIP</span></li>
+              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Trazabilidad de Lotes</span></li>
+              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Certificación ESG & CO₂</span></li>
             </ul>
           </div>
         </div>
 
-        <!-- Créditos y Acceso a Memoria Técnica / Ficha Académica -->
+        <!-- Créditos y Enlaces Legales Corporativos -->
         <div class="footer-credits-academic">
           <div>
-            &copy; 2026 <strong>MateriaX</strong>. Red Industrial de Reutilización Circular.
+            &copy; 2026 <strong>MateriaX</strong>. Red Industrial de Reutilización Circular. Todos los derechos reservados.
           </div>
-          <div>
-            <button type="button" class="btn-academic-link" id="openTechDocFooter">
-              📄 Ficha Institucional & Memoria Técnica (ITR3)
-            </button>
+          <div style="font-size: 0.82rem; color: #94A3B8; display: flex; gap: 1rem; flex-wrap: wrap;">
+            <span>Privacidad de Datos</span>
+            <span>•</span>
+            <span>Términos de Servicio B2B</span>
+            <span>•</span>
+            <span>Compliance Industrial</span>
           </div>
         </div>
       </div>
@@ -925,66 +888,71 @@
           </div>
 
           <div class="form-group">
-            <label for="formMessage">Especificaciones o Mensaje Opcional</label>
-            <textarea id="formMessage" rows="3" class="abtc-input" placeholder="Detalla volumen mensual estimado, índices MFI requeridos o tipos de scrap..."></textarea>
+            <label for="formMessage">Detalle del Lote o Requerimiento Técnico</label>
+            <textarea id="formMessage" class="abtc-input abtc-textarea" rows="3" placeholder="Indica tipo de polímero, volumen estimado mensual o especificación técnica..."></textarea>
           </div>
 
           <div class="modal-actions">
-            <button type="button" class="btn btn-ghost" id="closeAccessBtn">Cancelar</button>
-            <button type="submit" class="btn btn-primary btn-abtc-primary">Enviar Solicitud &rarr;</button>
+            <button type="button" class="btn btn-ghost" id="cancelAccessModal">Cancelar</button>
+            <button type="submit" class="btn btn-primary btn-abtc-primary">Enviar Solicitud</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- DETAIL / SPECIFICATIONS MODAL -->
+    <!-- DETAIL MODAL (FICHA TÉCNICA DINÁMICA) -->
     <div class="modal-overlay" id="detailModal" aria-hidden="true">
-      <div class="modal-card abtc-card" role="dialog" aria-labelledby="detailTitle">
+      <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="detailTitle">
         <button class="modal-close" id="closeDetailModal" aria-label="Cerrar ventana">&times;</button>
         <div class="modal-header">
-          <span class="section-eyebrow" id="detailCategory">POLÍMERO INDUSTRIAL</span>
-          <h3 id="detailTitle">Ficha Técnica de Material</h3>
-          <p id="detailDescription">Especificaciones fisicoquímicas y trazabilidad del lote.</p>
+          <div class="badge-row" style="margin-bottom: 0.5rem;">
+            <span class="hero-tag" id="detailBadgeCat" style="margin-bottom: 0;">CATEGORÍA</span>
+            <span class="status-badge-live badge-complete" id="detailBadgeStatus">AUDITADO</span>
+          </div>
+          <h3 id="detailTitle">Nombre del Polímero</h3>
+          <p id="detailDesc">Descripción técnica del material.</p>
         </div>
 
-        <div class="detail-matrix-box">
-          <div class="detail-item">
-            <span>Volumen Disponible:</span>
-            <strong id="detailStock">0 kg</strong>
+        <div class="detail-grid">
+          <div class="detail-cell">
+            <span class="detail-cell-label">Volumen Disponible</span>
+            <span class="detail-cell-val" id="detailVolume">-</span>
           </div>
-          <div class="detail-item">
-            <span>Ubicación Planta:</span>
-            <strong id="detailLocation">-</strong>
+          <div class="detail-cell">
+            <span class="detail-cell-label">Planta de Origen</span>
+            <span class="detail-cell-val" id="detailLocation">-</span>
           </div>
-          <div class="detail-item">
-            <span>Condición / Pureza:</span>
-            <strong id="detailStatus">-</strong>
+          <div class="detail-cell">
+            <span class="detail-cell-label">Índice de Fluidez (MFI)</span>
+            <span class="detail-cell-val" id="detailMfi">-</span>
           </div>
-          <div class="detail-item">
-            <span>Presentación:</span>
-            <strong id="detailPackaging">Big Bags / Fardos</strong>
+          <div class="detail-cell">
+            <span class="detail-cell-label">Densidad / Presentación</span>
+            <span class="detail-cell-val" id="detailPresentation">-</span>
           </div>
         </div>
 
-        <div class="modal-actions">
+        <div class="modal-actions modal-actions-between" style="margin-top: 2rem;">
           <button type="button" class="btn btn-ghost" id="closeDetailBtn">Cerrar</button>
-          <button type="button" class="btn btn-primary btn-abtc-primary" id="detailRequestBtn">Solicitar este Lote</button>
+          <button type="button" class="btn btn-primary btn-abtc-primary" id="requestLotBtn">
+            Solicitar Lote / Cotizar
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- ADMIN REQUESTS VIEWER MODAL (LOCALSTORAGE) -->
+    <!-- ADMIN / LOCALSTORAGE REQUESTS MODAL -->
     <div class="modal-overlay" id="adminModal" aria-hidden="true">
-      <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="adminTitle">
+      <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="adminModalTitle">
         <button class="modal-close" id="closeAdminModal" aria-label="Cerrar ventana">&times;</button>
         <div class="modal-header">
-          <span class="section-eyebrow">PANEL LOCALSTORAGE</span>
-          <h3 id="adminTitle">Solicitudes Guardadas en Navegador</h3>
-          <p>Registro local de interacciones generadas desde los formularios de la plataforma.</p>
+          <span class="section-eyebrow">PANEL DE TRAZABILIDAD LOCAL</span>
+          <h3 id="adminModalTitle">Solicitudes Guardadas en LocalStorage</h3>
+          <p>Registro de operaciones guardadas en el navegador durante la sesión activa.</p>
         </div>
 
-        <div class="admin-requests-container" id="adminRequestsList">
-          <!-- Rendered dynamically from LocalStorage -->
+        <div class="requests-list" id="requestsListContainer">
+          <!-- Renderizado dinámicamente con JavaScript -->
         </div>
 
         <div class="modal-actions modal-actions-between">
@@ -1003,77 +971,6 @@
       </div>
     </div>
 
-    <!-- TECHNICAL & ACADEMIC DOCUMENTATION MODAL -->
-    <div class="modal-overlay" id="techDocModal" aria-hidden="true">
-      <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="techDocModalTitle">
-        <button class="modal-close" id="closeTechDocModal" aria-label="Cerrar ventana">&times;</button>
-        <div class="modal-header">
-          <span class="section-eyebrow">FICHA INSTITUCIONAL & ANTEPROYECTO 2026</span>
-          <h3 id="techDocModalTitle">Memoria Técnica del Proyecto MateriaX</h3>
-          <p>Documentación de desarrollo, diseño de software y esquema de evaluación curricular.</p>
-        </div>
-
-        <div class="tech-doc-body" style="display: flex; flex-direction: column; gap: 1.25rem; font-size: 0.88rem; color: #E2E8F0; line-height: 1.6;">
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem; background: rgba(255, 255, 255, 0.04); padding: 1rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
-            <div>
-              <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Institución</strong>
-              <span>Instituto Técnico Río Tercero</span>
-            </div>
-            <div>
-              <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Especialidad</strong>
-              <span>Informática (2026)</span>
-            </div>
-            <div>
-              <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Materias</strong>
-              <span>Base de Datos, Lab. de Programación, Lab. de Aplicaciones II</span>
-            </div>
-            <div>
-              <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Docentes a Cargo</strong>
-              <span>Stucher Vanesa, Zanetti Simon, Rissone Francisco</span>
-            </div>
-          </div>
-
-          <div>
-            <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 0.35rem;">1. Propósito y Arquitectura de la Solución</h4>
-            <p style="margin: 0;">
-              MateriaX es una plataforma B2B orientada a la industria plástica para publicar, cotizar y reincorporar excedentes y descartes post-industriales en la economía circular. El sistema fue estructurado bajo el patrón MVC en <strong>CodeIgniter 4</strong>, frontend optimizado con estándares de diseño plano ABTC y base de datos relacional <strong>MySQL</strong> normalizada en 3FN.
-            </p>
-          </div>
-
-          <div>
-            <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 0.35rem;">2. Criterios de Seguridad y Blindaje Backend</h4>
-            <ul style="padding-left: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.25rem;">
-              <li><strong>Protección CSRF:</strong> Validación automática de tokens sincronizados en solicitudes POST.</li>
-              <li><strong>Hash Criptográfico:</strong> Almacenamiento seguro de credenciales con <code>PASSWORD_BCRYPT</code>.</li>
-              <li><strong>Prevención SQL Injection:</strong> Consultas preparadas parametrizadas en Modelos y Query Builder.</li>
-              <li><strong>Control de Sesión y Filtros:</strong> Restricción de rutas mediante <code>App\Filters\AuthFilter</code> según el rol.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 0.35rem;">3. Cronograma de Evaluación Curricular</h4>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.65rem; font-family: var(--font-mono); font-size: 0.78rem;">
-              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.65rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                <span style="color: #38BDF8; font-weight: bold; display: block;">HITO 1</span>
-                <span>Fundación MVC, Login y DB Base</span>
-              </div>
-              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.65rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                <span style="color: #38BDF8; font-weight: bold; display: block;">HITO 2</span>
-                <span>Inventario, Filtros y Solicitudes</span>
-              </div>
-              <div style="background: rgba(255, 255, 255, 0.03); padding: 0.65rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
-                <span style="color: #38BDF8; font-weight: bold; display: block;">HITO FINAL</span>
-                <span>Métricas, Auditoría y Defensa</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modal-actions" style="margin-top: 1.5rem; justify-content: flex-end;">
-          <button type="button" class="btn btn-primary btn-abtc-primary" id="closeTechDocBtn">Entendido / Cerrar</button>
-        </div>
-      </div>
-    </div>
   </main>
 
   <!-- TOAST NOTIFICATION CONTAINER -->

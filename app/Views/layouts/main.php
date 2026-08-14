@@ -41,20 +41,17 @@
           <a href="<?= base_url('#inicio') ?>" class="active">Inicio</a>
           <a href="<?= base_url('#propuesta-roles') ?>">Propuesta & Roles</a>
           <a href="<?= base_url('#roadmap-inventario') ?>">Roadmap & Inventario</a>
-          <a href="<?= base_url('#seguridad-infraestructura') ?>">Seguridad</a>
+          <a href="<?= base_url('#seguridad-infraestructura') ?>">Seguridad & Compliance</a>
           <a href="<?= base_url('#metricas') ?>">Métricas</a>
           <a href="<?= base_url('#contacto') ?>">Contacto</a>
         </nav>
 
         <div class="nav-buttons">
-          <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Ver solicitudes en LocalStorage">
+          <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Ver solicitudes en curso">
             📋 Solicitudes <span class="badge-count" id="adminBadgeCount">0</span>
           </button>
-          <button type="button" class="btn btn-sm btn-ghost" id="openTechDocBtn" title="Ver Memoria Técnica y Ficha Académica">
-            📄 Memoria Técnica
-          </button>
           <button type="button" class="btn btn-sm btn-primary btn-abtc-primary" id="openAccessModalNav">
-            Acceso / Login
+            Portal Empresas / Acceso
           </button>
         </div>
       </div>
@@ -103,44 +100,46 @@
         <div class="footer-col">
           <h4 class="footer-col-title">Estructura Web</h4>
           <ul class="footer-col-links">
-            <li><a href="#inicio">Inicio / Hero</a></li>
-            <li><a href="#propuesta-roles">Propuesta & Roles</a></li>
-            <li><a href="#roadmap-inventario">Roadmap & Inventario</a></li>
-            <li><a href="#seguridad-infraestructura">Seguridad & Infraestructura</a></li>
-            <li><a href="#metricas">Dashboard de Métricas</a></li>
+            <li><a href="<?= base_url('#inicio') ?>">Inicio / Hero</a></li>
+            <li><a href="<?= base_url('#propuesta-roles') ?>">Propuesta & Roles</a></li>
+            <li><a href="<?= base_url('#roadmap-inventario') ?>">Roadmap & Inventario</a></li>
+            <li><a href="<?= base_url('#seguridad-infraestructura') ?>">Seguridad & Compliance</a></li>
+            <li><a href="<?= base_url('#metricas') ?>">Dashboard de Métricas</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-col-title">Polímeros</h4>
+          <h4 class="footer-col-title">Polímeros & Lotes</h4>
           <ul class="footer-col-links">
-            <li><a href="#roadmap-inventario" data-filter-link="polietileno">Polietileno (PEAD/PEBD)</a></li>
-            <li><a href="#roadmap-inventario" data-filter-link="polipropileno">Polipropileno (PP)</a></li>
-            <li><a href="#roadmap-inventario" data-filter-link="tecnicos">PVC, ABS & Nylon</a></li>
-            <li><a href="#roadmap-inventario" data-filter-link="equipamiento">Matricería Industrial</a></li>
+            <li><a href="<?= base_url('#roadmap-inventario') ?>" data-filter-link="polietileno">Polietileno (PEAD/PEBD)</a></li>
+            <li><a href="<?= base_url('#roadmap-inventario') ?>" data-filter-link="polipropileno">Polipropileno (PP)</a></li>
+            <li><a href="<?= base_url('#roadmap-inventario') ?>" data-filter-link="tecnicos">PVC, ABS & Nylon</a></li>
+            <li><a href="<?= base_url('#roadmap-inventario') ?>" data-filter-link="equipamiento">Matricería Industrial</a></li>
           </ul>
         </div>
 
         <div class="footer-col">
-          <h4 class="footer-col-title">Seguridad & Backend</h4>
+          <h4 class="footer-col-title">Seguridad & Compliance</h4>
           <ul class="footer-col-links">
-            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● CodeIgniter 4 MVC</span></li>
-            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● MySQL InnoDB DB</span></li>
-            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● CSRF + Bcrypt Hash</span></li>
-            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Arquitectura 3FN</span></li>
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Cifrado de Datos & RBAC</span></li>
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Homologación CUIT / AFIP</span></li>
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Trazabilidad de Lotes</span></li>
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Certificación ESG & CO₂</span></li>
           </ul>
         </div>
       </div>
 
-      <!-- Créditos y Acceso a Memoria Técnica / Ficha Académica -->
+      <!-- Créditos y Enlaces Legales Corporativos -->
       <div class="footer-credits-academic">
         <div>
-          &copy; 2026 <strong>MateriaX</strong>. Red Industrial de Reutilización Circular.
+          &copy; 2026 <strong>MateriaX</strong>. Red Industrial de Reutilización Circular. Todos los derechos reservados.
         </div>
-        <div>
-          <button type="button" class="btn-academic-link" id="openTechDocFooter">
-            📄 Ficha Institucional & Memoria Técnica (ITR3)
-          </button>
+        <div style="font-size: 0.82rem; color: #94A3B8; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <span>Privacidad de Datos</span>
+          <span>•</span>
+          <span>Términos de Servicio B2B</span>
+          <span>•</span>
+          <span>Compliance Industrial</span>
         </div>
       </div>
     </div>
@@ -258,78 +257,6 @@
             Cerrar
           </button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TECHNICAL & ACADEMIC DOCUMENTATION MODAL -->
-  <div class="modal-overlay" id="techDocModal" aria-hidden="true">
-    <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="techDocModalTitle">
-      <button class="modal-close" id="closeTechDocModal" aria-label="Cerrar ventana">&times;</button>
-      <div class="modal-header">
-        <span class="section-eyebrow">FICHA INSTITUCIONAL & ANTEPROYECTO 2026</span>
-        <h3 id="techDocModalTitle">Memoria Técnica del Proyecto MateriaX</h3>
-        <p>Documentación de desarrollo, diseño de software y esquema de evaluación curricular.</p>
-      </div>
-
-      <div class="tech-doc-body" style="display: flex; flex-direction: column; gap: 1.25rem; font-size: 0.88rem; color: #E2E8F0; line-height: 1.6;">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem; background: rgba(255, 255, 255, 0.04); padding: 1rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.1);">
-          <div>
-            <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Institución</strong>
-            <span>Instituto Técnico Río Tercero</span>
-          </div>
-          <div>
-            <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Especialidad</strong>
-            <span>Informática (2026)</span>
-          </div>
-          <div>
-            <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Materias</strong>
-            <span>Base de Datos, Lab. de Programación, Lab. de Aplicaciones II</span>
-          </div>
-          <div>
-            <strong style="color: #93C5FD; display: block; font-size: 0.75rem; text-transform: uppercase; font-family: var(--font-mono);">Docentes a Cargo</strong>
-            <span>Stucher Vanesa, Zanetti Simon, Rissone Francisco</span>
-          </div>
-        </div>
-
-        <div>
-          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 0.35rem;">1. Propósito y Arquitectura de la Solución</h4>
-          <p style="margin: 0;">
-            MateriaX es una plataforma B2B orientada a la industria plástica para publicar, cotizar y reincorporar excedentes y descartes post-industriales en la economía circular. El sistema fue estructurado bajo el patrón MVC en <strong>CodeIgniter 4</strong>, frontend optimizado con estándares de diseño plano ABTC y base de datos relacional <strong>MySQL</strong> normalizada en 3FN.
-          </p>
-        </div>
-
-        <div>
-          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 0.35rem;">2. Criterios de Seguridad y Blindaje Backend</h4>
-          <ul style="padding-left: 1.25rem; margin: 0; display: flex; flex-direction: column; gap: 0.25rem;">
-            <li><strong>Protección CSRF:</strong> Validación automática de tokens sincronizados en solicitudes POST.</li>
-            <li><strong>Hash Criptográfico:</strong> Almacenamiento seguro de credenciales con <code>PASSWORD_BCRYPT</code>.</li>
-            <li><strong>Prevención SQL Injection:</strong> Consultas preparadas parametrizadas en Modelos y Query Builder.</li>
-            <li><strong>Control de Sesión y Filtros:</strong> Restricción de rutas mediante <code>App\Filters\AuthFilter</code> según el rol.</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 style="color: #FFFFFF; font-size: 1rem; margin-bottom: 0.35rem;">3. Cronograma de Evaluación Curricular</h4>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.65rem; font-family: var(--font-mono); font-size: 0.78rem;">
-            <div style="background: rgba(255, 255, 255, 0.03); padding: 0.65rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
-              <span style="color: #38BDF8; font-weight: bold; display: block;">HITO 1</span>
-              <span>Fundación MVC, Login y DB Base</span>
-            </div>
-            <div style="background: rgba(255, 255, 255, 0.03); padding: 0.65rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
-              <span style="color: #38BDF8; font-weight: bold; display: block;">HITO 2</span>
-              <span>Inventario, Filtros y Solicitudes</span>
-            </div>
-            <div style="background: rgba(255, 255, 255, 0.03); padding: 0.65rem; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08);">
-              <span style="color: #38BDF8; font-weight: bold; display: block;">HITO FINAL</span>
-              <span>Métricas, Auditoría y Defensa</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="modal-actions" style="margin-top: 1.5rem; justify-content: flex-end;">
-        <button type="button" class="btn btn-primary btn-abtc-primary" id="closeTechDocBtn">Entendido / Cerrar</button>
       </div>
     </div>
   </div>

@@ -76,7 +76,6 @@ const topNav = document.querySelector('#topNav');
 const accessModal = document.querySelector('#accessModal');
 const detailModal = document.querySelector('#detailModal');
 const adminModal = document.querySelector('#adminModal');
-const techDocModal = document.querySelector('#techDocModal');
 const accessForm = document.querySelector('#accessForm');
 const toastContainer = document.querySelector('#toastContainer');
 const adminBadgeCount = document.querySelector('#adminBadgeCount');
@@ -403,23 +402,12 @@ detailModal?.addEventListener('click', (e) => {
   if (e.target === detailModal) closeModal(detailModal);
 });
 
-// Technical & Academic Documentation Modal Triggers
-document.querySelector('#openTechDocBtn')?.addEventListener('click', () => openModal(techDocModal));
-document.querySelector('#openTechDocFooter')?.addEventListener('click', () => openModal(techDocModal));
-document.querySelector('#closeTechDocModal')?.addEventListener('click', () => closeModal(techDocModal));
-document.querySelector('#closeTechDocBtn')?.addEventListener('click', () => closeModal(techDocModal));
-
-techDocModal?.addEventListener('click', (e) => {
-  if (e.target === techDocModal) closeModal(techDocModal);
-});
-
 // Close modals on Escape key
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeModal(accessModal);
     closeModal(detailModal);
     closeModal(adminModal);
-    closeModal(techDocModal);
   }
 });
 

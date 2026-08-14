@@ -435,160 +435,128 @@
 </section>
 
 <!-- ==========================================================================
-     SECCIÓN 4: SEGURIDAD & INFRAESTRUCTURA (<section class="tech-section">)
+     SECCIÓN 4: SEGURIDAD, COMPLIANCE & TRAZABILIDAD (<section class="tech-section">)
      ========================================================================== -->
 <section class="tech-section section-dark" id="seguridad-infraestructura">
   <div class="hero-bg-grid"></div>
   <div class="section-wrapper" style="position: relative; z-index: 2;">
     <div class="section-header-block">
-      <span class="section-eyebrow">SEGURIDAD DE GRADO INDUSTRIAL & ARQUITECTURA</span>
-      <h2 class="section-title-dark">Blindaje de Operaciones & Trazabilidad Relacional</h2>
+      <span class="section-eyebrow">ESTÁNDARES DE SEGURIDAD EMPRESARIAL & COMPLIANCE</span>
+      <h2 class="section-title-dark">Confidencialidad, Trazabilidad & Certificación ESG</h2>
       <p class="section-desc-dark">
-        Garantía de confidencialidad en transacciones B2B, defensas avanzadas contra vulnerabilidades OWASP y arquitectura de persistencia relacional.
+        MateriaX implementa protocolos de seguridad de grado industrial para garantizar la confidencialidad en transacciones B2B, homologación fiscal de contrapartes y trazabilidad física y documental de cada lote.
       </p>
     </div>
 
     <div class="tech-panel-asymmetric">
-      <!-- Columna Izquierda: MVC & Seguridad Backend -->
+      <!-- Columna Izquierda: Blindaje Transaccional & Seguridad Corporativa -->
       <div class="tech-layer-card abtc-card">
         <div class="tech-card-header">
-          <div class="brand-icon" style="width:34px; height:34px; font-size: 0.8rem;">CI4</div>
-          <h3 class="tech-card-title">Arquitectura MVC & Blindaje Criptográfico</h3>
+          <div class="brand-icon" style="width:34px; height:34px; font-size: 0.8rem; background: var(--color-blue-electric);">SEC</div>
+          <h3 class="tech-card-title">Blindaje Transaccional & Control RBAC</h3>
         </div>
         <p class="tech-card-desc">
-          Separación estricta entre capa de presentación, lógica de negocio y persistencia (`App\Controllers`, `App\Models`, `App\Views`) para máxima escalabilidad y auditoría de operaciones.
+          Protección de datos industriales mediante cifrado de extremo a extremo, control de acceso basado en roles (RBAC) y resguardo de acuerdos de confidencialidad comercial.
         </p>
-
-        <div class="code-block-preview">
-          <span class="comment">// Controlador CodeIgniter 4: Validación, Modelos, Bcrypt y Sesiones</span><br>
-          <span class="kw">namespace</span> App\Controllers;<br>
-          <span class="kw">use</span> App\Models\UserModel;<br><br>
-          <span class="kw">class</span> <span class="func">AuthController</span> <span class="kw">extends</span> BaseController {<br>
-          &nbsp;&nbsp;<span class="kw">public function</span> <span class="func">login</span>() {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 1. Reglas de validación (CSRF e inputs)</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (!$this-><span class="func">validate</span>([<span class="str">'email'</span> => <span class="str">'required|valid_email'</span>, <span class="str">'password'</span> => <span class="str">'required'</span>])) {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="func">redirect</span>()-><span class="func">back</span>()-><span class="func">withInput</span>();<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 2. Extracción de request e instanciación de modelo</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;$email = $this->request-><span class="func">getPost</span>(<span class="str">'email'</span>);<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;$pass  = $this->request-><span class="func">getPost</span>(<span class="str">'password'</span>);<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;$model = <span class="kw">new</span> <span class="func">UserModel</span>();<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;$user  = $model-><span class="func">where</span>(<span class="str">'email'</span>, $email)-><span class="func">first</span>();<br><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 3. Verificación de existencia y hash Bcrypt</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> (!$user || !<span class="func">password_verify</span>($pass, $user[<span class="str">'password_hash'</span>])) {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="func">redirect</span>()-><span class="func">back</span>()-><span class="func">with</span>(<span class="str">'error'</span>, <span class="str">'Credenciales inválidas'</span>);<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// 4. Persistencia de sesión y redirección exitosa</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="func">session</span>()-><span class="func">set</span>([<span class="str">'user_id'</span> => $user[<span class="str">'id'</span>], <span class="str">'role'</span> => $user[<span class="str">'role'</span>], <span class="str">'isLoggedIn'</span> => <span class="kw">true</span>]);<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="func">redirect</span>()-><span class="func">to</span>(<span class="str">'/dashboard'</span>);<br>
-          &nbsp;&nbsp;}<br>
-          }
-        </div>
 
         <ul class="tech-checklist">
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span><strong>Protección CSRF:</strong> Filtros automáticos y validación nativa de tokens sincronizados por solicitud POST.</span>
+            <div>
+              <strong>Cifrado Transaccional & TLS 1.3:</strong>
+              <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Toda cotización, negociación de lotes y credenciales operan bajo túneles criptográficos blindados.</span>
+            </div>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span><strong>Prevención SQL Injection:</strong> Consultas preparadas parametrizadas en Modelos y Query Builder de CI4.</span>
+            <div>
+              <strong>Homologación Fiscal y CUIT Verificado:</strong>
+              <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Validación estricta de personería jurídica y habilitación ambiental de plantas antes de operar.</span>
+            </div>
           </li>
           <li>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <span><strong>Hash de Contraseñas:</strong> Encriptación irreversible con algoritmo seguro `PASSWORD_BCRYPT`.</span>
+            <div>
+              <strong>Protección de Propiedad Intelectual & NDA:</strong>
+              <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Resguardo de geometrías propietarias en matricería, moldes y formulaciones plásticas.</span>
+            </div>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <div>
+              <strong>Registro de Auditoría Inmutable:</strong>
+              <span style="color: #CBD5E1; display: block; font-size: 0.82rem; margin-top: 2px;">Trazabilidad completa con marca de tiempo por cada solicitud, pesaje y retiro de planta.</span>
+            </div>
           </li>
         </ul>
       </div>
 
-      <!-- Columna Derecha: Modelo de Base de Datos Relacional -->
+      <!-- Columna Derecha: Trazabilidad de Materiales & Pasaporte Digital -->
       <div class="tech-layer-card highlight-red abtc-card">
         <div class="tech-card-header">
-          <div class="brand-icon" style="background: var(--color-navy-dark); width:34px; height:34px;">SQL</div>
-          <h3 class="tech-card-title">Modelo Relacional & Cardinalidades</h3>
+          <div class="brand-icon" style="background: var(--color-red-performance); width:34px; height:34px; font-size: 0.8rem;">ESG</div>
+          <h3 class="tech-card-title">Cadena de Custodia & Pasaporte Digital</h3>
         </div>
         <p class="tech-card-desc">
-          Esquema de persistencia normalizado en 3FN con integridad referencial (Foreign Keys), restricciones y relaciones explícitas:
+          Trazabilidad física y documental del lote desde el pesaje en origen hasta su reincorporación en líneas de inyección, extrusión o rotomoldeo:
         </p>
 
-        <!-- Diagrama de Cardinalidades y Mapeo de Relaciones -->
+        <!-- Diagrama de Pasos de Trazabilidad B2B -->
         <div class="db-relations-flow">
           <div class="db-relation-row">
-            <span class="db-entity">roles <span class="badge-pk">PK id</span></span>
-            <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-            <span class="db-entity">usuarios <span class="badge-fk">FK role_id</span></span>
+            <span class="db-entity">1. Pesaje en Báscula <span class="badge-pk">Origen</span></span>
+            <span class="db-cardinality-indicator">Precinto Digital</span>
+            <span class="db-entity">Control Físico-Químico</span>
           </div>
           <div class="db-relation-row">
-            <span class="db-entity">usuarios <span class="badge-pk">PK id</span></span>
-            <span class="db-cardinality-indicator" title="Uno a Uno">1 : 1 &rarr;</span>
-            <span class="db-entity">empresas <span class="badge-fk">FK user_id</span></span>
+            <span class="db-entity">2. Homologación <span class="badge-fk">Matching</span></span>
+            <span class="db-cardinality-indicator">MFI / Densidad</span>
+            <span class="db-entity">Planta Receptora</span>
           </div>
           <div class="db-relation-row">
-            <span class="db-entity">empresas <span class="badge-pk">PK id</span></span>
-            <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-            <span class="db-entity">recursos <span class="badge-fk">FK empresa_id</span></span>
+            <span class="db-entity">3. Despacho Seguro <span class="badge-pk">Logística</span></span>
+            <span class="db-cardinality-indicator">Manifiesto B2B</span>
+            <span class="db-entity">Transporte Habilitado</span>
           </div>
           <div class="db-relation-row">
-            <span class="db-entity">categorias <span class="badge-pk">PK id</span></span>
-            <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-            <span class="db-entity">recursos <span class="badge-fk">FK categoria_id</span></span>
-          </div>
-          <div class="db-relation-row">
-            <span class="db-entity">recursos <span class="badge-pk">PK id</span></span>
-            <span class="db-cardinality-indicator" title="Uno a Muchos">1 : N &rarr;</span>
-            <span class="db-entity">solicitudes <span class="badge-fk">FK recurso_id</span></span>
-          </div>
-          <div class="db-relation-row">
-            <span class="db-entity">solicitudes <span class="badge-pk">PK id</span></span>
-            <span class="db-cardinality-indicator" title="Uno a Uno">1 : 1 &rarr;</span>
-            <span class="db-entity">operaciones <span class="badge-fk">FK solicitud_id</span></span>
+            <span class="db-entity">4. Reingreso Productivo <span class="badge-fk">Destino</span></span>
+            <span class="db-cardinality-indicator">Certificado ESG</span>
+            <span class="db-entity">CO₂ Evitado Auditado</span>
           </div>
         </div>
 
-        <!-- Matriz de Tablas Normalizadas con PK/FK alineados -->
+        <!-- Matriz de Indicadores de Cumplimiento -->
         <div class="db-schema-matrix">
           <div class="db-table-pill">
-            <span class="table-name">usuarios</span>
-            <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+            <span class="table-name">ISO 9001 / 14001</span>
+            <span class="table-keys"><span class="badge-pk">CALIDAD</span></span>
           </div>
           <div class="db-table-pill">
-            <span class="table-name">roles</span>
-            <span class="table-keys"><span class="badge-pk">PK</span></span>
+            <span class="table-name">Manifiesto Carga</span>
+            <span class="table-keys"><span class="badge-fk">DIGITAL</span></span>
           </div>
           <div class="db-table-pill">
-            <span class="table-name">empresas</span>
-            <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+            <span class="table-name">Reporte CO₂</span>
+            <span class="table-keys"><span class="badge-pk">ESG</span></span>
           </div>
           <div class="db-table-pill">
-            <span class="table-name">recursos</span>
-            <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+            <span class="table-name">Trazabilidad Batch</span>
+            <span class="table-keys"><span class="badge-fk">LOTE</span></span>
           </div>
           <div class="db-table-pill">
-            <span class="table-name">categorias</span>
-            <span class="table-keys"><span class="badge-pk">PK</span></span>
+            <span class="table-name">Homologación CUIT</span>
+            <span class="table-keys"><span class="badge-pk">AFIP</span></span>
           </div>
           <div class="db-table-pill">
-            <span class="table-name">solicitudes</span>
-            <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
-          </div>
-          <div class="db-table-pill">
-            <span class="table-name">operaciones</span>
-            <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
-          </div>
-          <div class="db-table-pill">
-            <span class="table-name">sesiones</span>
-            <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
-          </div>
-          <div class="db-table-pill">
-            <span class="table-name">ubicaciones</span>
-            <span class="table-keys"><span class="badge-pk">PK</span> <span class="badge-fk">FK</span></span>
+            <span class="table-name">Custodia NDA</span>
+            <span class="table-keys"><span class="badge-fk">LEGAL</span></span>
           </div>
         </div>
 
         <div class="db-integrity-note">
-          <span class="note-title">INTEGRIDAD REFERENCIAL & AUDITORÍA EN BD:</span>
+          <span class="note-title">CERTIFICACIÓN AMBIENTAL & HUELLA DE CARBONO:</span>
           <p>
-            Restricciones `ON DELETE RESTRICT / CASCADE`, índices `BTREE` en claves foráneas y filtros de rol (`App\Filters\AuthFilter`) para control estricto de accesos.
+            Cada operación completada emite automáticamente un informe de sustentabilidad empresarial con el balance exacto de material revalorizado y emisiones netas mitigadas.
           </p>
         </div>
       </div>
