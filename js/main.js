@@ -8,7 +8,7 @@ const RESOURCE_DATA = {
     title: "PEAD Molido Limpio",
     category: "Polietileno (PEAD)",
     stock: "180 kg",
-    location: "San Martín, Gran Buenos Aires",
+    location: "San Martín, Buenos Aires",
     status: "Excelente pureza (Molido industrial)",
     packaging: "Big Bags de 200 kg",
     description: "Lote proveniente de sobrantes de inyección de baldes industriales. Clasificado por color, libre de metálicos y con bajo índice de fluidez variable. Excelente desempeño para extrusion / compounding."
@@ -17,7 +17,7 @@ const RESOURCE_DATA = {
     title: "Scrap de PP Homopolímero",
     category: "Polipropileno (PP)",
     stock: "320 kg",
-    location: "Vicente López, Gran Buenos Aires",
+    location: "Vicente López, Buenos Aires",
     status: "Recortes en prensa",
     packaging: "Fardos consolidados de 80 kg",
     description: "Recortes limpios post-producción de envases rígidos. Trazabilidad de materia prima virgen con índice MFI 12. Ideal para mezclas de inyección de piezas de segunda línea."
@@ -26,7 +26,7 @@ const RESOURCE_DATA = {
     title: "Lote Compuestos ABS & PVC",
     category: "Materiales Técnicos",
     stock: "450 kg",
-    location: "Lomas de Zamora, BSAS",
+    location: "Lomas de Zamora, Buenos Aires",
     status: "Seleccionado y ensacado",
     packaging: "Sacos industriales de 25 kg",
     description: "Descarte de perfilería rígida de PVC y carcasas de ABS industrial. Clasificación mecánica completa, sin presencia de elastómeros ni caucho."
@@ -35,7 +35,7 @@ const RESOURCE_DATA = {
     title: "Pallets Plásticos & Cajas Reusables",
     category: "Equipamiento & Logística",
     stock: "85 unidades",
-    location: "Parque Industrial Pilar, BSAS",
+    location: "Pilar, Buenos Aires",
     status: "Usado estructural intacto",
     packaging: "Palletizado listo para carga",
     description: "Pallets plásticos reforzados (1200x1000x150mm) de polietileno de alta densidad. Soportan hasta 1.200 kg en rack y 3.000 kg estático."
@@ -44,7 +44,7 @@ const RESOURCE_DATA = {
     title: "Scrap Film PEBD Transparente",
     category: "Polietileno (PEBD)",
     stock: "600 kg",
-    location: "Quilmes, Gran Buenos Aires",
+    location: "Quilmes, Buenos Aires",
     status: "Fardos prensados limpios",
     packaging: "Fardos de alta densidad",
     description: "Film termocontraíble y stretch film transparente de desembalaje de pallets de insumos limpios. Sin etiquetas adhesivas ni polvo acumulado."

@@ -53,37 +53,37 @@
     <!-- Panel Asimétrico de Destacado Industrial -->
     <aside class="hero-feature-panel abtc-card">
       <div class="feature-panel-header">
-        <span class="feature-badge-cat">LOTE DESTACADO #RM-804</span>
+        <span class="feature-badge-cat">LOTE DESTACADO #PE-904</span>
         <span class="feature-badge-status">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
           AUDITADO
         </span>
       </div>
 
-      <h3 class="feature-panel-title">Molde Rotomoldeo 5000L</h3>
-      <p class="feature-panel-desc">Molde de aluminio fundido para tanques de polietileno rotomolded con conductividad térmica óptima.</p>
+      <h3 class="feature-panel-title">PEAD Molido Inyección & Soplado</h3>
+      <p class="feature-panel-desc">Sobrante industrial homogéneo de baldes y bidones. Descontaminado, libre de metales y con fluidez controlada para extrusión directa.</p>
 
       <div class="spec-matrix">
         <div class="spec-cell">
-          <span class="spec-label">Capacidad Nominal</span>
-          <span class="spec-value accent">5.000 Litros</span>
+          <span class="spec-label">Volumen Disponible</span>
+          <span class="spec-value accent">12.500 kg</span>
         </div>
         <div class="spec-cell">
-          <span class="spec-label">Polímero Apto</span>
-          <span class="spec-value">PEAD / PEBD</span>
+          <span class="spec-label">Índice Fluidez (MFI)</span>
+          <span class="spec-value">0.35 g/10min</span>
         </div>
         <div class="spec-cell">
-          <span class="spec-label">Dimensiones (DxH)</span>
-          <span class="spec-value">2.10m x 2.45m</span>
+          <span class="spec-label">Densidad Específica</span>
+          <span class="spec-value">0.954 g/cm³</span>
         </div>
         <div class="spec-cell">
-          <span class="spec-label">Espesor de Pared</span>
-          <span class="spec-value">8.5 mm</span>
+          <span class="spec-label">Pureza / Filtrado</span>
+          <span class="spec-value">99.8% Granza</span>
         </div>
       </div>
 
       <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--color-navy-border-subtle); padding-top: 1rem;">
-        <span style="font-size: 0.8rem; color: var(--color-text-light-muted); font-family: var(--font-mono);">PLANTA SAN MARTÍN (GBA)</span>
+        <span style="font-size: 0.8rem; color: #BAC7E6; font-family: var(--font-mono); font-weight: 600;">San Martín, Buenos Aires</span>
         <button type="button" class="btn btn-sm btn-primary open-detail-btn" data-resource-id="1">
           Ver Ficha Técnica &rarr;
         </button>
@@ -306,7 +306,7 @@
             </div>
             <div>
               <div class="resource-meta">
-                <div>Ubicación: <strong>San Martín, GBA</strong></div>
+                <div>Ubicación: <strong>San Martín, Buenos Aires</strong></div>
                 <div>Condición: <strong>Molido industrial limpio</strong></div>
               </div>
               <div class="resource-actions">
@@ -327,7 +327,7 @@
             </div>
             <div>
               <div class="resource-meta">
-                <div>Ubicación: <strong>Vicente López, GBA</strong></div>
+                <div>Ubicación: <strong>Vicente López, Buenos Aires</strong></div>
                 <div>Condición: <strong>Fardos prensados 80kg</strong></div>
               </div>
               <div class="resource-actions">
@@ -348,7 +348,7 @@
             </div>
             <div>
               <div class="resource-meta">
-                <div>Ubicación: <strong>Lomas de Zamora, BSAS</strong></div>
+                <div>Ubicación: <strong>Lomas de Zamora, Buenos Aires</strong></div>
                 <div>Condición: <strong>Sacos industriales 25kg</strong></div>
               </div>
               <div class="resource-actions">
@@ -369,7 +369,7 @@
             </div>
             <div>
               <div class="resource-meta">
-                <div>Ubicación: <strong>Parque Industrial Pilar</strong></div>
+                <div>Ubicación: <strong>Pilar, Buenos Aires</strong></div>
                 <div>Condición: <strong>Usado estructural intacto</strong></div>
               </div>
               <div class="resource-actions">
@@ -390,7 +390,7 @@
             </div>
             <div>
               <div class="resource-meta">
-                <div>Ubicación: <strong>Quilmes, GBA</strong></div>
+                <div>Ubicación: <strong>Quilmes, Buenos Aires</strong></div>
                 <div>Condición: <strong>Fardos de alta densidad</strong></div>
               </div>
               <div class="resource-actions">
@@ -411,7 +411,7 @@
             </div>
             <div>
               <div class="resource-meta">
-                <div>Ubicación: <strong>Córdoba Capital</strong></div>
+                <div>Ubicación: <strong>Córdoba Capital, Córdoba</strong></div>
                 <div>Condición: <strong>Tambores con desecante</strong></div>
               </div>
               <div class="resource-actions">
