@@ -249,12 +249,13 @@
             Consulta lotes en tiempo real y solicita reservas con trazabilidad industrial.
           </p>
         </div>
-        <div class="search-box-modular">
+        <div class="search-box-modular" role="search">
           <div class="input-icon-wrapper">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input id="search" type="search" placeholder="Buscar PEAD, PP, scrap, moldes, GBA..." autocomplete="off">
+            <label for="search" class="visually-hidden">Buscar en el inventario de polímeros y descartes</label>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input id="search" type="search" placeholder="Buscar PEAD, PP, scrap, moldes, Buenos Aires..." autocomplete="off" aria-label="Buscar en el inventario de polímeros y descartes">
           </div>
-          <button type="button" id="clearSearch" class="btn btn-sm btn-ghost-dark">Limpiar</button>
+          <button type="button" id="clearSearch" class="btn btn-sm btn-ghost-dark" aria-label="Limpiar búsqueda de inventario">Limpiar</button>
         </div>
       </div>
 

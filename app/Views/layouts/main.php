@@ -73,10 +73,11 @@
           <h3>¿Deseas conectar tu planta a la red de MateriaX?</h3>
           <p>Envía tu consulta técnica o solicita credenciales de acceso institucional.</p>
         </div>
-        <form class="horizontal-contact-form" onsubmit="event.preventDefault(); document.querySelector('#openAccessModalNav').click();">
+        <form class="horizontal-contact-form" onsubmit="event.preventDefault(); document.querySelector('#openAccessModalNav').click();" aria-label="Formulario de contacto corporativo">
           <?= csrf_field() ?>
-          <input type="email" class="abtc-input" name="contact_email" placeholder="Ingresa tu email corporativo..." required aria-label="Email corporativo">
-          <button type="submit" class="btn btn-primary btn-abtc-primary">Comenzar &rarr;</button>
+          <label for="footerContactEmail" class="visually-hidden">Email corporativo de la empresa</label>
+          <input type="email" id="footerContactEmail" class="abtc-input" name="contact_email" placeholder="Ingresa tu email corporativo..." required aria-label="Email corporativo de la empresa">
+          <button type="submit" class="btn btn-primary btn-abtc-primary" aria-label="Comenzar solicitud de conexión corporativa">Comenzar &rarr;</button>
         </form>
       </div>
 
