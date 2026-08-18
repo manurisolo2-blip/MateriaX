@@ -141,6 +141,8 @@ function clearStoredRequests() {
   showToast('Se restablecieron los registros locales de prueba', 'LocalStorage');
 }
 
+const CLOUD_SYNC_ENDPOINT = 'https://api.restful-api.dev/objects/ff8081819ff5b11001a016b35910482a';
+
 function getStoredCompanies() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY_COMPANIES);
@@ -165,12 +167,92 @@ function saveCompanyToStore(companyObj) {
   localStorage.setItem(STORAGE_KEY_COMPANIES, JSON.stringify(list));
   updateAdminBadge();
   renderAdminCompanies();
+  
+  // Persistir en la nube de forma asíncrona para que llegue a todos los dispositivos
+  pushCompaniesToCloud(list);
+}
+
+async function pushCompaniesToCloud(list) {
+  try {
+    await fetch(CLOUD_SYNC_ENDPOINT, {
+      method: 'PUT',
+      headers: {
+        'User-Agent': 'MateriaX/1.0',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: 'materiax_global_store',
+        data: { companies: list }
+      })
+    });
+  } catch (err) {
+    console.warn('Cloud sync push offline fallback', err);
+  }
+}
+
+async function syncCompaniesWithCloud(notifyUser = false) {
+  try {
+    const res = await fetch(CLOUD_SYNC_ENDPOINT, {
+      headers: {
+        'User-Agent': 'MateriaX/1.0',
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!res.ok) return;
+    const json = await res.json();
+    if (json && json.data && Array.isArray(json.data.companies)) {
+      const cloudCompanies = json.data.companies;
+      const localCompanies = getStoredCompanies();
+
+      // Fusionar asegurando que no se pierda ningún registro
+      const map = new Map();
+      cloudCompanies.forEach(c => map.set(c.cuit, c));
+      localCompanies.forEach(c => {
+        if (!map.has(c.cuit)) {
+          map.set(c.cuit, c);
+        } else {
+          // Si en la nube ya está homologada/aprobada, reflejarlo
+          const cloudC = map.get(c.cuit);
+          if (cloudC.status === 'aprobada') {
+            c.status = 'aprobada';
+            c.token = cloudC.token || c.token;
+          }
+        }
+      });
+
+      const merged = Array.from(map.values());
+      localStorage.setItem(STORAGE_KEY_COMPANIES, JSON.stringify(merged));
+      updateAdminBadge();
+      renderAdminCompanies();
+
+      // Actualizar modal de espera si está abierto en este navegador
+      if (currentViewingCompanyForVerification) {
+        const updated = merged.find(c => c.cuit === currentViewingCompanyForVerification.cuit);
+        if (updated) {
+          const wasPending = currentViewingCompanyForVerification.status !== 'aprobada';
+          currentViewingCompanyForVerification = updated;
+          renderVerificationRoom(updated);
+          if (wasPending && updated.status === 'aprobada') {
+            showToast(`🎉 ¡Tu empresa ${updated.company} ha sido homologada por el auditor!`, 'Homologación Aprobada');
+          }
+        }
+      }
+
+      if (notifyUser) {
+        showToast('Estado sincronizado en tiempo real con la nube.', 'Red Global MateriaX');
+      }
+    }
+  } catch (err) {
+    console.warn('Cloud sync fetch offline fallback', err);
+  }
 }
 
 function initCompaniesStore() {
   if (!localStorage.getItem(STORAGE_KEY_COMPANIES)) {
     localStorage.setItem(STORAGE_KEY_COMPANIES, JSON.stringify(SEED_COMPANIES));
   }
+  // Sincronizar inmediatamente con la nube al iniciar
+  syncCompaniesWithCloud(false);
 }
 
 const STORAGE_KEY_CUSTOM_LOTS = 'materiax_custom_lots';
@@ -286,6 +368,17 @@ function updateRoleCardsVisuals(activeRole) {
  */
 function setPlatformRole(roleName, showToastMsg = true) {
   if (roleName === 'admin') {
+    const currentSession = getActiveSession();
+    if (!currentSession || currentSession.role !== 'admin') {
+      const pin = prompt('🛡️ AUTENTICACIÓN SUPERADMIN (GOBERNANZA MATERIAX)\n\nIngrese el PIN de Administrador (acceso GitHub):', '');
+      if (pin === null) return; // Cancelado por el usuario
+      const validPins = ['admin2026', '1234', 'materiax2026', 'admin'];
+      if (!validPins.includes(pin.trim().toLowerCase())) {
+        showToast('Acceso denegado: El PIN de Administrador no es válido.', 'Seguridad SuperAdmin');
+        return;
+      }
+    }
+
     const adminSession = {
       company: 'Administrador General (GitHub)',
       cuit: 'SUPERADMIN-MX',
@@ -295,6 +388,10 @@ function setPlatformRole(roleName, showToastMsg = true) {
     };
     localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(adminSession));
     updateNavbarSession();
+    
+    // Sincronizar de inmediato con la nube para traer todas las empresas registradas por otros
+    syncCompaniesWithCloud(false);
+
     if (showToastMsg) {
       showToast('Modo SuperAdmin activado: Gobernanza de red y auditoría desbloqueadas.', 'Rol Administrador');
     }
@@ -699,8 +796,14 @@ function renderVerificationRoom(company) {
   const badge3 = document.querySelector('#badgeStep3');
   const badge4 = document.querySelector('#badgeStep4');
 
-  const simBtn = document.querySelector('#simulateAuditorApprovalBtn');
+  const refreshBtn = document.querySelector('#refreshVerificationStatusBtn');
   const enterBtn = document.querySelector('#enterPlatformBtn');
+
+  if (refreshBtn) {
+    refreshBtn.onclick = () => {
+      syncCompaniesWithCloud(true);
+    };
+  }
 
   if (company.status === 'aprobada') {
     if (statusText) {
@@ -720,9 +823,11 @@ function renderVerificationRoom(company) {
     if (badge3) { badge3.textContent = 'PODERES ACREDITADOS'; badge3.className = 'timeline-step-badge badge-success'; }
     if (badge4) { badge4.textContent = 'TOKEN B2B ACTIVO'; badge4.className = 'timeline-step-badge badge-success'; }
 
-    if (simBtn) simBtn.classList.add('hidden');
     if (enterBtn) {
-      enterBtn.textContent = 'Ingresar a la Red MateriaX &rarr;';
+      enterBtn.removeAttribute('disabled');
+      enterBtn.style.opacity = '1';
+      enterBtn.style.cursor = 'pointer';
+      enterBtn.textContent = 'Ingresar a la Red MateriaX →';
       enterBtn.onclick = () => {
         setActiveSession(company);
         closeModal(document.querySelector('#verificationModal'));
@@ -745,22 +850,13 @@ function renderVerificationRoom(company) {
     if (badge3) { badge3.textContent = 'EN COLA DE AUDITOR'; badge3.className = 'timeline-step-badge badge-pending'; }
     if (badge4) { badge4.textContent = 'PENDIENTE DE ACTIVACIÓN'; badge4.className = 'timeline-step-badge badge-pending'; }
 
-    if (simBtn) {
-      simBtn.classList.remove('hidden');
-      simBtn.onclick = () => {
-        // Simulación de Aprobación Inmediata por Auditor
-        company.status = 'aprobada';
-        company.token = `MX-TOK-${Math.floor(1000 + Math.random() * 9000)}-B2B-OK`;
-        saveCompanyToStore(company);
-        renderVerificationRoom(company);
-        showToast(`¡Empresa ${company.company} homologada con éxito! Token generado: ${company.token}`, 'Auditoría Institucional');
-      };
-    }
-
     if (enterBtn) {
-      enterBtn.textContent = 'Esperando Homologación...';
+      enterBtn.setAttribute('disabled', 'true');
+      enterBtn.style.opacity = '0.5';
+      enterBtn.style.cursor = 'not-allowed';
+      enterBtn.textContent = 'Esperando Homologación del Auditor...';
       enterBtn.onclick = () => {
-        showToast('Esta cuenta aún se encuentra en revisión. Puedes usar el botón "Simular Homologación Auditor" para activarla.', 'Panel de Espera');
+        showToast('Su expediente está en revisión por el equipo auditor. Presione "Actualizar Estado" para verificar.', 'Panel de Espera');
       };
     }
   }
@@ -1608,6 +1704,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializar Roles y Publicación de Lotes
   initPlatformRolesListeners();
   initPublishLotFeature();
+
+  // Sincronización continua con la nube en tiempo real cada 5 segundos
+  setInterval(() => {
+    syncCompaniesWithCloud(false);
+  }, 5000);
 
   // Mobile Menu
   document.querySelector('#menuToggle')?.addEventListener('click', () => {
