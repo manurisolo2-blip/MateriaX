@@ -263,30 +263,16 @@ function formatCuit(val) {
 }
 
 /**
- * Validador de Correo Corporativo (Excluye proveedores gratuitos)
+ * Validador de Correo Electrónico (Acepta Gmail, Outlook, Hotmail, dominios corporativos, etc.)
  */
 function validateCorporateEmail(email) {
   const clean = String(email || '').trim().toLowerCase();
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!emailRegex.test(clean)) {
-    return { valid: false, message: 'Ingrese una dirección de correo válida.' };
+    return { valid: false, message: 'Ingrese una dirección de correo válida (ej: contacto@gmail.com).' };
   }
 
-  const blockedDomains = [
-    'gmail.com', 'googlemail.com', 'hotmail.com', 'outlook.com', 'live.com',
-    'yahoo.com', 'yahoo.com.ar', 'icloud.com', 'aol.com', 'proton.me',
-    'protonmail.com', 'mail.com', 'zoho.com', 'gmx.com'
-  ];
-
-  const domain = clean.split('@')[1];
-  if (blockedDomains.includes(domain)) {
-    return {
-      valid: false,
-      message: `El dominio @${domain} es público. MateriaX requiere un correo corporativo institucional (@empresa.com).`
-    };
-  }
-
-  return { valid: true, message: `✓ Dominio corporativo institucional (@${domain}) aceptado.` };
+  return { valid: true, message: '✓ Correo electrónico válido.' };
 }
 
 // ==========================================================================
@@ -368,12 +354,12 @@ function setupOnboardingFlow() {
     cuitInput.classList.toggle('input-invalid', !result.valid);
   });
 
-  // Validación en vivo de Correo Corporativo
+  // Validación en vivo de Correo
   emailInput?.addEventListener('input', (e) => {
     const val = e.target.value.trim();
     if (!val) {
       if (emailFeedback) {
-        emailFeedback.textContent = 'Debe ser un dominio propio (no @gmail, @hotmail, etc.)';
+        emailFeedback.textContent = 'Ingrese un correo electrónico de contacto válido';
         emailFeedback.className = 'input-feedback-msg';
       }
       emailInput.classList.remove('input-valid', 'input-invalid');
