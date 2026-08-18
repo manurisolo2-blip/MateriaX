@@ -88,112 +88,105 @@
 </section>
 
 <!-- ==========================================================================
-     SECCIÓN 2: PROPUESTA DE VALOR Y ROLES (<section class="value-prop-section">)
+     SECCIÓN 2: ECOSISTEMA Y SEGURIDAD INDUSTRIAL (<section class="value-prop-section">)
      ========================================================================== -->
 <section class="value-prop-section section-dark" id="propuesta-roles">
   <div class="section-wrapper">
     <div class="section-header-block">
-      <span class="section-eyebrow">ROLES A NIVEL DE PLATAFORMA (SISTEMA GENERAL)</span>
-      <h2 class="section-title-dark">Ecosistema B2B & Matriz de Roles y Permisos</h2>
+      <span class="section-eyebrow">SEGURIDAD & CONFIABILIDAD INDUSTRIAL</span>
+      <h2 class="section-title-dark">Ecosistema B2B de Alta Confianza</h2>
       <p class="section-desc-dark">
-        MateriaX estructura el acceso y operación industrial en tres niveles clave para garantizar seguridad, verificación de contrapartes y dinamismo comercial.
+        MateriaX garantiza transacciones seguras mediante la verificación obligatoria de personería jurídica, custodia de documentación legal y homologación previa de cada planta participante.
       </p>
     </div>
 
     <div class="roles-grid">
-      <!-- Rol 1: Administrador del Sistema / Moderador (Superadmin) -->
+      <!-- Pilar 1: Gobernanza & Auditoría Institucional -->
       <article class="role-card abtc-card" id="roleCardAdmin">
         <div>
           <div class="role-card-header-row">
             <div class="role-icon-box" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border-color: rgba(56, 189, 248, 0.3);">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
-            <span class="role-badge-tag">SUPERADMIN (GITHUB)</span>
+            <span class="role-badge-tag">GOBERNANZA & AUDITORÍA</span>
           </div>
-          <div class="role-status-slot" id="statusSlotAdmin"></div>
-          <h3 class="role-name">Administrador del Sistema / Moderador</h3>
-          <p class="role-need"><strong>Función principal:</strong> Gestionar y velar por la seguridad y cumplimiento del ecosistema. Personas con acceso al repositorio y gobernanza institucional.</p>
+          <h3 class="role-name">Auditoría & Control Institucional</h3>
+          <p class="role-need"><strong>Función del equipo auditor:</strong> Velar por la integridad, legalidad y cumplimiento normativo de toda la red.</p>
         </div>
         <ul class="role-permissions-list">
           <li>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Verificación Empresarial:</strong> Validar y aprobar nuevas empresas (CUIT, razón social, estatutos/poderes y correos de contacto).</span>
+            <span><strong>Homologación de Empresas:</strong> Validación estricta de CUIT ante AFIP, estatuto social y poderes de representación legal.</span>
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Moderación y Auditoría:</strong> Auditar publicaciones, eliminar spam, ofertas engañosas o materiales no permitidos.</span>
+            <span><strong>Moderación Preventiva:</strong> Control de calidad sobre publicaciones técnicas para asegurar lotes de polímeros verídicos.</span>
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Gestión de Conflictos:</strong> Administrar reportes y reclamos entre plantas.</span>
+            <span><strong>Trazabilidad y Métricas:</strong> Supervisión de indicadores de impacto ambiental, kg valorizados y reducción de CO₂.</span>
           </li>
-          <li>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Métricas Globales:</strong> Acceso a indicadores totales (kg recuperados, transacciones y empresas activas).</span>
-          </li>
-            </ul>
-          </article>
+        </ul>
+      </article>
 
-          <!-- Rol 2: Empresa Verificada (Usuario B2B Activo) -->
-          <article class="role-card abtc-card" id="roleCardEmpresa" style="border-color: rgba(56, 189, 248, 0.4);">
-            <div>
-              <div class="role-card-header-row">
-                <div class="role-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4M5 21V10.85M19 21V10.85M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
-                </div>
-                <span class="role-badge-tag" style="color: #38BDF8; border-color: rgba(56, 189, 248, 0.35);">NÚCLEO B2B ACTIVO</span>
-              </div>
-              <div class="role-status-slot" id="statusSlotEmpresa"></div>
-              <h3 class="role-name">Empresa Verificada (Usuario B2B Activo)</h3>
-              <p class="role-need"><strong>Función principal:</strong> Empresas que completaron el registro y fueron autorizadas por los administradores para operar en red:</p>
-
-              <div class="role-facet-container">
-                <div class="role-facet-box">
-                  <div class="role-facet-title">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
-                    Como Oferente (Vendedora / Donante):
-                  </div>
-                  Publica excedentes, scrap, polímeros molidos, moldes o recursos productivos (pallets, tolvas, etc.), cargando fichas técnicas y fotos.
-                </div>
-                <div class="role-facet-box">
-                  <div class="role-facet-title">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
-                    Como Demandante (Compradora / Receptora):
-                  </div>
-                  Busca materiales en el catálogo, envía solicitudes de retiro/compra, publica necesidades específicas y califica operaciones.
-                </div>
-              </div>
+      <!-- Pilar 2: Empresas Verificadas (Oferentes & Demandantes) -->
+      <article class="role-card abtc-card" id="roleCardEmpresa" style="border-color: rgba(56, 189, 248, 0.4);">
+        <div>
+          <div class="role-card-header-row">
+            <div class="role-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4M5 21V10.85M19 21V10.85M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
             </div>
-          </article>
+            <span class="role-badge-tag" style="color: #38BDF8; border-color: rgba(56, 189, 248, 0.35);">RED B2B HOMOLOGADA</span>
+          </div>
+          <h3 class="role-name">Empresas & Plantas Verificadas</h3>
+          <p class="role-need"><strong>Operación industrial en dos facetas integradas:</strong></p>
 
-          <!-- Rol 3: Visitante / Usuario No Registrado (Público General) -->
-          <article class="role-card abtc-card" id="roleCardVisitante">
-            <div>
-              <div class="role-card-header-row">
-                <div class="role-icon-box" style="background: rgba(255, 255, 255, 0.08); color: #BAC7E6; border-color: rgba(255, 255, 255, 0.15);">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
-                </div>
-                <span class="role-badge-tag">PÚBLICO GENERAL</span>
+          <div class="role-facet-container">
+            <div class="role-facet-box">
+              <div class="role-facet-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
+                Faceta Oferente (Venta / Descarte):
               </div>
-              <div class="role-status-slot" id="statusSlotVisitante"></div>
-              <h3 class="role-name">Visitante / Usuario No Registrado</h3>
-              <p class="role-need"><strong>Función principal:</strong> Conocer la propuesta de valor institucional y solicitar acceso a la red.</p>
+              Publicación de excedentes, scrap limpio, granzas recicladas y matricería con ficha técnica oficial.
             </div>
-            <ul class="role-permissions-list">
-              <li>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                <span><strong>Exploración Institucional:</strong> Visualizar landing page, beneficios y métricas de impacto ambiental públicas.</span>
-              </li>
-              <li>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                <span><strong>Catálogo de Vista Previa:</strong> Explorar lotes públicos (sin acceso a contactos, chats ni fichas privadas).</span>
-              </li>
-              <li>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                <span><strong>Solicitud de Onboarding:</strong> Acceder al formulario de registro y solicitud de verificación empresarial.</span>
-              </li>
-            </ul>
-          </article>
+            <div class="role-facet-box">
+              <div class="role-facet-title">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
+                Faceta Demandante (Compra / Recupero):
+              </div>
+              Reserva vinculante de materias primas con firma corporativa, trazabilidad de lote y retiro programado.
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Pilar 3: Catálogo Abierto & Transparencia -->
+      <article class="role-card abtc-card" id="roleCardVisitante">
+        <div>
+          <div class="role-card-header-row">
+            <div class="role-icon-box" style="background: rgba(255, 255, 255, 0.08); color: #BAC7E6; border-color: rgba(255, 255, 255, 0.15);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
+            </div>
+            <span class="role-badge-tag">TRANSPARENCIA TOTAL</span>
+          </div>
+          <h3 class="role-name">Catálogo Abierto & Trazabilidad</h3>
+          <p class="role-need"><strong>Acceso y exploración pública:</strong></p>
+        </div>
+        <ul class="role-permissions-list">
+          <li>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+            <span><strong>Búsqueda en Tiempo Real:</strong> Exploración abierta de materiales, índices MFI, densidades y ubicación geográfica.</span>
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+            <span><strong>Métricas Ambientales Públicas:</strong> Visualización de toneladas reutilizadas y huella de carbono prevenida.</span>
+          </li>
+          <li>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+            <span><strong>Onboarding Digital:</strong> Registro empresarial simple y guiado para incorporarse a la red en minutos.</span>
+          </li>
+        </ul>
+      </article>
     </div>
   </div>
 </section>

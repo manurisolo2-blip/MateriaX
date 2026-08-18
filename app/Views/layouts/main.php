@@ -39,8 +39,8 @@
 
       <!-- Navegación Principal Modular -->
       <nav class="topnav nav-links" id="topNav" aria-label="Navegación principal">
-        <a href="<?= base_url('#inicio') ?>" class="active">Inicio</a>
-        <a href="<?= base_url('#propuesta-roles') ?>">Roles B2B</a>
+        <a href="<?= base_url() ?>" class="active">Inicio</a>
+        <a href="<?= base_url('#propuesta-roles') ?>">Cómo Funciona</a>
         <a href="<?= base_url('#roadmap-inventario') ?>">Inventario</a>
         <a href="<?= base_url('#seguridad-infraestructura') ?>">Seguridad</a>
         <a href="<?= base_url('#metricas') ?>">Métricas</a>
@@ -51,7 +51,7 @@
       <div class="nav-actions-wrapper">
         <div class="nav-buttons" id="navDefaultActions">
           <button type="button" class="btn btn-sm btn-primary btn-abtc-primary" id="openAccessModalNav">
-            🏢 Iniciar Sesión / Registro Empresa
+            🏢 Iniciar Sesión / Registro
           </button>
         </div>
 

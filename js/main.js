@@ -279,7 +279,7 @@ function clearActiveSession() {
 }
 
 /**
- * Sincroniza la barra de navegación y las tarjetas de roles con el rol activo
+ * Sincroniza la barra de navegación con la sesión activa autenticada
  */
 function updateNavbarSession() {
   const session = getActiveSession();
@@ -310,7 +310,7 @@ function updateNavbarSession() {
       if (navAdminDirectBtn) {
         navAdminDirectBtn.classList.remove('hidden');
         const companies = getStoredCompanies();
-        const pendingCount = companies.filter(c => c.status === 'en_auditoria').length;
+        const pendingCount = companies.filter(c => c.status === 'pendiente' || c.status === 'en_auditoria').length;
         navAdminDirectBtn.innerHTML = `🛡️ Backoffice Auditoría <span class="badge-count" style="margin-left:4px;">${pendingCount}</span>`;
       }
       if (navVerificationBtn) navVerificationBtn.classList.add('hidden');
@@ -326,97 +326,9 @@ function updateNavbarSession() {
       if (navVerificationBtn) navVerificationBtn.classList.remove('hidden');
     }
   } else {
-    // Visitante
+    // Visitante (Por Defecto)
     if (defaultActions) defaultActions.classList.remove('hidden');
     if (sessionWidget) sessionWidget.classList.add('hidden');
-  }
-
-  // 2. Actualizar botones del selector de roles en navbar
-  document.querySelectorAll('.nav-role-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.roleSelect === currentRole);
-  });
-
-  // 3. Actualizar tarjetas interactivas de la sección #propuesta-roles
-  updateRoleCardsVisuals(currentRole);
-}
-
-/**
- * Actualiza el estado visual y badge activo en las tarjetas de roles
- */
-function updateRoleCardsVisuals(activeRole) {
-  const cardAdmin = document.querySelector('#roleCardAdmin');
-  const cardEmpresa = document.querySelector('#roleCardEmpresa');
-  const cardVisitante = document.querySelector('#roleCardVisitante');
-
-  const slotAdmin = document.querySelector('#statusSlotAdmin');
-  const slotEmpresa = document.querySelector('#statusSlotEmpresa');
-  const slotVisitante = document.querySelector('#statusSlotVisitante');
-
-  const activeBadgeHtml = '<span class="role-active-indicator">● ROL ACTIVO EN SESIÓN</span>';
-
-  if (cardAdmin) cardAdmin.classList.toggle('role-card-active', activeRole === 'admin');
-  if (cardEmpresa) cardEmpresa.classList.toggle('role-card-active', activeRole === 'empresa');
-  if (cardVisitante) cardVisitante.classList.toggle('role-card-active', activeRole === 'visitante');
-
-  if (slotAdmin) slotAdmin.innerHTML = (activeRole === 'admin') ? activeBadgeHtml : '';
-  if (slotEmpresa) slotEmpresa.innerHTML = (activeRole === 'empresa') ? activeBadgeHtml : '';
-  if (slotVisitante) slotVisitante.innerHTML = (activeRole === 'visitante') ? activeBadgeHtml : '';
-}
-
-/**
- * Conmutador global de roles para evaluar la plataforma
- */
-function setPlatformRole(roleName, showToastMsg = true) {
-  if (roleName === 'admin') {
-    const currentSession = getActiveSession();
-    if (!currentSession || currentSession.role !== 'admin') {
-      const pin = prompt('🛡️ AUTENTICACIÓN SUPERADMIN (GOBERNANZA MATERIAX)\n\nIngrese el PIN de Administrador (acceso GitHub):', '');
-      if (pin === null) return; // Cancelado por el usuario
-      const validPins = ['admin2026', '1234', 'materiax2026', 'admin'];
-      if (!validPins.includes(pin.trim().toLowerCase())) {
-        showToast('Acceso denegado: El PIN de Administrador no es válido.', 'Seguridad SuperAdmin');
-        return;
-      }
-    }
-
-    const adminSession = {
-      company: 'Administrador General (GitHub)',
-      cuit: 'SUPERADMIN-MX',
-      email: 'admin@materiax.org',
-      role: 'admin',
-      status: 'aprobada'
-    };
-    localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(adminSession));
-    updateNavbarSession();
-    
-    // Sincronizar de inmediato con la nube para traer todas las empresas registradas por otros
-    syncCompaniesWithCloud(false);
-
-    if (showToastMsg) {
-      showToast('Modo SuperAdmin activado: Gobernanza de red y auditoría desbloqueadas.', 'Rol Administrador');
-    }
-  } else if (roleName === 'empresa') {
-    const empresaSession = {
-      company: 'PetroPlast Industrial S.A.',
-      cuit: '30-71458921-7',
-      email: 'contacto@petroplast.com.ar',
-      rep: 'Ing. Carlos Mendoza',
-      role: 'empresa',
-      status: 'aprobada',
-      token: 'MX-TOK-7145-B2B-OK'
-    };
-    localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(empresaSession));
-    updateNavbarSession();
-    if (showToastMsg) {
-      showToast('Modo Empresa Verificada: Habilitado para publicar excedentes y reservar lotes.', 'Rol Empresa B2B');
-    }
-  } else {
-    // Visitante
-    localStorage.removeItem(STORAGE_KEY_SESSION);
-    updateNavbarSession();
-    if (showToastMsg) {
-      showToast('Modo Visitante: Navegando como usuario no registrado con catálogo en vista previa.', 'Rol Visitante');
-    }
   }
 }
 
