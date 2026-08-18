@@ -102,21 +102,22 @@
 
     <div class="roles-grid">
       <!-- Rol 1: Administrador del Sistema / Moderador (Superadmin) -->
-      <article class="role-card abtc-card">
+      <article class="role-card abtc-card" id="roleCardAdmin">
         <div>
           <div class="role-card-header-row">
             <div class="role-icon-box" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border-color: rgba(56, 189, 248, 0.3);">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
-            <span class="role-badge-tag">SUPERADMIN</span>
+            <span class="role-badge-tag">SUPERADMIN (GITHUB)</span>
           </div>
+          <div class="role-status-slot" id="statusSlotAdmin"></div>
           <h3 class="role-name">Administrador del Sistema / Moderador</h3>
-          <p class="role-need"><strong>Función principal:</strong> Gestionar y velar por la seguridad y cumplimiento del ecosistema.</p>
+          <p class="role-need"><strong>Función principal:</strong> Gestionar y velar por la seguridad y cumplimiento del ecosistema. Personas con acceso al repositorio y gobernanza institucional.</p>
         </div>
         <ul class="role-permissions-list">
           <li>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Verificación Empresarial:</strong> Validar y aprobar nuevas empresas (CUIT, razón social, estatutos/poderes y correos institucionales).</span>
+            <span><strong>Verificación Empresarial:</strong> Validar y aprobar nuevas empresas (CUIT, razón social, estatutos/poderes y correos de contacto).</span>
           </li>
           <li>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
@@ -131,10 +132,15 @@
             <span><strong>Métricas Globales:</strong> Acceso a indicadores totales (kg recuperados, transacciones y empresas activas).</span>
           </li>
         </ul>
+        <div class="role-card-action-bar">
+          <button type="button" class="btn btn-sm btn-abtc-outline btn-role-activate" data-role-target="admin">
+            🛡️ Activar Rol Administrador
+          </button>
+        </div>
       </article>
 
       <!-- Rol 2: Empresa Verificada (Usuario B2B Activo) -->
-      <article class="role-card abtc-card" style="border-color: rgba(56, 189, 248, 0.4);">
+      <article class="role-card abtc-card" id="roleCardEmpresa" style="border-color: rgba(56, 189, 248, 0.4);">
         <div>
           <div class="role-card-header-row">
             <div class="role-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);">
@@ -142,8 +148,9 @@
             </div>
             <span class="role-badge-tag" style="color: #38BDF8; border-color: rgba(56, 189, 248, 0.35);">NÚCLEO B2B ACTIVO</span>
           </div>
+          <div class="role-status-slot" id="statusSlotEmpresa"></div>
           <h3 class="role-name">Empresa Verificada (Usuario B2B Activo)</h3>
-          <p class="role-need"><strong>Función principal:</strong> Es el núcleo operativo de la plataforma. Una misma empresa actúa en dos facetas según su necesidad operativa:</p>
+          <p class="role-need"><strong>Función principal:</strong> Empresas que completaron el registro y fueron autorizadas por los administradores para operar en red:</p>
 
           <div class="role-facet-container">
             <div class="role-facet-box">
@@ -162,10 +169,15 @@
             </div>
           </div>
         </div>
+        <div class="role-card-action-bar">
+          <button type="button" class="btn btn-sm btn-abtc-primary btn-role-activate" data-role-target="empresa">
+            🏢 Activar Rol Empresa Verificada
+          </button>
+        </div>
       </article>
 
       <!-- Rol 3: Visitante / Usuario No Registrado (Público General) -->
-      <article class="role-card abtc-card">
+      <article class="role-card abtc-card" id="roleCardVisitante">
         <div>
           <div class="role-card-header-row">
             <div class="role-icon-box" style="background: rgba(255, 255, 255, 0.08); color: #BAC7E6; border-color: rgba(255, 255, 255, 0.15);">
@@ -173,6 +185,7 @@
             </div>
             <span class="role-badge-tag">PÚBLICO GENERAL</span>
           </div>
+          <div class="role-status-slot" id="statusSlotVisitante"></div>
           <h3 class="role-name">Visitante / Usuario No Registrado</h3>
           <p class="role-need"><strong>Función principal:</strong> Conocer la propuesta de valor institucional y solicitar acceso a la red.</p>
         </div>
@@ -190,6 +203,11 @@
             <span><strong>Solicitud de Onboarding:</strong> Acceder al formulario de registro y solicitud de verificación empresarial.</span>
           </li>
         </ul>
+        <div class="role-card-action-bar">
+          <button type="button" class="btn btn-sm btn-ghost btn-role-activate" data-role-target="visitante">
+            🌐 Activar Rol Visitante Público
+          </button>
+        </div>
       </article>
     </div>
   </div>
@@ -218,41 +236,38 @@
         </div>
         <h3 class="milestone-title">Infraestructura, Auth & Red Segura</h3>
         <p class="milestone-desc">Estructura modular en CodeIgniter 4 con control de acceso por rol, validación CUIT de empresas, encriptación Bcrypt y persistencia relacional.</p>
-        <ul class="milestone-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Portal corporativo responsive y gestión de sesiones</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Validación de CUIT y homologación empresarial</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Base de datos relacional MySQL InnoDB 3FN</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Protección CSRF y blindaje contra ataques web</li>
+        <ul class="milestone-features-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Validación de CUIT con algoritmo Módulo 11</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Panel de espera y verificación institucional</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Simulación de integridad de estatutos y poderes</li>
         </ul>
       </article>
 
       <!-- Tarjeta Fase 2 -->
       <article class="milestone-card abtc-card">
         <div class="milestone-header">
-          <span class="milestone-tag tag-hito-2">FASE 2 - MARKETPLACE</span>
-          <span class="tech-code" style="font-size: 0.75rem; color: var(--color-navy-dark);">OPERATIVO</span>
+          <span class="milestone-tag tag-hito-2">FASE 2 - INVENTARIO</span>
+          <span class="tech-code" style="font-size: 0.75rem; color: var(--color-navy-dark);">ACTIVO</span>
         </div>
-        <h3 class="milestone-title">Inventario Activo & Matching Circular</h3>
-        <p class="milestone-desc">Publicación de excedentes clasificados por resina (PE, PP, PVC, ABS, Nylon), motor de filtrado técnico y solicitudes de reserva entre plantas.</p>
-        <ul class="milestone-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Catálogo de lotes con fichas técnicas y stock</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Buscador por fluidez (MFI), tipo y ubicación</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Gestión de reservas y matching entre empresas</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Panel de operaciones y seguimiento de pedidos</li>
+        <h3 class="milestone-title">Catálogo Modular & Solicitudes</h3>
+        <p class="milestone-desc">Buscador instantáneo por polímero, estado y ubicación física. Filtros por familias de resina y modal de solicitud con trazabilidad de lotes.</p>
+        <ul class="milestone-features-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Filtrado dinámico en tiempo real y fichas técnicas</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Solicitudes de retiro y compra con confirmación</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Persistencia en LocalStorage con exportación JSON</li>
         </ul>
       </article>
 
       <!-- Tarjeta Fase 3 -->
       <article class="milestone-card abtc-card">
         <div class="milestone-header">
-          <span class="milestone-tag tag-hito-3">FASE 3 - ESCALABILIDAD</span>
-          <span class="tech-code" style="font-size: 0.75rem; color: var(--color-navy-dark);">PRODUCCIÓN Q4</span>
+          <span class="milestone-tag tag-hito-3">FASE 3 - ANALÍTICA</span>
+          <span class="tech-code" style="font-size: 0.75rem; color: var(--color-navy-dark);">ROADMAP</span>
         </div>
-        <h3 class="milestone-title">Certificación ESG & Analítica Total</h3>
-        <p class="milestone-desc">Panel de métricas de impacto cuantitativo en tiempo real, cálculo de CO2 evitado por tonelada reutilizada y trazabilidad integral de operaciones.</p>
-        <ul class="milestone-features">
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Dashboard analítico con precisión tabular</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Reportes descargables de huella de carbono evitada</li>
+        <h3 class="milestone-title">Certificación, Huella de CO₂ & Logística</h3>
+        <p class="milestone-desc">Métricas de reducción de huella de carbono, optimización logística por geolocalización de plantas y emisión de certificados de trazabilidad ambiental.</p>
+        <ul class="milestone-features-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Calculadora de CO₂ evitado por kg valorizado</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Certificados de economía circular para auditorías</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Integración y exportación de datos operativos</li>
         </ul>
@@ -263,9 +278,14 @@
     <div class="inventory-block abtc-card">
       <div class="inventory-header">
         <div>
-          <h3 class="inventory-title">Inventario Activo de Polímeros & Equipamiento</h3>
-          <p style="font-size: 0.88rem; color: var(--color-text-dark-muted); margin-top: 0.25rem;">
-            Consulta lotes en tiempo real y solicita reservas con trazabilidad industrial.
+          <div style="display:flex; align-items:center; gap: 0.75rem; flex-wrap: wrap;">
+            <h3 class="inventory-title" style="margin:0;">Inventario Activo de Polímeros & Equipamiento</h3>
+            <button type="button" class="btn-publish-lot" id="openPublishLotBtn">
+              <span>➕</span> Publicar Excedente (Oferente)
+            </button>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--color-text-dark-muted); margin-top: 0.35rem;">
+            Consulta lotes en tiempo real, solicita reservas con trazabilidad industrial o publica nuevos excedentes como empresa oferente.
           </p>
         </div>
         <div class="search-box-modular" role="search">

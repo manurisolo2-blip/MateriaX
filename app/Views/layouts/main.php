@@ -47,8 +47,16 @@
         <a href="<?= base_url('#contacto') ?>">Contacto</a>
       </nav>
 
-      <!-- 2. Botones de Acción Corporativa & Sesión Activa -->
+      <!-- 2. Botones de Acción Corporativa, Selector de Roles & Sesión Activa -->
       <div class="nav-actions-wrapper">
+        <!-- Selector Rápido de Rol Activo (Simulador RBAC) -->
+        <div class="nav-role-switcher" id="navRoleSwitcher" title="Cambiar rol activo para probar la plataforma">
+          <span style="font-size:0.68rem; color:#94A3B8; padding:0 3px; font-family:var(--font-mono); font-weight:700;">ROL:</span>
+          <button type="button" class="nav-role-btn active" data-role-select="visitante" title="Visitante No Registrado">🌐 Visitante</button>
+          <button type="button" class="nav-role-btn" data-role-select="empresa" title="Empresa Verificada (PetroPlast)">🏢 Empresa</button>
+          <button type="button" class="nav-role-btn" data-role-select="admin" title="Administrador del Sistema (GitHub)">🛡️ Admin</button>
+        </div>
+
         <div class="nav-buttons" id="navDefaultActions">
           <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Panel de Auditoría B2B y Solicitudes">
             🛡️ Auditoría & Solicitudes <span class="badge-count" id="adminBadgeCount">0</span>
@@ -57,18 +65,20 @@
             🏢 Portal Empresas / Acceso
           </button>
         </div>
-        <!-- Widget Dinámico de Sesión Corporativa Activa -->
+
+        <!-- Widget Dinámico de Sesión Corporativa / Admin Activa -->
         <div class="nav-session-active hidden" id="navSessionWidget">
           <div class="nav-session-info">
             <div class="nav-session-company">
-              <span class="status-dot-pulse" style="width:6px; height:6px; background:#10B981;"></span>
+              <span class="status-dot-pulse" id="navSessionDot" style="width:6px; height:6px; background:#10B981;"></span>
               <span id="navCompanyName">Empresa Homologada</span>
             </div>
-            <div class="nav-session-cuit" id="navCompanyCuit">CUIT 30-XXXXXXXX-X ● RED ACTIVA</div>
+            <div class="nav-session-cuit" id="navCompanyCuit">CUIT 30-71458921-7 ● RED ACTIVA</div>
           </div>
           <div class="nav-session-actions">
+            <button type="button" class="btn btn-xs btn-ghost hidden" id="navAdminDirectBtn" title="Abrir Backoffice de Auditoría">🛡️ Backoffice</button>
             <button type="button" class="btn btn-xs btn-ghost" id="navVerificationBtn" title="Ver Estado y Credencial de Verificación">📑 Mi Estado</button>
-            <button type="button" class="btn-session-logout" id="navLogoutBtn" title="Cerrar sesión corporativa">✕ Salir</button>
+            <button type="button" class="btn-session-logout" id="navLogoutBtn" title="Cerrar sesión y volver a Visitante">✕ Salir</button>
           </div>
         </div>
       </div>
@@ -628,6 +638,73 @@
       <div class="modal-actions" style="margin-top: 1rem;">
         <button type="button" class="btn btn-primary btn-abtc-primary btn-sm" id="closeDocPreviewBtn">Cerrar Visor</button>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE PUBLICACIÓN DE EXCEDENTE INDUSTRIAL (OFERENTE) -->
+  <div class="modal-overlay" id="publishLotModal" aria-hidden="true">
+    <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="publishLotModalTitle">
+      <button class="modal-close" id="closePublishLotModal" aria-label="Cerrar ventana">&times;</button>
+      
+      <div class="modal-header">
+        <span class="section-eyebrow">FACETA OFERENTE ● PUBLICACIÓN DE LOTE</span>
+        <h3 id="publishLotModalTitle" style="margin: 0.25rem 0 0.5rem 0;">Publicar Nuevo Excedente / Lote de Polímero</h3>
+        <p style="font-size: 0.88rem; color: var(--color-text-light-muted); margin: 0;">
+          Los lotes publicados se integran al inventario en tiempo real con trazabilidad de origen y personería jurídica verificada.
+        </p>
+      </div>
+
+      <form class="modal-form" id="publishLotForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pubCompanyName">Empresa Oferente / Planta Emisora *</label>
+            <input type="text" id="pubCompanyName" class="abtc-input" required placeholder="PetroPlast Industrial S.A." readonly style="opacity: 0.85;">
+          </div>
+          <div class="form-group">
+            <label for="pubCategory">Familia de Polímero / Categoría *</label>
+            <select id="pubCategory" class="abtc-input" required>
+              <option value="polietileno">Polietileno (PEAD / PEBD / Film)</option>
+              <option value="polipropileno">Polipropileno (PP Homopolímero / Copolímero)</option>
+              <option value="tecnicos">Técnicos (ABS / PVC / Nylon / Policarbonato)</option>
+              <option value="equipamiento">Matricería & Logística (Pallets / Tolvas / Molinos)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pubMaterialTitle">Título / Nombre del Material *</label>
+            <input type="text" id="pubMaterialTitle" class="abtc-input" required placeholder="Ej: Scrap de PEAD Soplado Limpio">
+          </div>
+          <div class="form-group">
+            <label for="pubStock">Volumen / Cantidad Disponible *</label>
+            <input type="text" id="pubStock" class="abtc-input" required placeholder="Ej: 500 kg o 120 unid.">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pubLocation">Ubicación de la Planta *</label>
+            <input type="text" id="pubLocation" class="abtc-input" required placeholder="Ej: Parque Industrial Pilar, Buenos Aires">
+          </div>
+          <div class="form-group">
+            <label for="pubCondition">Condición / Presentación *</label>
+            <input type="text" id="pubCondition" class="abtc-input" required placeholder="Ej: Molido limpio en Big Bags">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pubDescription">Descripción Técnica & Pureza del Lote *</label>
+          <textarea id="pubDescription" class="abtc-input" rows="3" required placeholder="Detalla índice MFI, color, proceso previo (inyección/extrusión), grado de limpieza y disponibilidad para retiro."></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="cancelPublishLotBtn">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-abtc-primary">
+            🚀 Publicar Lote en la Red MateriaX
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 

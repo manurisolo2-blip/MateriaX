@@ -47,8 +47,16 @@
         <a href="#contacto">Contacto</a>
       </nav>
 
-      <!-- 2. Botones de Acción Corporativa & Sesión Activa -->
+      <!-- 2. Botones de Acción Corporativa, Selector de Roles & Sesión Activa -->
       <div class="nav-actions-wrapper">
+        <!-- Selector Rápido de Rol Activo (Simulador RBAC) -->
+        <div class="nav-role-switcher" id="navRoleSwitcher" title="Cambiar rol activo para probar la plataforma">
+          <span style="font-size:0.68rem; color:#94A3B8; padding:0 3px; font-family:var(--font-mono); font-weight:700;">ROL:</span>
+          <button type="button" class="nav-role-btn active" data-role-select="visitante" title="Visitante No Registrado">🌐 Visitante</button>
+          <button type="button" class="nav-role-btn" data-role-select="empresa" title="Empresa Verificada (PetroPlast)">🏢 Empresa</button>
+          <button type="button" class="nav-role-btn" data-role-select="admin" title="Administrador del Sistema (GitHub)">🛡️ Admin</button>
+        </div>
+
         <div class="nav-buttons" id="navDefaultActions">
           <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Panel de Auditoría B2B y Solicitudes">
             🛡️ Auditoría & Solicitudes <span class="badge-count" id="adminBadgeCount">0</span>
@@ -57,18 +65,20 @@
             🏢 Portal Empresas / Acceso
           </button>
         </div>
-        <!-- Widget Dinámico de Sesión Corporativa Activa -->
+
+        <!-- Widget Dinámico de Sesión Corporativa / Admin Activa -->
         <div class="nav-session-active hidden" id="navSessionWidget">
           <div class="nav-session-info">
             <div class="nav-session-company">
-              <span class="status-dot-pulse" style="width:6px; height:6px; background:#10B981;"></span>
+              <span class="status-dot-pulse" id="navSessionDot" style="width:6px; height:6px; background:#10B981;"></span>
               <span id="navCompanyName">Empresa Homologada</span>
             </div>
-            <div class="nav-session-cuit" id="navCompanyCuit">CUIT 30-XXXXXXXX-X ● RED ACTIVA</div>
+            <div class="nav-session-cuit" id="navCompanyCuit">CUIT 30-71458921-7 ● RED ACTIVA</div>
           </div>
           <div class="nav-session-actions">
+            <button type="button" class="btn btn-xs btn-ghost hidden" id="navAdminDirectBtn" title="Abrir Backoffice de Auditoría">🛡️ Backoffice</button>
             <button type="button" class="btn btn-xs btn-ghost" id="navVerificationBtn" title="Ver Estado y Credencial de Verificación">📑 Mi Estado</button>
-            <button type="button" class="btn-session-logout" id="navLogoutBtn" title="Cerrar sesión corporativa">✕ Salir</button>
+            <button type="button" class="btn-session-logout" id="navLogoutBtn" title="Cerrar sesión y volver a Visitante">✕ Salir</button>
           </div>
         </div>
       </div>
@@ -176,21 +186,22 @@
 
         <div class="roles-grid">
           <!-- Rol 1: Administrador del Sistema / Moderador (Superadmin) -->
-          <article class="role-card abtc-card">
+          <article class="role-card abtc-card" id="roleCardAdmin">
             <div>
               <div class="role-card-header-row">
                 <div class="role-icon-box" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border-color: rgba(56, 189, 248, 0.3);">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
-                <span class="role-badge-tag">SUPERADMIN</span>
+                <span class="role-badge-tag">SUPERADMIN (GITHUB)</span>
               </div>
+              <div class="role-status-slot" id="statusSlotAdmin"></div>
               <h3 class="role-name">Administrador del Sistema / Moderador</h3>
-              <p class="role-need"><strong>Función principal:</strong> Gestionar y velar por la seguridad y cumplimiento del ecosistema.</p>
+              <p class="role-need"><strong>Función principal:</strong> Gestionar y velar por la seguridad y cumplimiento del ecosistema. Personas con acceso al repositorio y gobernanza institucional.</p>
             </div>
             <ul class="role-permissions-list">
               <li>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-                <span><strong>Verificación Empresarial:</strong> Validar y aprobar nuevas empresas (CUIT, razón social, estatutos/poderes y correos institucionales).</span>
+                <span><strong>Verificación Empresarial:</strong> Validar y aprobar nuevas empresas (CUIT, razón social, estatutos/poderes y correos de contacto).</span>
               </li>
               <li>
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
@@ -205,10 +216,15 @@
                 <span><strong>Métricas Globales:</strong> Acceso a indicadores totales (kg recuperados, transacciones y empresas activas).</span>
               </li>
             </ul>
+            <div class="role-card-action-bar">
+              <button type="button" class="btn btn-sm btn-abtc-outline btn-role-activate" data-role-target="admin">
+                🛡️ Activar Rol Administrador
+              </button>
+            </div>
           </article>
 
           <!-- Rol 2: Empresa Verificada (Usuario B2B Activo) -->
-          <article class="role-card abtc-card" style="border-color: rgba(56, 189, 248, 0.4);">
+          <article class="role-card abtc-card" id="roleCardEmpresa" style="border-color: rgba(56, 189, 248, 0.4);">
             <div>
               <div class="role-card-header-row">
                 <div class="role-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);">
@@ -216,8 +232,9 @@
                 </div>
                 <span class="role-badge-tag" style="color: #38BDF8; border-color: rgba(56, 189, 248, 0.35);">NÚCLEO B2B ACTIVO</span>
               </div>
+              <div class="role-status-slot" id="statusSlotEmpresa"></div>
               <h3 class="role-name">Empresa Verificada (Usuario B2B Activo)</h3>
-              <p class="role-need"><strong>Función principal:</strong> Es el núcleo operativo de la plataforma. Una misma empresa actúa en dos facetas según su necesidad operativa:</p>
+              <p class="role-need"><strong>Función principal:</strong> Empresas que completaron el registro y fueron autorizadas por los administradores para operar en red:</p>
 
               <div class="role-facet-container">
                 <div class="role-facet-box">
@@ -236,10 +253,15 @@
                 </div>
               </div>
             </div>
+            <div class="role-card-action-bar">
+              <button type="button" class="btn btn-sm btn-abtc-primary btn-role-activate" data-role-target="empresa">
+                🏢 Activar Rol Empresa Verificada
+              </button>
+            </div>
           </article>
 
           <!-- Rol 3: Visitante / Usuario No Registrado (Público General) -->
-          <article class="role-card abtc-card">
+          <article class="role-card abtc-card" id="roleCardVisitante">
             <div>
               <div class="role-card-header-row">
                 <div class="role-icon-box" style="background: rgba(255, 255, 255, 0.08); color: #BAC7E6; border-color: rgba(255, 255, 255, 0.15);">
@@ -247,6 +269,7 @@
                 </div>
                 <span class="role-badge-tag">PÚBLICO GENERAL</span>
               </div>
+              <div class="role-status-slot" id="statusSlotVisitante"></div>
               <h3 class="role-name">Visitante / Usuario No Registrado</h3>
               <p class="role-need"><strong>Función principal:</strong> Conocer la propuesta de valor institucional y solicitar acceso a la red.</p>
             </div>
@@ -264,6 +287,11 @@
                 <span><strong>Solicitud de Onboarding:</strong> Acceder al formulario de registro y solicitud de verificación empresarial.</span>
               </li>
             </ul>
+            <div class="role-card-action-bar">
+              <button type="button" class="btn btn-sm btn-ghost btn-role-activate" data-role-target="visitante">
+                🌐 Activar Rol Visitante Público
+              </button>
+            </div>
           </article>
         </div>
       </div>
@@ -337,9 +365,14 @@
         <div class="inventory-block abtc-card">
           <div class="inventory-header">
             <div>
-              <h3 class="inventory-title">Inventario Activo de Polímeros & Equipamiento</h3>
-              <p style="font-size: 0.88rem; color: var(--color-text-dark-muted); margin-top: 0.25rem;">
-                Consulta lotes en tiempo real y solicita reservas con trazabilidad industrial.
+              <div style="display:flex; align-items:center; gap: 0.75rem; flex-wrap: wrap;">
+                <h3 class="inventory-title" style="margin:0;">Inventario Activo de Polímeros & Equipamiento</h3>
+                <button type="button" class="btn-publish-lot" id="openPublishLotBtn">
+                  <span>➕</span> Publicar Excedente (Oferente)
+                </button>
+              </div>
+              <p style="font-size: 0.88rem; color: var(--color-text-dark-muted); margin-top: 0.35rem;">
+                Consulta lotes en tiempo real, solicita reservas con trazabilidad industrial o publica nuevos excedentes como empresa oferente.
               </p>
             </div>
             <div class="search-box-modular" role="search">
@@ -1352,6 +1385,73 @@
       <div class="modal-actions" style="margin-top: 1rem;">
         <button type="button" class="btn btn-primary btn-abtc-primary btn-sm" id="closeDocPreviewBtn">Cerrar Visor</button>
       </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE PUBLICACIÓN DE EXCEDENTE INDUSTRIAL (OFERENTE) -->
+  <div class="modal-overlay" id="publishLotModal" aria-hidden="true">
+    <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="publishLotModalTitle">
+      <button class="modal-close" id="closePublishLotModal" aria-label="Cerrar ventana">&times;</button>
+      
+      <div class="modal-header">
+        <span class="section-eyebrow">FACETA OFERENTE ● PUBLICACIÓN DE LOTE</span>
+        <h3 id="publishLotModalTitle" style="margin: 0.25rem 0 0.5rem 0;">Publicar Nuevo Excedente / Lote de Polímero</h3>
+        <p style="font-size: 0.88rem; color: var(--color-text-light-muted); margin: 0;">
+          Los lotes publicados se integran al inventario en tiempo real con trazabilidad de origen y personería jurídica verificada.
+        </p>
+      </div>
+
+      <form class="modal-form" id="publishLotForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pubCompanyName">Empresa Oferente / Planta Emisora *</label>
+            <input type="text" id="pubCompanyName" class="abtc-input" required placeholder="PetroPlast Industrial S.A." readonly style="opacity: 0.85;">
+          </div>
+          <div class="form-group">
+            <label for="pubCategory">Familia de Polímero / Categoría *</label>
+            <select id="pubCategory" class="abtc-input" required>
+              <option value="polietileno">Polietileno (PEAD / PEBD / Film)</option>
+              <option value="polipropileno">Polipropileno (PP Homopolímero / Copolímero)</option>
+              <option value="tecnicos">Técnicos (ABS / PVC / Nylon / Policarbonato)</option>
+              <option value="equipamiento">Matricería & Logística (Pallets / Tolvas / Molinos)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pubMaterialTitle">Título / Nombre del Material *</label>
+            <input type="text" id="pubMaterialTitle" class="abtc-input" required placeholder="Ej: Scrap de PEAD Soplado Limpio">
+          </div>
+          <div class="form-group">
+            <label for="pubStock">Volumen / Cantidad Disponible *</label>
+            <input type="text" id="pubStock" class="abtc-input" required placeholder="Ej: 500 kg o 120 unid.">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pubLocation">Ubicación de la Planta *</label>
+            <input type="text" id="pubLocation" class="abtc-input" required placeholder="Ej: Parque Industrial Pilar, Buenos Aires">
+          </div>
+          <div class="form-group">
+            <label for="pubCondition">Condición / Presentación *</label>
+            <input type="text" id="pubCondition" class="abtc-input" required placeholder="Ej: Molido limpio en Big Bags">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pubDescription">Descripción Técnica & Pureza del Lote *</label>
+          <textarea id="pubDescription" class="abtc-input" rows="3" required placeholder="Detalla índice MFI, color, proceso previo (inyección/extrusión), grado de limpieza y disponibilidad para retiro."></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="cancelPublishLotBtn">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-abtc-primary">
+            🚀 Publicar Lote en la Red MateriaX
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 

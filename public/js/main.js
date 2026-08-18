@@ -173,7 +173,9 @@ function initCompaniesStore() {
   }
 }
 
-// Sesión Activa de Empresa
+const STORAGE_KEY_CUSTOM_LOTS = 'materiax_custom_lots';
+
+// Sesión Activa de Plataforma / Empresa / Admin
 function getActiveSession() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY_SESSION);
@@ -191,26 +193,128 @@ function setActiveSession(company) {
 function clearActiveSession() {
   localStorage.removeItem(STORAGE_KEY_SESSION);
   updateNavbarSession();
-  showToast('Has cerrado la sesión corporativa', 'MateriaX B2B');
+  showToast('Has cambiado al modo Visitante Público.', 'Sesión MateriaX');
 }
 
+/**
+ * Sincroniza la barra de navegación y las tarjetas de roles con el rol activo
+ */
 function updateNavbarSession() {
   const session = getActiveSession();
   const defaultActions = document.querySelector('#navDefaultActions');
   const sessionWidget = document.querySelector('#navSessionWidget');
   const companyNameEl = document.querySelector('#navCompanyName');
   const companyCuitEl = document.querySelector('#navCompanyCuit');
+  const navSessionDot = document.querySelector('#navSessionDot');
+  const navAdminDirectBtn = document.querySelector('#navAdminDirectBtn');
+  const navVerificationBtn = document.querySelector('#navVerificationBtn');
 
-  if (session && session.status === 'aprobada') {
+  // Determinar rol activo
+  let currentRole = 'visitante';
+  if (session && session.role === 'admin') {
+    currentRole = 'admin';
+  } else if (session && session.status === 'aprobada') {
+    currentRole = 'empresa';
+  }
+
+  // 1. Actualizar Navbar
+  if (currentRole === 'admin') {
+    if (defaultActions) defaultActions.classList.add('hidden');
+    if (sessionWidget) {
+      sessionWidget.classList.remove('hidden');
+      if (companyNameEl) companyNameEl.textContent = 'Administrador General (GitHub)';
+      if (companyCuitEl) companyCuitEl.textContent = 'SUPERADMIN ● GOBERNANZA ACTIVA';
+      if (navSessionDot) navSessionDot.style.background = '#38BDF8';
+      if (navAdminDirectBtn) navAdminDirectBtn.classList.remove('hidden');
+      if (navVerificationBtn) navVerificationBtn.classList.add('hidden');
+    }
+  } else if (currentRole === 'empresa') {
     if (defaultActions) defaultActions.classList.add('hidden');
     if (sessionWidget) {
       sessionWidget.classList.remove('hidden');
       if (companyNameEl) companyNameEl.textContent = session.company;
       if (companyCuitEl) companyCuitEl.textContent = `${session.cuit} ● RED ACTIVA`;
+      if (navSessionDot) navSessionDot.style.background = '#10B981';
+      if (navAdminDirectBtn) navAdminDirectBtn.classList.add('hidden');
+      if (navVerificationBtn) navVerificationBtn.classList.remove('hidden');
     }
   } else {
+    // Visitante
     if (defaultActions) defaultActions.classList.remove('hidden');
     if (sessionWidget) sessionWidget.classList.add('hidden');
+  }
+
+  // 2. Actualizar botones del selector de roles en navbar
+  document.querySelectorAll('.nav-role-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.roleSelect === currentRole);
+  });
+
+  // 3. Actualizar tarjetas interactivas de la sección #propuesta-roles
+  updateRoleCardsVisuals(currentRole);
+}
+
+/**
+ * Actualiza el estado visual y badge activo en las tarjetas de roles
+ */
+function updateRoleCardsVisuals(activeRole) {
+  const cardAdmin = document.querySelector('#roleCardAdmin');
+  const cardEmpresa = document.querySelector('#roleCardEmpresa');
+  const cardVisitante = document.querySelector('#roleCardVisitante');
+
+  const slotAdmin = document.querySelector('#statusSlotAdmin');
+  const slotEmpresa = document.querySelector('#statusSlotEmpresa');
+  const slotVisitante = document.querySelector('#statusSlotVisitante');
+
+  const activeBadgeHtml = '<span class="role-active-indicator">● ROL ACTIVO EN SESIÓN</span>';
+
+  if (cardAdmin) cardAdmin.classList.toggle('role-card-active', activeRole === 'admin');
+  if (cardEmpresa) cardEmpresa.classList.toggle('role-card-active', activeRole === 'empresa');
+  if (cardVisitante) cardVisitante.classList.toggle('role-card-active', activeRole === 'visitante');
+
+  if (slotAdmin) slotAdmin.innerHTML = (activeRole === 'admin') ? activeBadgeHtml : '';
+  if (slotEmpresa) slotEmpresa.innerHTML = (activeRole === 'empresa') ? activeBadgeHtml : '';
+  if (slotVisitante) slotVisitante.innerHTML = (activeRole === 'visitante') ? activeBadgeHtml : '';
+}
+
+/**
+ * Conmutador global de roles para evaluar la plataforma
+ */
+function setPlatformRole(roleName, showToastMsg = true) {
+  if (roleName === 'admin') {
+    const adminSession = {
+      company: 'Administrador General (GitHub)',
+      cuit: 'SUPERADMIN-MX',
+      email: 'admin@materiax.org',
+      role: 'admin',
+      status: 'aprobada'
+    };
+    localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(adminSession));
+    updateNavbarSession();
+    if (showToastMsg) {
+      showToast('Modo SuperAdmin activado: Gobernanza de red y auditoría desbloqueadas.', 'Rol Administrador');
+    }
+  } else if (roleName === 'empresa') {
+    const empresaSession = {
+      company: 'PetroPlast Industrial S.A.',
+      cuit: '30-71458921-7',
+      email: 'contacto@petroplast.com.ar',
+      rep: 'Ing. Carlos Mendoza',
+      role: 'empresa',
+      status: 'aprobada',
+      token: 'MX-TOK-7145-B2B-OK'
+    };
+    localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(empresaSession));
+    updateNavbarSession();
+    if (showToastMsg) {
+      showToast('Modo Empresa Verificada: Habilitado para publicar excedentes y reservar lotes.', 'Rol Empresa B2B');
+    }
+  } else {
+    // Visitante
+    localStorage.removeItem(STORAGE_KEY_SESSION);
+    updateNavbarSession();
+    if (showToastMsg) {
+      showToast('Modo Visitante: Navegando como usuario no registrado con catálogo en vista previa.', 'Rol Visitante');
+    }
   }
 }
 
@@ -1237,6 +1341,268 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // ==========================================================================
+  // SISTEMA DE ROLES B2B (SUPERADMIN, EMPRESA VERIFICADA, VISITANTE)
+  // ==========================================================================
+  function initPlatformRolesListeners() {
+    // 1. Botones de activación en tarjetas de la sección #propuesta-roles
+    document.querySelectorAll('.btn-role-activate').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetRole = btn.dataset.roleTarget;
+        if (targetRole) {
+          setPlatformRole(targetRole, true);
+        }
+      });
+    });
+
+    // 2. Botones del selector en la barra de navegación (Header)
+    document.querySelectorAll('.nav-role-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const role = btn.dataset.roleSelect;
+        if (role) {
+          setPlatformRole(role, true);
+        }
+      });
+    });
+
+    // 3. Botón directo de Backoffice en navbar para Administrador
+    document.querySelector('#navAdminDirectBtn')?.addEventListener('click', () => {
+      openModal(adminModal);
+    });
+
+    // Inicializar visuales de roles al cargar
+    updateNavbarSession();
+  }
+
+  // ==========================================================================
+  // PUBLICACIÓN DE EXCEDENTES INDUSTRIALES (FACETA OFERENTE)
+  // ==========================================================================
+  const publishLotModal = document.querySelector('#publishLotModal');
+  const publishLotForm = document.querySelector('#publishLotForm');
+  const openPublishLotBtn = document.querySelector('#openPublishLotBtn');
+  const closePublishLotModalBtn = document.querySelector('#closePublishLotModal');
+  const cancelPublishLotBtn = document.querySelector('#cancelPublishLotBtn');
+
+  function initPublishLotFeature() {
+    openPublishLotBtn?.addEventListener('click', () => {
+      const session = getActiveSession();
+      if (!session || session.status !== 'aprobada') {
+        showToast('Debes ser una Empresa Verificada u Administrador para publicar excedentes.', 'Acceso Restringido');
+        // Abrir portal institucional para invitar al Onboarding
+        openModal(accessModal);
+        const tabBtn = document.querySelector('.portal-tab-btn[data-portal-tab="onboardingTab"]');
+        if (tabBtn) tabBtn.click();
+        return;
+      }
+
+      // Prefill con los datos de la empresa conectada
+      const compInput = document.querySelector('#pubCompanyName');
+      if (compInput) {
+        compInput.value = session.company || 'Empresa Emisora Homologada';
+      }
+      openModal(publishLotModal);
+    });
+
+    closePublishLotModalBtn?.addEventListener('click', () => closeModal(publishLotModal));
+    cancelPublishLotBtn?.addEventListener('click', () => closeModal(publishLotModal));
+
+    publishLotForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const session = getActiveSession();
+      const company = document.querySelector('#pubCompanyName')?.value.trim() || session?.company || 'Planta Industrial Homologada';
+      const category = document.querySelector('#pubCategory')?.value || 'polietileno';
+      const title = document.querySelector('#pubMaterialTitle')?.value.trim();
+      const stock = document.querySelector('#pubStock')?.value.trim();
+      const location = document.querySelector('#pubLocation')?.value.trim();
+      const condition = document.querySelector('#pubCondition')?.value.trim();
+      const description = document.querySelector('#pubDescription')?.value.trim();
+
+      if (!title || !stock || !location) {
+        showToast('Por favor completa todos los campos requeridos.', 'Formulario Incompleto');
+        return;
+      }
+
+      const newId = 'custom_' + Date.now();
+      const newLot = {
+        id: newId,
+        category: category,
+        title: title,
+        desc: description,
+        stock: stock,
+        location: location,
+        condition: condition,
+        company: company,
+        timestamp: new Date().toISOString()
+      };
+
+      // Guardar en LocalStorage
+      let storedCustom = [];
+      try {
+        storedCustom = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM_LOTS) || '[]');
+      } catch (err) {
+        storedCustom = [];
+      }
+      storedCustom.unshift(newLot);
+      localStorage.setItem(STORAGE_KEY_CUSTOM_LOTS, JSON.stringify(storedCustom));
+
+      // Agregar a RESOURCE_DATA en memoria
+      RESOURCE_DATA[newId] = {
+        title: title,
+        category: category.toUpperCase(),
+        description: description,
+        stock: stock,
+        location: location,
+        status: 'Disponible para Retiro',
+        packaging: condition
+      };
+
+      // Renderizar en el DOM
+      renderSingleCustomLotCard(newLot);
+
+      // Limpiar y cerrar modal
+      publishLotForm.reset();
+      closeModal(publishLotModal);
+      showToast(`¡Lote "${title}" publicado exitosamente en el catálogo activo!`, 'Oferta B2B Registrada');
+
+      // Scroll hacia el inventario
+      document.querySelector('#roadmap-inventario')?.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    loadAndRenderCustomLots();
+  }
+
+  function renderSingleCustomLotCard(lot) {
+    const grid = document.querySelector('#resourceGrid');
+    if (!grid) return;
+
+    let chipLabel = 'POLÍMERO VERIFICADO';
+    if (lot.category === 'polietileno') chipLabel = 'PEAD / PEBD';
+    else if (lot.category === 'polipropileno') chipLabel = 'PP HOMOPOLÍMERO';
+    else if (lot.category === 'tecnicos') chipLabel = 'POLÍMERO TÉCNICO';
+    else if (lot.category === 'equipamiento') chipLabel = 'LOGÍSTICA & MATRICERÍA';
+
+    const card = document.createElement('article');
+    card.className = 'resource-card';
+    card.dataset.category = lot.category;
+    card.dataset.keywords = `${lot.title} ${lot.category} ${lot.location} ${lot.condition} ${lot.company}`.toLowerCase();
+    card.dataset.id = lot.id;
+
+    card.innerHTML = `
+      <div>
+        <div class="resource-card-header">
+          <span class="chip-polymer">${escapeHtml(chipLabel)}</span>
+          <span class="chip-stock">${escapeHtml(lot.stock)}</span>
+        </div>
+        <h4 class="resource-title">${escapeHtml(lot.title)}</h4>
+        <p class="resource-desc">${escapeHtml(lot.desc)}</p>
+      </div>
+      <div>
+        <div class="resource-meta">
+          <div>Ubicación: <strong>${escapeHtml(lot.location)}</strong></div>
+          <div>Condición: <strong>${escapeHtml(lot.condition)}</strong></div>
+          <div style="font-size:0.75rem; color:#64748B; margin-top:0.2rem;">Oferente: <strong>${escapeHtml(lot.company)}</strong></div>
+        </div>
+        <div class="resource-actions">
+          <button type="button" class="btn btn-sm btn-primary request-btn" data-title="${escapeHtml(lot.title)}">Solicitar</button>
+          <button type="button" class="btn btn-sm btn-ghost-dark open-detail-btn" data-resource-id="${escapeHtml(lot.id)}">Ficha Técnica</button>
+        </div>
+      </div>
+    `;
+
+    grid.prepend(card);
+
+    // Asignar listeners
+    card.querySelector('.request-btn')?.addEventListener('click', () => {
+      handleLotRequest(lot.title, lot.id);
+    });
+
+    card.querySelector('.open-detail-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openDetailModalForId(lot.id);
+    });
+
+    // Actualizar contador
+    const count = grid.querySelectorAll('.resource-card').length;
+    const counterEl = document.querySelector('#searchCounter');
+    if (counterEl) counterEl.textContent = `Mostrando ${count} recursos activos`;
+  }
+
+  function loadAndRenderCustomLots() {
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY_CUSTOM_LOTS) || '[]');
+      stored.reverse().forEach(lot => {
+        RESOURCE_DATA[lot.id] = {
+          title: lot.title,
+          category: lot.category.toUpperCase(),
+          description: lot.desc,
+          stock: lot.stock,
+          location: lot.location,
+          status: 'Disponible para Retiro',
+          packaging: lot.condition
+        };
+        renderSingleCustomLotCard(lot);
+      });
+    } catch (e) {
+      console.error('Error loading custom lots', e);
+    }
+  }
+
+  function handleLotRequest(title, lotId) {
+    const session = getActiveSession();
+    if (session && session.status === 'aprobada') {
+      const reqData = {
+        id: Date.now(),
+        timestamp: new Date().toLocaleString('es-AR', { dateStyle: 'short', timeStyle: 'medium' }),
+        company: session.company,
+        cuit: session.cuit,
+        email: session.email,
+        interest: `Reserva directa: ${title}`,
+        message: `Operación registrada por ${session.company} (Rol: ${session.role || 'Empresa'}).`
+      };
+      saveRequestToLocalStorage(reqData);
+      showToast(`¡Reserva para "${title}" enviada exitosamente bajo firma corporativa!`, 'Reserva B2B');
+    } else {
+      openModal(accessModal);
+      showToast('Debes registrar o identificar tu empresa para formalizar reservas vinculantes.', 'Acceso Requerido');
+    }
+  }
+
+  function openDetailModalForId(id) {
+    const data = RESOURCE_DATA[id];
+    if (!data) return;
+    const titleEl = document.querySelector('#detailTitle');
+    const catEl = document.querySelector('#detailCategory');
+    const descEl = document.querySelector('#detailDescription');
+    const stockEl = document.querySelector('#detailStock');
+    const locEl = document.querySelector('#detailLocation');
+    const statusEl = document.querySelector('#detailStatus');
+    const packEl = document.querySelector('#detailPackaging');
+
+    if (titleEl) titleEl.textContent = data.title;
+    if (catEl) catEl.textContent = data.category;
+    if (descEl) descEl.textContent = data.description;
+    if (stockEl) stockEl.textContent = data.stock;
+    if (locEl) locEl.textContent = data.location;
+    if (statusEl) statusEl.textContent = data.status;
+    if (packEl) packEl.textContent = data.packaging;
+
+    const detailReqBtn = document.querySelector('#detailRequestBtn');
+    if (detailReqBtn) {
+      detailReqBtn.onclick = () => {
+        closeModal(detailModal);
+        handleLotRequest(data.title, id);
+      };
+    }
+
+    openModal(detailModal);
+  }
+
+  // Inicializar Roles y Publicación de Lotes
+  initPlatformRolesListeners();
+  initPublishLotFeature();
 
   // Mobile Menu
   document.querySelector('#menuToggle')?.addEventListener('click', () => {

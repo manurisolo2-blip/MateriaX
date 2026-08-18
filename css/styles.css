@@ -2561,3 +2561,111 @@ select option {
   }
 }
 
+/* ==========================================================================
+   SISTEMA DE GESTIÓN DE ROLES B2B (SUPERADMIN, EMPRESA VERIFICADA, VISITANTE)
+   ========================================================================== */
+.role-card {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.role-card.role-card-active {
+  border-color: #38BDF8 !important;
+  box-shadow: 0 0 24px rgba(56, 189, 248, 0.18);
+  background: linear-gradient(180deg, rgba(23, 27, 51, 0.95) 0%, rgba(30, 41, 78, 0.95) 100%);
+}
+
+.role-active-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.role-card-action-bar {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-navy-border-subtle, rgba(255, 255, 255, 0.08));
+}
+
+.role-card-action-bar .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Selector Rápido de Roles en Header / Navbar */
+.nav-role-switcher {
+  display: flex;
+  align-items: center;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.nav-role-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.nav-role-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-role-btn.active {
+  color: #FFFFFF;
+  background: #0284C7;
+  font-weight: 700;
+}
+
+/* Barra de Inventario & Botón Publicar Lote */
+.inventory-header-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.btn-publish-lot {
+  background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+  color: #FFFFFF;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  font-weight: 700;
+  padding: 0.65rem 1.25rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-publish-lot:hover {
+  background: linear-gradient(135deg, #0369A1 0%, #075985 100%);
+  border-color: #38BDF8;
+  transform: translateY(-1px);
+}
+
