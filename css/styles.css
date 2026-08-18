@@ -1738,16 +1738,36 @@ h1, h2, h3, h4, h5, h6 {
 .modal-form input, .modal-form select, .modal-form textarea {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: var(--color-navy-elevated);
-  border: 1px solid var(--color-navy-border);
-  border-radius: var(--radius-sm);
+  background: var(--color-navy-elevated, #171B33);
+  border: 1px solid var(--color-navy-border, #2A3353);
+  border-radius: var(--radius-sm, 4px);
   color: #FFFFFF;
   outline: none;
   font-size: 0.9rem;
 }
 
+.modal-form select {
+  background-color: #171B33 !important;
+  color: #FFFFFF !important;
+  cursor: pointer;
+}
+
+.modal-form select option,
+select option {
+  background-color: #171B33 !important;
+  color: #FFFFFF !important;
+  padding: 8px 12px;
+}
+
+.modal-form select option:checked,
+.modal-form select option:hover {
+  background-color: #0284C7 !important;
+  color: #FFFFFF !important;
+}
+
 .modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus {
-  border-color: var(--color-blue-electric);
+  border-color: var(--color-blue-electric, #38BDF8);
+  outline: none;
 }
 
 .modal-form .form-row {

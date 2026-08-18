@@ -315,6 +315,19 @@ body {
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
+select.abtc-input,
+.modal-form select {
+  background-color: #171B33 !important;
+  color: #FFFFFF !important;
+}
+
+select.abtc-input option,
+.modal-form select option,
+select option {
+  background-color: #171B33 !important;
+  color: #FFFFFF !important;
+}
+
 /* Inputs en sección clara */
 .section-light .abtc-input,
 .section-light .search-box-modular input,
