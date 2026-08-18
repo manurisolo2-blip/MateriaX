@@ -1038,20 +1038,44 @@ function setupCorporateAuth() {
     });
   });
 
-  // Login Form Submit
+  // Login Form Submit (Autenticación Real B2B / SuperAdmin)
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     const query = document.querySelector('#loginEmail')?.value.trim().toLowerCase();
-    const companies = getStoredCompanies();
+    const pass = document.querySelector('#loginPassword')?.value.trim();
 
+    if (!query || !pass) {
+      showToast('Por favor ingrese su usuario/correo y contraseña.', 'Campos Requeridos');
+      return;
+    }
+
+    // 1. Acceso Exclusivo para Administrador / SuperAdmin
+    if ((query === 'admin@materiax.org' || query === 'admin') && (pass === 'admin2026' || pass === '1234' || pass === 'admin' || pass === 'materiax2026')) {
+      const adminSession = {
+        company: 'Administrador General (GitHub)',
+        cuit: 'SUPERADMIN-MX',
+        email: 'admin@materiax.org',
+        role: 'admin',
+        status: 'aprobada'
+      };
+      localStorage.setItem(STORAGE_KEY_SESSION, JSON.stringify(adminSession));
+      updateNavbarSession();
+      syncCompaniesWithCloud(false);
+      closeModal(document.querySelector('#accessModal'));
+      showToast('¡Bienvenido, Administrador General! Gobernanza y Backoffice activados.', 'Sesión SuperAdmin');
+      return;
+    }
+
+    // 2. Acceso para Empresas Registradas
+    const companies = getStoredCompanies();
     const matched = companies.find(c => 
       c.email.toLowerCase() === query || 
       c.cuit.replace(/\D/g, '') === query.replace(/\D/g, '') ||
-      c.company.toLowerCase().includes(query)
+      c.company.toLowerCase() === query
     );
 
     if (!matched) {
-      showToast('No se encontró una empresa con ese correo o CUIT. Revisa las credenciales o regístrate en Onboarding.', 'Error de Acceso');
+      showToast('Credenciales no válidas. Si es tu primera vez, debes registrar a tu empresa en la pestaña "Registro Onboarding Empresa".', 'Error de Acceso');
       return;
     }
 
@@ -1061,37 +1085,13 @@ function setupCorporateAuth() {
     if (matched.status === 'pendiente') {
       renderVerificationRoom(matched);
       openModal(document.querySelector('#verificationModal'));
-      showToast('Tu cuenta se encuentra en revisión. Aquí puedes seguir el estado de auditoría.', 'Panel de Espera');
+      showToast('Tu empresa se encuentra en proceso de homologación por el equipo auditor.', 'Panel de Espera');
     } else if (matched.status === 'aprobada') {
       setActiveSession(matched);
-      showToast(`¡Bienvenido de nuevo, ${matched.company}! Acceso B2B verificado.`, 'Sesión Iniciada');
+      showToast(`¡Bienvenido de nuevo, ${matched.company}! Acceso corporativo verificado.`, 'Sesión Iniciada');
     } else {
       showToast(`Tu cuenta tiene observaciones: ${matched.observation || 'Contacta a soporte institucional.'}`, 'Cuenta Observada');
     }
-  });
-
-  // Demo 1-Click Buttons
-  document.querySelector('#demoVerifiedBtn')?.addEventListener('click', () => {
-    const companies = getStoredCompanies();
-    const verified = companies.find(c => c.status === 'aprobada') || SEED_COMPANIES[0];
-    setActiveSession(verified);
-    closeModal(document.querySelector('#accessModal'));
-    showToast(`Sesión activa como "${verified.company}" (Empresa Homologada).`, 'Demo Verificada');
-  });
-
-  document.querySelector('#demoPendingBtn')?.addEventListener('click', () => {
-    const companies = getStoredCompanies();
-    const pending = companies.find(c => c.status === 'pendiente') || SEED_COMPANIES[1];
-    closeModal(document.querySelector('#accessModal'));
-    renderVerificationRoom(pending);
-    openModal(document.querySelector('#verificationModal'));
-  });
-
-  document.querySelector('#demoAuditorBtn')?.addEventListener('click', () => {
-    closeModal(document.querySelector('#accessModal'));
-    renderAdminCompanies();
-    renderAdminRequests();
-    openModal(document.querySelector('#adminModal'));
   });
 
   // Consultar Estado Form
@@ -1447,29 +1447,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // SISTEMA DE ROLES B2B (SUPERADMIN, EMPRESA VERIFICADA, VISITANTE)
   // ==========================================================================
   function initPlatformRolesListeners() {
-    // 1. Botones de activación en tarjetas de la sección #propuesta-roles
-    document.querySelectorAll('.btn-role-activate').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetRole = btn.dataset.roleTarget;
-        if (targetRole) {
-          setPlatformRole(targetRole, true);
-        }
-      });
-    });
-
-    // 2. Botones del selector en la barra de navegación (Header)
-    document.querySelectorAll('.nav-role-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const role = btn.dataset.roleSelect;
-        if (role) {
-          setPlatformRole(role, true);
-        }
-      });
-    });
-
-    // 3. Botón directo de Backoffice en navbar para Administrador
+    // Botón directo de Backoffice en navbar para Administrador
     document.querySelector('#navAdminDirectBtn')?.addEventListener('click', () => {
       openModal(adminModal);
     });

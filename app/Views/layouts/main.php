@@ -47,19 +47,11 @@
         <a href="<?= base_url('#contacto') ?>">Contacto</a>
       </nav>
 
-      <!-- 2. Botones de Acción Corporativa, Selector de Roles & Sesión Activa -->
+      <!-- 2. Botones de Acción Corporativa & Sesión Activa -->
       <div class="nav-actions-wrapper">
-        <!-- Selector Rápido de Rol Activo (Simulador RBAC) -->
-        <div class="nav-role-switcher" id="navRoleSwitcher" title="Cambiar rol activo para probar la plataforma">
-          <span style="font-size:0.68rem; color:#94A3B8; padding:0 3px; font-family:var(--font-mono); font-weight:700;">ROL:</span>
-          <button type="button" class="nav-role-btn active" data-role-select="visitante" title="Visitante No Registrado">🌐 Visitante</button>
-          <button type="button" class="nav-role-btn" data-role-select="empresa" title="Empresa Verificada (PetroPlast)">🏢 Empresa</button>
-          <button type="button" class="nav-role-btn" data-role-select="admin" title="Administrador del Sistema (GitHub)">🛡️ Admin</button>
-        </div>
-
         <div class="nav-buttons" id="navDefaultActions">
           <button type="button" class="btn btn-sm btn-primary btn-abtc-primary" id="openAccessModalNav">
-            🏢 Portal Empresas / Acceso
+            🏢 Iniciar Sesión / Registro Empresa
           </button>
         </div>
 
@@ -214,25 +206,6 @@
             <button type="submit" class="btn btn-primary btn-abtc-primary">Ingresar al Portal &rarr;</button>
           </div>
         </form>
-
-        <!-- Accesos Rápidos de Demostración -->
-        <div class="demo-accounts-box">
-          <h5>⚡ Accesos Rápidos para Evaluación (1-Click Demo)</h5>
-          <div class="demo-buttons-grid">
-            <button type="button" class="btn-demo-account" id="demoVerifiedBtn" title="Ingresar como Empresa Homologada">
-              <strong>🏢 PetroPlast S.A.</strong>
-              <span>● Verificada / Activa</span>
-            </button>
-            <button type="button" class="btn-demo-account" id="demoPendingBtn" title="Ver Panel de Espera y Verificación">
-              <strong>⏳ BioPlásticos Cuyo</strong>
-              <span>● En Auditoría Legal</span>
-            </button>
-            <button type="button" class="btn-demo-account" id="demoAuditorBtn" title="Abrir Panel Auditor">
-              <strong>🛡️ Auditor MateriaX</strong>
-              <span>● Backoffice de Control</span>
-            </button>
-          </div>
-        </div>
       </div>
 
       <!-- CONTENIDO PESTAÑA 2: REGISTRO ONBOARDING EMPRESARIAL (2 PASOS) -->

@@ -131,84 +131,69 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
             <span><strong>Métricas Globales:</strong> Acceso a indicadores totales (kg recuperados, transacciones y empresas activas).</span>
           </li>
-        </ul>
-        <div class="role-card-action-bar">
-          <button type="button" class="btn btn-sm btn-abtc-outline btn-role-activate" data-role-target="admin">
-            🛡️ Activar Rol Administrador
-          </button>
-        </div>
-      </article>
+            </ul>
+          </article>
 
-      <!-- Rol 2: Empresa Verificada (Usuario B2B Activo) -->
-      <article class="role-card abtc-card" id="roleCardEmpresa" style="border-color: rgba(56, 189, 248, 0.4);">
-        <div>
-          <div class="role-card-header-row">
-            <div class="role-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4M5 21V10.85M19 21V10.85M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
-            </div>
-            <span class="role-badge-tag" style="color: #38BDF8; border-color: rgba(56, 189, 248, 0.35);">NÚCLEO B2B ACTIVO</span>
-          </div>
-          <div class="role-status-slot" id="statusSlotEmpresa"></div>
-          <h3 class="role-name">Empresa Verificada (Usuario B2B Activo)</h3>
-          <p class="role-need"><strong>Función principal:</strong> Empresas que completaron el registro y fueron autorizadas por los administradores para operar en red:</p>
-
-          <div class="role-facet-container">
-            <div class="role-facet-box">
-              <div class="role-facet-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
-                Como Oferente (Vendedora / Donante):
+          <!-- Rol 2: Empresa Verificada (Usuario B2B Activo) -->
+          <article class="role-card abtc-card" id="roleCardEmpresa" style="border-color: rgba(56, 189, 248, 0.4);">
+            <div>
+              <div class="role-card-header-row">
+                <div class="role-icon-box" style="background: rgba(239, 68, 68, 0.15); color: #EF4444; border-color: rgba(239, 68, 68, 0.3);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7H3l2-4h14l2 4M5 21V10.85M19 21V10.85M9 21v-4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v4"/></svg>
+                </div>
+                <span class="role-badge-tag" style="color: #38BDF8; border-color: rgba(56, 189, 248, 0.35);">NÚCLEO B2B ACTIVO</span>
               </div>
-              Publica excedentes, scrap, polímeros molidos, moldes o recursos productivos (pallets, tolvas, etc.), cargando fichas técnicas y fotos.
-            </div>
-            <div class="role-facet-box">
-              <div class="role-facet-title">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
-                Como Demandante (Compradora / Receptora):
-              </div>
-              Busca materiales en el catálogo, envía solicitudes de retiro/compra, publica necesidades específicas y califica operaciones.
-            </div>
-          </div>
-        </div>
-        <div class="role-card-action-bar">
-          <button type="button" class="btn btn-sm btn-abtc-primary btn-role-activate" data-role-target="empresa">
-            🏢 Activar Rol Empresa Verificada
-          </button>
-        </div>
-      </article>
+              <div class="role-status-slot" id="statusSlotEmpresa"></div>
+              <h3 class="role-name">Empresa Verificada (Usuario B2B Activo)</h3>
+              <p class="role-need"><strong>Función principal:</strong> Empresas que completaron el registro y fueron autorizadas por los administradores para operar en red:</p>
 
-      <!-- Rol 3: Visitante / Usuario No Registrado (Público General) -->
-      <article class="role-card abtc-card" id="roleCardVisitante">
-        <div>
-          <div class="role-card-header-row">
-            <div class="role-icon-box" style="background: rgba(255, 255, 255, 0.08); color: #BAC7E6; border-color: rgba(255, 255, 255, 0.15);">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
+              <div class="role-facet-container">
+                <div class="role-facet-box">
+                  <div class="role-facet-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
+                    Como Oferente (Vendedora / Donante):
+                  </div>
+                  Publica excedentes, scrap, polímeros molidos, moldes o recursos productivos (pallets, tolvas, etc.), cargando fichas técnicas y fotos.
+                </div>
+                <div class="role-facet-box">
+                  <div class="role-facet-title">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m5 12 5 5L20 7"/></svg>
+                    Como Demandante (Compradora / Receptora):
+                  </div>
+                  Busca materiales en el catálogo, envía solicitudes de retiro/compra, publica necesidades específicas y califica operaciones.
+                </div>
+              </div>
             </div>
-            <span class="role-badge-tag">PÚBLICO GENERAL</span>
-          </div>
-          <div class="role-status-slot" id="statusSlotVisitante"></div>
-          <h3 class="role-name">Visitante / Usuario No Registrado</h3>
-          <p class="role-need"><strong>Función principal:</strong> Conocer la propuesta de valor institucional y solicitar acceso a la red.</p>
-        </div>
-        <ul class="role-permissions-list">
-          <li>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Exploración Institucional:</strong> Visualizar landing page, beneficios y métricas de impacto ambiental públicas.</span>
-          </li>
-          <li>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Catálogo de Vista Previa:</strong> Explorar lotes públicos (sin acceso a contactos, chats ni fichas privadas).</span>
-          </li>
-          <li>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-            <span><strong>Solicitud de Onboarding:</strong> Acceder al formulario de registro y solicitud de verificación empresarial.</span>
-          </li>
-        </ul>
-        <div class="role-card-action-bar">
-          <button type="button" class="btn btn-sm btn-ghost btn-role-activate" data-role-target="visitante">
-            🌐 Activar Rol Visitante Público
-          </button>
-        </div>
-      </article>
+          </article>
+
+          <!-- Rol 3: Visitante / Usuario No Registrado (Público General) -->
+          <article class="role-card abtc-card" id="roleCardVisitante">
+            <div>
+              <div class="role-card-header-row">
+                <div class="role-icon-box" style="background: rgba(255, 255, 255, 0.08); color: #BAC7E6; border-color: rgba(255, 255, 255, 0.15);">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20M2 12h20"/></svg>
+                </div>
+                <span class="role-badge-tag">PÚBLICO GENERAL</span>
+              </div>
+              <div class="role-status-slot" id="statusSlotVisitante"></div>
+              <h3 class="role-name">Visitante / Usuario No Registrado</h3>
+              <p class="role-need"><strong>Función principal:</strong> Conocer la propuesta de valor institucional y solicitar acceso a la red.</p>
+            </div>
+            <ul class="role-permissions-list">
+              <li>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                <span><strong>Exploración Institucional:</strong> Visualizar landing page, beneficios y métricas de impacto ambiental públicas.</span>
+              </li>
+              <li>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                <span><strong>Catálogo de Vista Previa:</strong> Explorar lotes públicos (sin acceso a contactos, chats ni fichas privadas).</span>
+              </li>
+              <li>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                <span><strong>Solicitud de Onboarding:</strong> Acceder al formulario de registro y solicitud de verificación empresarial.</span>
+              </li>
+            </ul>
+          </article>
     </div>
   </div>
 </section>
