@@ -19,7 +19,7 @@
       </p>
 
       <div class="hero-cta-group">
-        <a class="btn btn-primary btn-abtc-primary" href="#modulos-hitos">
+        <a class="btn btn-primary btn-abtc-primary" href="#roadmap-inventario">
           Explorar Inventario
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -87,9 +87,6 @@
   </div>
 </section>
 
-<!-- ==========================================================================
-     SECCIÓN 2: PROPUESTA DE VALOR Y ROLES (<section class="value-prop-section">)
-     ========================================================================== -->
 <!-- ==========================================================================
      SECCIÓN 2: PROPUESTA DE VALOR Y ROLES (<section class="value-prop-section">)
      ========================================================================== -->
@@ -339,7 +336,7 @@
             </div>
           </article>
 
-          <article class="resource-card" data-category="polipropileno" data-keywords="pp polipropileno scrap rebaba inyeccion recortes" data-id="2">
+          <article class="resource-card" data-category="polipropileno" data-keywords="pp polipropileno scrap rebaba inyeccion recortes buenos aires vicente lopez" data-id="2">
             <div>
               <div class="resource-card-header">
                 <span class="chip-polymer">PP HOMOPOLÍMERO</span>
@@ -360,7 +357,7 @@
             </div>
           </article>
 
-          <article class="resource-card" data-category="tecnicos" data-keywords="pvc abs nylon lote discontinuado compuestos resina" data-id="3">
+          <article class="resource-card" data-category="tecnicos" data-keywords="pvc abs nylon lote discontinuado compuestos resina lomas de zamora buenos aires" data-id="3">
             <div>
               <div class="resource-card-header">
                 <span class="chip-polymer">MATERIALES TÉCNICOS</span>
@@ -381,7 +378,7 @@
             </div>
           </article>
 
-          <article class="resource-card" data-category="equipamiento" data-keywords="moldes pallets big bags contenedores matriceria racks" data-id="4">
+          <article class="resource-card" data-category="equipamiento" data-keywords="moldes pallets big bags contenedores matriceria racks pilar buenos aires" data-id="4">
             <div>
               <div class="resource-card-header">
                 <span class="chip-polymer">LOGÍSTICA & MATRICERÍA</span>
@@ -402,7 +399,7 @@
             </div>
           </article>
 
-          <article class="resource-card" data-category="polietileno" data-keywords="pebd film strech transparente rollo bobina" data-id="5">
+          <article class="resource-card" data-category="polietileno" data-keywords="pebd film strech transparente rollo bobina quilmes buenos aires" data-id="5">
             <div>
               <div class="resource-card-header">
                 <span class="chip-polymer">POLIETILENO PEBD</span>
@@ -423,7 +420,7 @@
             </div>
           </article>
 
-          <article class="resource-card" data-category="tecnicos" data-keywords="nylon pa6 pa66 grilon descarte inyeccion" data-id="6">
+          <article class="resource-card" data-category="tecnicos" data-keywords="nylon pa6 pa66 grilon descarte inyeccion cordoba capital" data-id="6">
             <div>
               <div class="resource-card-header">
                 <span class="chip-polymer">POLIAMIDA TÉCNICA</span>

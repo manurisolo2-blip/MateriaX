@@ -33,14 +33,19 @@
     <div class="navbar-container">
       <!-- 1. Izquierda: Logo / Nombre del Proyecto -->
       <a href="#inicio" class="brand-wrapper" aria-label="Ir al inicio de MateriaX">
-        <div class="brand-logo-badge">
-          <svg viewBox="0 0 100 100" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="#1E293B" stroke="#38BDF8" stroke-width="4"/>
-            <path d="M 28 58 L 52 28 L 74 28 C 80 28 84 32 80 38 L 74 44 L 54 44 C 48 44 45 47 45 52 L 66 52 L 78 74 C 82 82 78 88 70 88 C 64 88 60 84 57 78 L 48 60 L 28 60 Z" fill="#FFFFFF"/>
-          </svg>
-        </div>
+        <img src="./assets/logos/isotipo-black.png" alt="MateriaX Logo" class="brand-logo-img" width="40" height="40">
         <span class="brand-text">Materia<span class="accent-blue">X</span></span>
       </a>
+
+      <!-- Navegación Principal Modular -->
+      <nav class="topnav nav-links" id="topNav" aria-label="Navegación principal">
+        <a href="#inicio" class="active">Inicio</a>
+        <a href="#propuesta-roles">Roles B2B</a>
+        <a href="#roadmap-inventario">Inventario</a>
+        <a href="#seguridad-infraestructura">Seguridad</a>
+        <a href="#metricas">Métricas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
 
       <!-- 2. Botones de Acción Corporativa -->
       <div class="nav-actions-wrapper">
@@ -312,7 +317,6 @@
               <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Integración y exportación de datos operativos</li>
             </ul>
           </article>
-        </div>
         </div>
 
         <!-- Inventario Interactivo de Materiales -->
@@ -763,14 +767,13 @@
         </div>
       </div>
     </section>
-  </main>
 
     <!-- ==========================================================================
          SECCIÓN 5.5: MENSAJE INSTITUCIONAL ESTILO ABTC
          ========================================================================== -->
     <section class="message-section section-light" style="background: var(--color-gray-surface); padding: 100px 1.5rem; position: relative; overflow: hidden;">
       <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.05; pointer-events: none;">
-        <img src="assets/logos/isotipo-black.png" alt="" style="width: 360px; height: 360px; object-fit: contain;">
+        <img src="./assets/logos/isotipo-black.png" alt="" style="width: 360px; height: 360px; object-fit: contain;">
       </div>
       <div style="max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 2;">
         <p style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #C53030; margin-bottom: 2rem;">Un mensaje de nuestro equipo</p>
@@ -781,212 +784,207 @@
         </h2>
       </div>
     </section>
+  </main>
 
   <!-- ==========================================================================
        SECCIÓN 6: FOOTER CORPORATIVO (<footer>)
        ========================================================================== -->
-    <footer class="footer-corporate footer-abtc section-dark" id="contacto">
-      <div class="footer-container">
-        <!-- Formulario Plano Horizontal para Consultas Directas -->
-        <div class="footer-contact-banner abtc-card">
-          <div class="contact-banner-copy">
-            <h3>¿Deseas conectar tu planta a la red de MateriaX?</h3>
-            <p>Envía tu consulta técnica o solicita credenciales de acceso institucional.</p>
-          </div>
-          <form class="horizontal-contact-form" onsubmit="event.preventDefault(); document.querySelector('#openAccessModalNav').click();" aria-label="Formulario de contacto corporativo">
-            <label for="footerContactEmail" class="visually-hidden">Email corporativo de la empresa</label>
-            <input type="email" id="footerContactEmail" name="contact_email" class="abtc-input" placeholder="Ingresa tu email corporativo..." required aria-label="Email corporativo de la empresa">
-            <button type="submit" class="btn btn-primary btn-abtc-primary" aria-label="Comenzar solicitud de conexión corporativa">Comenzar &rarr;</button>
-          </form>
+  <footer class="footer-corporate footer-abtc section-dark" id="contacto">
+    <div class="footer-container">
+      <!-- Formulario Plano Horizontal para Consultas Directas -->
+      <div class="footer-contact-banner abtc-card">
+        <div class="contact-banner-copy">
+          <h3>¿Deseas conectar tu planta a la red de MateriaX?</h3>
+          <p>Envía tu consulta técnica o solicita credenciales de acceso institucional.</p>
         </div>
-
-        <!-- Columnas Modulares de Navegación -->
-        <div class="footer-grid-modular">
-          <div class="footer-brand-info">
-            <div class="brand-wrapper">
-              <div class="brand-logo-badge">
-                <svg viewBox="0 0 100 100" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="50" cy="50" r="46" fill="#1E293B" stroke="#38BDF8" stroke-width="4"/>
-                  <path d="M 28 58 L 52 28 L 74 28 C 80 28 84 32 80 38 L 74 44 L 54 44 C 48 44 45 47 45 52 L 66 52 L 78 74 C 82 82 78 88 70 88 C 64 88 60 84 57 78 L 48 60 L 28 60 Z" fill="#FFFFFF"/>
-                </svg>
-              </div>
-              <span class="brand-text brand-text-lg">Materia<span class="accent-blue">X</span></span>
-            </div>
-          </div>
-          <div class="footer-col">
-            <h4 class="footer-col-title">Estructura Web</h4>
-            <ul class="footer-col-links">
-              <li><a href="#inicio">Inicio / Hero</a></li>
-              <li><a href="#propuesta-roles">Propuesta & Roles</a></li>
-              <li><a href="#roadmap-inventario">Roadmap & Inventario</a></li>
-              <li><a href="#seguridad-infraestructura">Seguridad & Compliance</a></li>
-              <li><a href="#metricas">Dashboard de Métricas</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4 class="footer-col-title">Polímeros & Lotes</h4>
-            <ul class="footer-col-links">
-              <li><a href="#roadmap-inventario" data-filter-link="polietileno">Polietileno (PEAD/PEBD)</a></li>
-              <li><a href="#roadmap-inventario" data-filter-link="polipropileno">Polipropileno (PP)</a></li>
-              <li><a href="#roadmap-inventario" data-filter-link="tecnicos">PVC, ABS & Nylon</a></li>
-              <li><a href="#roadmap-inventario" data-filter-link="equipamiento">Matricería Industrial</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-col">
-            <h4 class="footer-col-title">Seguridad & Compliance</h4>
-            <ul class="footer-col-links">
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Cifrado de Datos & RBAC</span></li>
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Homologación CUIT / AFIP</span></li>
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Trazabilidad de Lotes</span></li>
-              <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Certificación ESG & CO₂</span></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Créditos y Enlaces Legales Corporativos -->
-        <div class="footer-credits-academic">
-          <div>
-            &copy; 2026 <strong>MateriaX</strong>. Red Industrial de Reutilización Circular. Todos los derechos reservados.
-          </div>
-          <div style="font-size: 0.82rem; color: #94A3B8; display: flex; gap: 1rem; flex-wrap: wrap;">
-            <span>Privacidad de Datos</span>
-            <span>•</span>
-            <span>Términos de Servicio B2B</span>
-            <span>•</span>
-            <span>Compliance Industrial</span>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- ==========================================================================
-         MODALES FUNCIONALES (LOCALSTORAGE & INTERACCIÓN)
-         ========================================================================== -->
-
-    <!-- ACCESS / PUBLISH / LOGIN MODAL -->
-    <div class="modal-overlay" id="accessModal" aria-hidden="true">
-      <div class="modal-card abtc-card" role="dialog" aria-labelledby="modalTitle">
-        <button class="modal-close" id="closeAccessModal" aria-label="Cerrar ventana">&times;</button>
-        <div class="modal-header">
-          <span class="section-eyebrow">CREDENCIALES DE ACCESO</span>
-          <h3 id="modalTitle">Registro & Acceso de Empresa</h3>
-          <p>Valida tu razón social para publicar y reservar lotes en la red de MateriaX.</p>
-        </div>
-
-        <form class="modal-form" id="accessForm">
-          <div class="form-group">
-            <label for="companyName">Razón Social / Nombre de Planta *</label>
-            <input type="text" id="companyName" class="abtc-input" required placeholder="Ej: Polímeros Industriales S.A.">
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="companyCuit">CUIT de la Empresa *</label>
-              <input type="text" id="companyCuit" class="abtc-input" required placeholder="30-12345678-9">
-            </div>
-            <div class="form-group">
-              <label for="companyEmail">Email Corporativo *</label>
-              <input type="email" id="companyEmail" class="abtc-input" required placeholder="planta@empresa.com">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="interestType">Faceta / Tipo de Operación de la Empresa</label>
-            <select id="interestType" class="abtc-input">
-              <option value="Empresa Verificada - Oferente">Empresa Verificada - Oferente (Publicar Excedentes / Scrap / Moldes)</option>
-              <option value="Empresa Verificada - Demandante">Empresa Verificada - Demandante (Comprar / Solicitar Polímeros)</option>
-              <option value="Ambas Facetas (Oferta y Demanda)">Ambas Facetas (Publicar Excedentes y Adquirir Material)</option>
-              <option value="Auditoría / Alianza Institucional">Auditoría / Alianza Institucional</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="formMessage">Detalle del Lote o Requerimiento Técnico</label>
-            <textarea id="formMessage" class="abtc-input abtc-textarea" rows="3" placeholder="Indica tipo de polímero, volumen estimado mensual o especificación técnica..."></textarea>
-          </div>
-
-          <div class="modal-actions">
-            <button type="button" class="btn btn-ghost" id="cancelAccessModal">Cancelar</button>
-            <button type="submit" class="btn btn-primary btn-abtc-primary">Enviar Solicitud</button>
-          </div>
+        <form class="horizontal-contact-form" id="footerContactForm" aria-label="Formulario de contacto corporativo">
+          <label for="footerContactEmail" class="visually-hidden">Email corporativo de la empresa</label>
+          <input type="email" id="footerContactEmail" name="contact_email" class="abtc-input" placeholder="Ingresa tu email corporativo..." required aria-label="Email corporativo de la empresa">
+          <button type="submit" class="btn btn-primary btn-abtc-primary" aria-label="Comenzar solicitud de conexión corporativa">Comenzar &rarr;</button>
         </form>
       </div>
-    </div>
 
-    <!-- DETAIL MODAL (FICHA TÉCNICA DINÁMICA) -->
-    <div class="modal-overlay" id="detailModal" aria-hidden="true">
-      <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="detailTitle">
-        <button class="modal-close" id="closeDetailModal" aria-label="Cerrar ventana">&times;</button>
-        <div class="modal-header">
-          <div class="badge-row" style="margin-bottom: 0.5rem;">
-            <span class="hero-tag" id="detailBadgeCat" style="margin-bottom: 0;">CATEGORÍA</span>
-            <span class="status-badge-live badge-complete" id="detailBadgeStatus">AUDITADO</span>
+      <!-- Columnas Modulares de Navegación -->
+      <div class="footer-grid-modular">
+        <div class="footer-brand-info">
+          <div class="brand-wrapper">
+            <img src="./assets/logos/isotipo-black.png" alt="MateriaX Logo" class="brand-logo-img" width="48" height="48">
+            <span class="brand-text brand-text-lg">Materia<span class="accent-blue">X</span></span>
           </div>
-          <h3 id="detailTitle">Nombre del Polímero</h3>
-          <p id="detailDesc">Descripción técnica del material.</p>
+          <p style="margin-top: 1rem; color: var(--color-text-light-muted); font-size: 0.88rem; line-height: 1.6;">
+            Plataforma B2B para la valorización y reutilización de polímeros industriales. Trazabilidad garantizada bajo arquitectura segura.
+          </p>
         </div>
 
+        <div class="footer-col">
+          <h4 class="footer-col-title">Estructura Web</h4>
+          <ul class="footer-col-links">
+            <li><a href="#inicio">Inicio / Hero</a></li>
+            <li><a href="#propuesta-roles">Propuesta & Roles</a></li>
+            <li><a href="#roadmap-inventario">Roadmap & Inventario</a></li>
+            <li><a href="#seguridad-infraestructura">Seguridad & Compliance</a></li>
+            <li><a href="#metricas">Dashboard de Métricas</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Polímeros & Lotes</h4>
+          <ul class="footer-col-links">
+            <li><a href="#roadmap-inventario" data-filter-link="polietileno">Polietileno (PEAD/PEBD)</a></li>
+            <li><a href="#roadmap-inventario" data-filter-link="polipropileno">Polipropileno (PP)</a></li>
+            <li><a href="#roadmap-inventario" data-filter-link="tecnicos">PVC, ABS & Nylon</a></li>
+            <li><a href="#roadmap-inventario" data-filter-link="equipamiento">Matricería Industrial</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title">Seguridad & Compliance</h4>
+          <ul class="footer-col-links">
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Cifrado de Datos & RBAC</span></li>
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Homologación CUIT / AFIP</span></li>
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Trazabilidad de Lotes</span></li>
+            <li><span class="tech-code" style="font-size: 0.8rem; color: #BAC7E6;">● Certificación ESG & CO₂</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Créditos y Enlaces Legales Corporativos -->
+      <div class="footer-credits-academic">
+        <div>
+          &copy; 2026 <strong>MateriaX</strong>. Red Industrial de Reutilización Circular. Todos los derechos reservados.
+        </div>
+        <div style="font-size: 0.82rem; color: #94A3B8; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <span>Privacidad de Datos</span>
+          <span>•</span>
+          <span>Términos de Servicio B2B</span>
+          <span>•</span>
+          <span>Compliance Industrial</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODALES FUNCIONALES (LOCALSTORAGE & INTERACCIÓN)
+       ========================================================================== -->
+
+  <!-- ACCESS / PUBLISH / LOGIN MODAL -->
+  <div class="modal-overlay" id="accessModal" aria-hidden="true">
+    <div class="modal-card abtc-card" role="dialog" aria-labelledby="modalTitle">
+      <button class="modal-close" id="closeAccessModal" aria-label="Cerrar ventana">&times;</button>
+      <div class="modal-header">
+        <span class="section-eyebrow">CREDENCIALES DE ACCESO</span>
+        <h3 id="modalTitle">Registro & Acceso de Empresa</h3>
+        <p>Valida tu razón social para publicar y reservar lotes en la red de MateriaX.</p>
+      </div>
+
+      <form class="modal-form" id="accessForm">
+        <div class="form-group">
+          <label for="companyName">Razón Social / Nombre de Planta *</label>
+          <input type="text" id="companyName" class="abtc-input" required placeholder="Ej: Polímeros Industriales S.A.">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="companyCuit">CUIT de la Empresa *</label>
+            <input type="text" id="companyCuit" class="abtc-input" required placeholder="30-12345678-9">
+          </div>
+          <div class="form-group">
+            <label for="companyEmail">Email Corporativo *</label>
+            <input type="email" id="companyEmail" class="abtc-input" required placeholder="planta@empresa.com">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="interestType">Faceta / Tipo de Operación de la Empresa</label>
+          <select id="interestType" class="abtc-input">
+            <option value="Empresa Verificada - Oferente">Empresa Verificada - Oferente (Publicar Excedentes / Scrap / Moldes)</option>
+            <option value="Empresa Verificada - Demandante">Empresa Verificada - Demandante (Comprar / Solicitar Polímeros)</option>
+            <option value="Ambas Facetas (Oferta y Demanda)">Ambas Facetas (Publicar Excedentes y Adquirir Material)</option>
+            <option value="Auditoría / Alianza Institucional">Auditoría / Alianza Institucional</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="formMessage">Detalle del Lote o Requerimiento Técnico</label>
+          <textarea id="formMessage" class="abtc-input abtc-textarea" rows="3" placeholder="Indica tipo de polímero, volumen estimado mensual o especificación técnica..."></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="cancelAccessModal">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-abtc-primary">Enviar Solicitud</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- DETAIL MODAL (FICHA TÉCNICA DINÁMICA) -->
+  <div class="modal-overlay" id="detailModal" aria-hidden="true">
+    <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="detailTitle">
+      <button class="modal-close" id="closeDetailModal" aria-label="Cerrar ventana">&times;</button>
+      <div class="modal-header">
+        <span class="feature-badge-cat" id="detailCategory" style="margin-bottom: 0.5rem; display: inline-block;">Categoría</span>
+        <h3 id="detailTitle" style="margin-top: 0.25rem;">Nombre del Recurso</h3>
+        <p id="detailDescription" style="font-size: 0.9rem; color: var(--color-text-light-muted); line-height: 1.6; margin-top: 0.5rem;">
+          Descripción técnica del lote y procedencia.
+        </p>
+      </div>
+
+      <div class="modal-body-content">
         <div class="detail-grid">
-          <div class="detail-cell">
-            <span class="detail-cell-label">Volumen Disponible</span>
-            <span class="detail-cell-val" id="detailVolume">-</span>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Volumen Disponible:</span>
+            <strong class="detail-cell-val" id="detailStock">0 kg</strong>
           </div>
-          <div class="detail-cell">
-            <span class="detail-cell-label">Planta de Origen</span>
-            <span class="detail-cell-val" id="detailLocation">-</span>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Ubicación Planta:</span>
+            <strong class="detail-cell-val" id="detailLocation">-</strong>
           </div>
-          <div class="detail-cell">
-            <span class="detail-cell-label">Índice de Fluidez (MFI)</span>
-            <span class="detail-cell-val" id="detailMfi">-</span>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Condición / Pureza:</span>
+            <strong class="detail-cell-val" id="detailStatus">-</strong>
           </div>
-          <div class="detail-cell">
-            <span class="detail-cell-label">Densidad / Presentación</span>
-            <span class="detail-cell-val" id="detailPresentation">-</span>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Presentación:</span>
+            <strong class="detail-cell-val" id="detailPackaging">Big Bags / Fardos</strong>
           </div>
         </div>
+      </div>
 
-        <div class="modal-actions modal-actions-between" style="margin-top: 2rem;">
-          <button type="button" class="btn btn-ghost" id="closeDetailBtn">Cerrar</button>
-          <button type="button" class="btn btn-primary btn-abtc-primary" id="requestLotBtn">
-            Solicitar Lote / Cotizar
+      <div class="modal-actions modal-actions-between" style="margin-top: 1.5rem;">
+        <button type="button" class="btn btn-ghost" id="closeDetailBtn">Cerrar</button>
+        <button type="button" class="btn btn-primary btn-abtc-primary" id="detailRequestBtn">Solicitar este Lote</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN / LOCALSTORAGE REQUESTS MODAL -->
+  <div class="modal-overlay" id="adminModal" aria-hidden="true">
+    <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="adminTitle">
+      <button class="modal-close" id="closeAdminModal" aria-label="Cerrar ventana">&times;</button>
+      <div class="modal-header">
+        <span class="section-eyebrow">PANEL LOCALSTORAGE</span>
+        <h3 id="adminTitle">Solicitudes Guardadas en Navegador</h3>
+        <p>Registro local de interacciones generadas desde los formularios de la plataforma.</p>
+      </div>
+
+      <div class="admin-requests-container" id="adminRequestsList"></div>
+
+      <div class="modal-actions modal-actions-between">
+        <button type="button" class="btn btn-red btn-sm" id="clearStorageBtn">
+          🗑️ Vaciar Solicitudes
+        </button>
+        <div style="display: flex; gap: 0.5rem;">
+          <button type="button" class="btn btn-ghost btn-sm" id="exportStorageBtn">
+            📥 Exportar JSON
+          </button>
+          <button type="button" class="btn btn-primary btn-abtc-primary btn-sm" id="closeAdminBtn">
+            Cerrar
           </button>
         </div>
       </div>
     </div>
-
-    <!-- ADMIN / LOCALSTORAGE REQUESTS MODAL -->
-    <div class="modal-overlay" id="adminModal" aria-hidden="true">
-      <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="adminModalTitle">
-        <button class="modal-close" id="closeAdminModal" aria-label="Cerrar ventana">&times;</button>
-        <div class="modal-header">
-          <span class="section-eyebrow">PANEL DE TRAZABILIDAD LOCAL</span>
-          <h3 id="adminModalTitle">Solicitudes Guardadas en LocalStorage</h3>
-          <p>Registro de operaciones guardadas en el navegador durante la sesión activa.</p>
-        </div>
-
-        <div class="requests-list" id="requestsListContainer">
-          <!-- Renderizado dinámicamente con JavaScript -->
-        </div>
-
-        <div class="modal-actions modal-actions-between">
-          <button type="button" class="btn btn-red btn-sm" id="clearStorageBtn">
-            🗑️ Vaciar Solicitudes
-          </button>
-          <div style="display: flex; gap: 0.5rem;">
-            <button type="button" class="btn btn-ghost btn-sm" id="exportStorageBtn">
-              📥 Exportar JSON
-            </button>
-            <button type="button" class="btn btn-primary btn-abtc-primary btn-sm" id="closeAdminBtn">
-              Cerrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
+  </div>
 
   <!-- TOAST NOTIFICATION CONTAINER -->
   <div class="toast-container" id="toastContainer"></div>

@@ -23,7 +23,7 @@ class UserModel extends Model
         'updated_at'
     ];
 
-    // Fechas
+    // Fechas automáticas
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
@@ -38,8 +38,21 @@ class UserModel extends Model
 
     protected $validationMessages = [
         'email' => [
-            'is_unique' => 'El correo electrónico ya se encuentra registrado.',
+            'is_unique'   => 'El correo electrónico ya se encuentra registrado.',
             'valid_email' => 'Ingrese una dirección de correo electrónico válida.'
         ]
     ];
+
+    /**
+     * Busca un usuario activo por su dirección de correo electrónico.
+     *
+     * @param string $email
+     * @return array|null
+     */
+    public function findActiveByEmail(string $email)
+    {
+        return $this->where('email', $email)
+                    ->where('activo', 1)
+                    ->first();
+    }
 }

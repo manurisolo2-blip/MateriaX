@@ -10,6 +10,13 @@
   <!-- Favicon / Isotipo Oficial -->
   <link rel="icon" type="image/png" href="<?= base_url('assets/logos/isotipo-black.png') ?>">
 
+  <!-- Open Graph / Meta Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MateriaX | Red Industrial Circular">
+  <meta property="og:description" content="Plataforma institucional para transformar excedentes plásticos en recursos valiosos entre empresas verificadas.">
+  <meta property="og:site_name" content="MateriaX">
+  <meta property="og:image" content="<?= base_url('assets/logos/isotipo-512.png') ?>">
+
   <!-- Google Fonts: Barlow, Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,14 +33,19 @@
     <div class="navbar-container">
       <!-- 1. Izquierda: Logo / Nombre del Proyecto -->
       <a href="<?= base_url('#inicio') ?>" class="brand-wrapper" aria-label="Ir al inicio de MateriaX">
-        <div class="brand-logo-badge">
-          <svg viewBox="0 0 100 100" width="38" height="38" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="46" fill="#1E293B" stroke="#38BDF8" stroke-width="4"/>
-            <path d="M 28 58 L 52 28 L 74 28 C 80 28 84 32 80 38 L 74 44 L 54 44 C 48 44 45 47 45 52 L 66 52 L 78 74 C 82 82 78 88 70 88 C 64 88 60 84 57 78 L 48 60 L 28 60 Z" fill="#FFFFFF"/>
-          </svg>
-        </div>
+        <img src="<?= base_url('assets/logos/isotipo-black.png') ?>" alt="MateriaX Logo" class="brand-logo-img" width="40" height="40">
         <span class="brand-text">Materia<span class="accent-blue">X</span></span>
       </a>
+
+      <!-- Navegación Principal Modular -->
+      <nav class="topnav nav-links" id="topNav" aria-label="Navegación principal">
+        <a href="<?= base_url('#inicio') ?>" class="active">Inicio</a>
+        <a href="<?= base_url('#propuesta-roles') ?>">Roles B2B</a>
+        <a href="<?= base_url('#roadmap-inventario') ?>">Inventario</a>
+        <a href="<?= base_url('#seguridad-infraestructura') ?>">Seguridad</a>
+        <a href="<?= base_url('#metricas') ?>">Métricas</a>
+        <a href="<?= base_url('#contacto') ?>">Contacto</a>
+      </nav>
 
       <!-- 2. Botones de Acción Corporativa -->
       <div class="nav-actions-wrapper">
@@ -64,7 +76,7 @@
           <h3>¿Deseas conectar tu planta a la red de MateriaX?</h3>
           <p>Envía tu consulta técnica o solicita credenciales de acceso institucional.</p>
         </div>
-        <form class="horizontal-contact-form" onsubmit="event.preventDefault(); document.querySelector('#openAccessModalNav').click();" aria-label="Formulario de contacto corporativo">
+        <form class="horizontal-contact-form" id="footerContactForm" aria-label="Formulario de contacto corporativo">
           <?= csrf_field() ?>
           <label for="footerContactEmail" class="visually-hidden">Email corporativo de la empresa</label>
           <input type="email" id="footerContactEmail" class="abtc-input" name="contact_email" placeholder="Ingresa tu email corporativo..." required aria-label="Email corporativo de la empresa">
@@ -76,15 +88,10 @@
       <div class="footer-grid-modular">
         <div class="footer-brand-info">
           <div class="brand-wrapper">
-            <div class="brand-logo-badge">
-              <svg viewBox="0 0 100 100" width="40" height="40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="50" r="46" fill="#1E293B" stroke="#38BDF8" stroke-width="4"/>
-                <path d="M 28 58 L 52 28 L 74 28 C 80 28 84 32 80 38 L 74 44 L 54 44 C 48 44 45 47 45 52 L 66 52 L 78 74 C 82 82 78 88 70 88 C 64 88 60 84 57 78 L 48 60 L 28 60 Z" fill="#FFFFFF"/>
-              </svg>
-            </div>
+            <img src="<?= base_url('assets/logos/isotipo-black.png') ?>" alt="MateriaX Logo" class="brand-logo-img" width="48" height="48">
             <span class="brand-text brand-text-lg">Materia<span class="accent-blue">X</span></span>
           </div>
-          <p>
+          <p style="margin-top: 1rem; color: var(--color-text-light-muted); font-size: 0.88rem; line-height: 1.6;">
             Plataforma B2B para la valorización y reutilización de polímeros industriales. Trazabilidad garantizada bajo arquitectura segura.
           </p>
         </div>
@@ -168,20 +175,20 @@
         <div class="form-group">
           <label for="interestType">Faceta / Tipo de Operación de la Empresa</label>
           <select id="interestType" name="interest_type" class="abtc-input">
-            <option value="oferente">Empresa Verificada - Oferente (Publicar Excedentes / Scrap / Moldes)</option>
-            <option value="demandante">Empresa Verificada - Demandante (Comprar / Solicitar Polímeros)</option>
-            <option value="ambas">Ambas Facetas (Publicar Excedentes y Adquirir Material)</option>
-            <option value="auditoria">Auditoría / Alianza Institucional</option>
+            <option value="Empresa Verificada - Oferente">Empresa Verificada - Oferente (Publicar Excedentes / Scrap / Moldes)</option>
+            <option value="Empresa Verificada - Demandante">Empresa Verificada - Demandante (Comprar / Solicitar Polímeros)</option>
+            <option value="Ambas Facetas (Oferta y Demanda)">Ambas Facetas (Publicar Excedentes y Adquirir Material)</option>
+            <option value="Auditoría / Alianza Institucional">Auditoría / Alianza Institucional</option>
           </select>
         </div>
 
         <div class="form-group">
           <label for="formMessage">Detalles técnicos del material o volumen estimado</label>
-          <textarea id="formMessage" name="message" class="abtc-input" rows="3" placeholder="Indica tipo de resina (PEAD, PP, ABS), cantidades en kg o zona de retiro..."></textarea>
+          <textarea id="formMessage" name="message" class="abtc-input abtc-textarea" rows="3" placeholder="Indica tipo de resina (PEAD, PP, ABS), cantidades en kg o zona de retiro..."></textarea>
         </div>
 
         <div class="modal-actions">
-          <button type="button" class="btn btn-ghost btn-abtc-outline" id="cancelAccessModal">Cancelar</button>
+          <button type="button" class="btn btn-ghost" id="cancelAccessModal">Cancelar</button>
           <button type="submit" class="btn btn-primary btn-abtc-primary">Enviar Solicitud</button>
         </div>
       </form>
@@ -189,46 +196,46 @@
   </div>
 
   <div class="modal-overlay" id="detailModal" aria-hidden="true">
-    <div class="modal-card abtc-card" role="dialog" aria-labelledby="detailTitle">
+    <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="detailTitle">
       <button class="modal-close" id="closeDetailModal" aria-label="Cerrar ventana">&times;</button>
       <div class="modal-header">
-        <span class="feature-badge-cat" id="detailCategory">Categoría</span>
-        <h3 id="detailTitle" style="margin-top: 0.5rem;">Nombre del Recurso</h3>
+        <span class="feature-badge-cat" id="detailCategory" style="margin-bottom: 0.5rem; display: inline-block;">Categoría</span>
+        <h3 id="detailTitle" style="margin-top: 0.25rem;">Nombre del Recurso</h3>
+        <p id="detailDescription" style="font-size: 0.9rem; color: var(--color-text-light-muted); line-height: 1.6; margin-top: 0.5rem;">
+          Descripción técnica del lote y procedencia.
+        </p>
       </div>
 
       <div class="modal-body-content">
-        <p id="detailDescription" style="font-size: 0.9rem; color: var(--color-text-light-muted); line-height: 1.6;">
-          Descripción técnica del lote y procedencia.
-        </p>
         <div class="detail-grid">
-          <div class="detail-item">
-            <span>Volumen Disponible:</span>
-            <strong id="detailStock">0 kg</strong>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Volumen Disponible:</span>
+            <strong class="detail-cell-val" id="detailStock">0 kg</strong>
           </div>
-          <div class="detail-item">
-            <span>Ubicación Planta:</span>
-            <strong id="detailLocation">-</strong>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Ubicación Planta:</span>
+            <strong class="detail-cell-val" id="detailLocation">-</strong>
           </div>
-          <div class="detail-item">
-            <span>Condición / Pureza:</span>
-            <strong id="detailStatus">-</strong>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Condición / Pureza:</span>
+            <strong class="detail-cell-val" id="detailStatus">-</strong>
           </div>
-          <div class="detail-item">
-            <span>Presentación:</span>
-            <strong id="detailPackaging">Big Bags / Fardos</strong>
+          <div class="detail-item detail-cell">
+            <span class="detail-cell-label">Presentación:</span>
+            <strong class="detail-cell-val" id="detailPackaging">Big Bags / Fardos</strong>
           </div>
         </div>
       </div>
 
-      <div class="modal-actions">
+      <div class="modal-actions modal-actions-between" style="margin-top: 1.5rem;">
         <button type="button" class="btn btn-ghost" id="closeDetailBtn">Cerrar</button>
-        <button type="button" class="btn btn-primary" id="detailRequestBtn">Solicitar este Lote</button>
+        <button type="button" class="btn btn-primary btn-abtc-primary" id="detailRequestBtn">Solicitar este Lote</button>
       </div>
     </div>
   </div>
 
   <div class="modal-overlay" id="adminModal" aria-hidden="true">
-    <div class="modal-card modal-card-wide" role="dialog" aria-labelledby="adminTitle">
+    <div class="modal-card modal-card-wide abtc-card" role="dialog" aria-labelledby="adminTitle">
       <button class="modal-close" id="closeAdminModal" aria-label="Cerrar ventana">&times;</button>
       <div class="modal-header">
         <span class="section-eyebrow">PANEL LOCALSTORAGE</span>
@@ -246,7 +253,7 @@
           <button type="button" class="btn btn-ghost btn-sm" id="exportStorageBtn">
             📥 Exportar JSON
           </button>
-          <button type="button" class="btn btn-primary btn-sm" id="closeAdminBtn">
+          <button type="button" class="btn btn-primary btn-abtc-primary btn-sm" id="closeAdminBtn">
             Cerrar
           </button>
         </div>

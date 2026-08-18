@@ -1,4 +1,5 @@
 // MATERIAX PLATFORM - CORE JAVASCRIPT & LOCALSTORAGE SYSTEM
+// Especialidad Informática 2026 - Instituto Técnico Río Tercero
 
 const STORAGE_KEY = 'materiax_requests';
 
@@ -11,7 +12,7 @@ const RESOURCE_DATA = {
     location: "San Martín, Buenos Aires",
     status: "Excelente pureza (Molido industrial)",
     packaging: "Big Bags de 200 kg",
-    description: "Lote proveniente de sobrantes de inyección de baldes industriales. Clasificado por color, libre de metálicos y con bajo índice de fluidez variable. Excelente desempeño para extrusion / compounding."
+    description: "Lote proveniente de sobrantes de inyección de baldes industriales. Clasificado por color, libre de metálicos y con bajo índice de fluidez variable. Excelente desempeño para extrusión / compounding."
   },
   2: {
     title: "Scrap de PP Homopolímero",
@@ -60,7 +61,7 @@ const RESOURCE_DATA = {
   }
 };
 
-// DOM Elements Selection
+// DOM Elements Selection (Safe Queries)
 const searchInput = document.querySelector('#search');
 const clearButton = document.querySelector('#clearSearch');
 const filterPills = document.querySelectorAll('.filter-pill');
@@ -77,9 +78,8 @@ const accessModal = document.querySelector('#accessModal');
 const detailModal = document.querySelector('#detailModal');
 const adminModal = document.querySelector('#adminModal');
 const accessForm = document.querySelector('#accessForm');
-const toastContainer = document.querySelector('#toastContainer');
 const adminBadgeCount = document.querySelector('#adminBadgeCount');
-const adminRequestsList = document.querySelector('#adminRequestsList');
+const adminRequestsList = document.querySelector('#adminRequestsList, #requestsListContainer');
 
 let currentCategory = 'all';
 
@@ -97,12 +97,20 @@ function getStoredRequests() {
 function saveRequestToLocalStorage(requestData) {
   const requests = getStoredRequests();
   requests.unshift(requestData); // newest first
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(requests));
+  } catch (e) {
+    console.error('Error al guardar en LocalStorage:', e);
+  }
   updateAdminBadge();
 }
 
 function clearStoredRequests() {
-  localStorage.removeItem(STORAGE_KEY);
+  try {
+    localStorage.removeItem(STORAGE_KEY);
+  } catch (e) {
+    console.error('Error al borrar de LocalStorage:', e);
+  }
   updateAdminBadge();
   renderAdminRequests();
   showToast('Todas las solicitudes se han borrado de LocalStorage', 'LocalStorage');
@@ -110,27 +118,29 @@ function clearStoredRequests() {
 
 function updateAdminBadge() {
   const requests = getStoredRequests();
-  if (adminBadgeCount) {
-    adminBadgeCount.textContent = requests.length;
-  }
+  const badges = document.querySelectorAll('#adminBadgeCount, .badge-count');
+  badges.forEach(badge => {
+    badge.textContent = requests.length;
+  });
 }
 
 function renderAdminRequests() {
-  if (!adminRequestsList) return;
+  const listContainer = document.querySelector('#adminRequestsList, #requestsListContainer');
+  if (!listContainer) return;
   const requests = getStoredRequests();
 
   if (requests.length === 0) {
-    adminRequestsList.innerHTML = `
-      <div class="empty-state" style="padding:30px 10px;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <h4 style="margin:8px 0 4px; font-family:'Space Grotesk',sans-serif;">Sin solicitudes guardadas</h4>
-        <p style="font-size:0.85rem; margin:0;">Llena cualquier formulario de la página para ver cómo se guarda aquí.</p>
+    listContainer.innerHTML = `
+      <div class="empty-state" style="padding:30px 10px; text-align:center;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:0.5rem; opacity:0.6;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <h4 style="margin:8px 0 4px; font-family:var(--font-titles, sans-serif); color:#FFFFFF;">Sin solicitudes guardadas</h4>
+        <p style="font-size:0.85rem; margin:0; color:var(--color-text-light-muted, #9BA3B8);">Completa cualquier formulario de la página para registrar solicitudes aquí.</p>
       </div>
     `;
     return;
   }
 
-  adminRequestsList.innerHTML = requests.map(req => `
+  listContainer.innerHTML = requests.map(req => `
     <div class="request-item-card">
       <div class="request-item-header">
         <strong>${escapeHtml(req.company)}</strong>
@@ -148,7 +158,7 @@ function renderAdminRequests() {
 
 function escapeHtml(str) {
   if (!str) return '';
-  return str.replace(/[&<>"']/g, function(m) {
+  return String(str).replace(/[&<>"']/g, function(m) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
   });
 }
@@ -166,21 +176,29 @@ function exportRequestsJSON() {
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
   downloadAnchor.remove();
-  showToast('Archivo JSON descargado', 'Exportar');
+  showToast('Archivo JSON descargado exitosamente', 'Exportar');
 }
 
-// Toast Notification Utility
+// Toast Notification Utility (Guarded against missing container)
 function showToast(message, title = 'MateriaX System') {
+  let container = document.querySelector('#toastContainer');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toastContainer';
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
   const toast = document.createElement('div');
   toast.className = 'toast';
   toast.innerHTML = `
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <div>
-      <strong style="display:block; font-size:0.85rem;">${title}</strong>
-      <span>${message}</span>
+      <strong style="display:block; font-size:0.85rem;">${escapeHtml(title)}</strong>
+      <span>${escapeHtml(message)}</span>
     </div>
   `;
-  toastContainer.appendChild(toast);
+  container.appendChild(toast);
   setTimeout(() => {
     toast.style.opacity = '0';
     toast.style.transition = 'opacity 0.3s ease';
@@ -192,8 +210,9 @@ function showToast(message, title = 'MateriaX System') {
 function filterResources() {
   const query = searchInput ? searchInput.value.trim().toLowerCase() : '';
   let visibleCount = 0;
+  const allCards = document.querySelectorAll('.resource-card');
 
-  cards.forEach((card) => {
+  allCards.forEach((card) => {
     const cardCategory = card.dataset.category || '';
     const keywords = `${card.textContent} ${card.dataset.keywords || ''}`.toLowerCase();
     
@@ -202,18 +221,20 @@ function filterResources() {
 
     if (matchesCategory && matchesSearch) {
       card.classList.remove('hidden');
+      card.style.display = '';
       visibleCount++;
     } else {
       card.classList.add('hidden');
+      card.style.display = 'none';
     }
   });
 
   // Update counter
   if (searchCounter) {
-    if (visibleCount === cards.length) {
-      searchCounter.textContent = `Mostrando todos los recursos (${cards.length})`;
+    if (visibleCount === allCards.length) {
+      searchCounter.textContent = `Mostrando todos los recursos (${allCards.length})`;
     } else {
-      searchCounter.textContent = `Mostrando ${visibleCount} de ${cards.length} recursos`;
+      searchCounter.textContent = `Mostrando ${visibleCount} de ${allCards.length} recursos`;
     }
   }
 
@@ -260,12 +281,16 @@ filterPills.forEach((pill) => {
 
 // Footer Category Links Quick Filter
 document.querySelectorAll('[data-filter-link]').forEach(link => {
-  link.addEventListener('click', (e) => {
+  link.addEventListener('click', () => {
     const category = link.dataset.filterLink;
     if (category) {
       currentCategory = category;
       filterPills.forEach(p => p.classList.toggle('active', p.dataset.category === category));
       filterResources();
+      const targetSection = document.querySelector('#roadmap-inventario, #modulos-hitos');
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   });
 });
@@ -311,6 +336,25 @@ accessModal?.addEventListener('click', (e) => {
   if (e.target === accessModal) closeModal(accessModal);
 });
 
+// Footer Horizontal Form Integration
+const footerContactForms = document.querySelectorAll('.horizontal-contact-form');
+footerContactForms.forEach(form => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const emailInput = form.querySelector('input[type="email"]');
+    const emailVal = emailInput ? emailInput.value.trim() : '';
+    openModal(accessModal);
+    const modalEmail = document.querySelector('#companyEmail');
+    if (modalEmail && emailVal) {
+      modalEmail.value = emailVal;
+    }
+    const modalMsg = document.querySelector('#formMessage');
+    if (modalMsg && !modalMsg.value) {
+      modalMsg.value = 'Solicitud de conexión / consulta técnica desde pie de página.';
+    }
+  });
+});
+
 // Form Submission Handling -> Save to LocalStorage!
 accessForm?.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -319,7 +363,7 @@ accessForm?.addEventListener('submit', (e) => {
   const cuit = document.querySelector('#companyCuit')?.value.trim() || 'N/A';
   const email = document.querySelector('#companyEmail')?.value.trim() || 'N/A';
   const interestSelect = document.querySelector('#interestType');
-  const interest = interestSelect ? interestSelect.options[interestSelect.selectedIndex].text : 'General';
+  const interest = interestSelect ? (interestSelect.options[interestSelect.selectedIndex]?.text || interestSelect.value) : 'General';
   const message = document.querySelector('#formMessage')?.value.trim() || '';
 
   const newRequest = {
@@ -353,7 +397,7 @@ adminModal?.addEventListener('click', (e) => {
   if (e.target === adminModal) closeModal(adminModal);
 });
 
-// Detail Modal Trigger & Populating
+// Detail Modal Trigger & Robust Populating
 document.querySelectorAll('.open-detail-btn').forEach(btn => {
   btn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -361,17 +405,24 @@ document.querySelectorAll('.open-detail-btn').forEach(btn => {
     const data = RESOURCE_DATA[id];
 
     if (data) {
-      document.querySelector('#detailTitle').textContent = data.title;
-      document.querySelector('#detailCategory').textContent = data.category;
-      document.querySelector('#detailDescription').textContent = data.description;
-      document.querySelector('#detailStock').textContent = data.stock;
-      document.querySelector('#detailLocation').textContent = data.location;
-      document.querySelector('#detailStatus').textContent = data.status;
-      document.querySelector('#detailPackaging').textContent = data.packaging;
+      const titleEl = document.querySelector('#detailTitle');
+      const catEl = document.querySelector('#detailCategory, #detailBadgeCat');
+      const descEl = document.querySelector('#detailDescription, #detailDesc');
+      const stockEl = document.querySelector('#detailStock, #detailVolume');
+      const locEl = document.querySelector('#detailLocation');
+      const statusEl = document.querySelector('#detailStatus, #detailBadgeStatus');
+      const packEl = document.querySelector('#detailPackaging, #detailPresentation');
 
-      const detailReqBtn = document.querySelector('#detailRequestBtn');
+      if (titleEl) titleEl.textContent = data.title;
+      if (catEl) catEl.textContent = data.category;
+      if (descEl) descEl.textContent = data.description;
+      if (stockEl) stockEl.textContent = data.stock;
+      if (locEl) locEl.textContent = data.location;
+      if (statusEl) statusEl.textContent = data.status;
+      if (packEl) packEl.textContent = data.packaging;
+
+      const detailReqBtn = document.querySelector('#detailRequestBtn, #requestLotBtn');
       if (detailReqBtn) {
-
         detailReqBtn.onclick = () => {
           closeModal(detailModal);
           openModal(accessModal);
@@ -413,22 +464,24 @@ document.addEventListener('keydown', (e) => {
 
 // ScrollSpy para actualizar el link activo en la barra de navegación al hacer scroll
 const trackedSections = document.querySelectorAll('section[id], footer[id]');
-const scrollSpyObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const currentId = entry.target.getAttribute('id');
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === `#${currentId}`) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-        }
-      });
-    }
-  });
-}, { rootMargin: '-20% 0px -70% 0px' });
+if ('IntersectionObserver' in window && trackedSections.length > 0) {
+  const scrollSpyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const currentId = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href') || '';
+          if (href === `#${currentId}` || href.endsWith(`#${currentId}`) || link.hash === `#${currentId}`) {
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
 
-trackedSections.forEach(sec => scrollSpyObserver.observe(sec));
+  trackedSections.forEach(sec => scrollSpyObserver.observe(sec));
+}
 
 // Initialize Badge & Filters
 updateAdminBadge();
