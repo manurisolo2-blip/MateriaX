@@ -9,10 +9,16 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Dependencias PHP y Composer
+/vendor/
+composer.phar
+
 # Logs y caches
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 .cache/
+
 

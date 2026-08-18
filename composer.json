@@ -1,0 +1,31 @@
+{
+    "name": "materiax/platform",
+    "type": "project",
+    "description": "MateriaX - Plataforma B2B para la Valorización y Trazabilidad Circular de Polímeros Industriales",
+    "homepage": "https://materiax.org",
+    "license": "MIT",
+    "require": {
+        "php": "^8.1 || ^8.2 || ^8.3",
+        "codeigniter4/framework": "^4.4"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9",
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "CodeIgniter\\ComposerScripts::postUpdate"
+        ]
+    }
+}
