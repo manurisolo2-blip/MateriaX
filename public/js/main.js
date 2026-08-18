@@ -225,7 +225,12 @@ function updateNavbarSession() {
       if (companyNameEl) companyNameEl.textContent = 'Administrador General (GitHub)';
       if (companyCuitEl) companyCuitEl.textContent = 'SUPERADMIN ● GOBERNANZA ACTIVA';
       if (navSessionDot) navSessionDot.style.background = '#38BDF8';
-      if (navAdminDirectBtn) navAdminDirectBtn.classList.remove('hidden');
+      if (navAdminDirectBtn) {
+        navAdminDirectBtn.classList.remove('hidden');
+        const companies = getStoredCompanies();
+        const pendingCount = companies.filter(c => c.status === 'en_auditoria').length;
+        navAdminDirectBtn.innerHTML = `🛡️ Backoffice Auditoría <span class="badge-count" style="margin-left:4px;">${pendingCount}</span>`;
+      }
       if (navVerificationBtn) navVerificationBtn.classList.add('hidden');
     }
   } else if (currentRole === 'empresa') {

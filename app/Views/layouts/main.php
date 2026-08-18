@@ -58,9 +58,6 @@
         </div>
 
         <div class="nav-buttons" id="navDefaultActions">
-          <button type="button" class="btn btn-sm btn-ghost" id="openAdminModalBtn" title="Panel de Auditoría B2B y Solicitudes">
-            🛡️ Auditoría & Solicitudes <span class="badge-count" id="adminBadgeCount">0</span>
-          </button>
           <button type="button" class="btn btn-sm btn-primary btn-abtc-primary" id="openAccessModalNav">
             🏢 Portal Empresas / Acceso
           </button>
